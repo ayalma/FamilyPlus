@@ -8,5 +8,11 @@
  */
 class BuyItemDAOMS implements BuyItemDAO
 {
+    private $_connection;
+
+    function __construct($_connection)
+    {
+        $this->_connection = $_connection;
+    }
 
 }

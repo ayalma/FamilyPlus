@@ -8,5 +8,11 @@
  */
 class EventsDAOMS implements EventsDAO
 {
+    private $_connection;
+
+    function __construct($_connection)
+    {
+        $this->_connection = $_connection;
+    }
 
 }

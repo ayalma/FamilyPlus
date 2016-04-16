@@ -8,6 +8,13 @@
  */
 class UserDAOMS implements UserDAO
 {
+    private $_connection;
+
+    function __construct($_connection)
+    {
+        $this->_connection = $_connection;
+    }
+
 
     /**
      * @param User $user user will be save in data base.
