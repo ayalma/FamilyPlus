@@ -8,5 +8,68 @@
  */
 class BuyItem
 {
-    
+    private $_name; // item name.
+    private $_purchased; // this mean that is item bought by user.
+    private $_price;// price of item.
+
+    function __construct($_name, $_purchased, $_price)
+    {
+        $this->_name = $_name;
+        $this->_purchased = $_purchased;
+        $this->_price = $_price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPurchased()
+    {
+        return $this->_purchased;
+    }
+
+    /**
+     * @param mixed $purchased
+     */
+    public function setPurchased($purchased)
+    {
+        $this->_purchased = $purchased;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->_price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->_price = $price;
+    }
+
+
+
+
+
+
 }
