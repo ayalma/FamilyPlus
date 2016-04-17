@@ -1,5 +1,7 @@
 <?php
 
+include_once 'RoleDAO.php';
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

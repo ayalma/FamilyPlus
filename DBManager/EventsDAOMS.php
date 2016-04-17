@@ -1,5 +1,6 @@
 <?php
 
+include_once 'EventsDAO.php';
 /**
  * Created by PhpStorm.
  * User: alimohammadi

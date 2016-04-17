@@ -1,5 +1,14 @@
 <?php
 
+include_once 'DBCons.php';
+
+include_once 'UserDAOMS.php';
+include_once 'BuyItemDAOMS.php';
+include_once 'EventsDAOMS.php';
+include_once 'RoleDAOMS.php';
+include_once 'UserDAOMS.php';
+
+
 /**
  * DbManager class that list all method that access to database.
  * this class also implement singleton pattern.
@@ -39,12 +48,17 @@ class DbManager
         }
     }
 
-    function getInstance()
+    static function getInstance()
     {
         if (self::$_instance == null)
             self::$_instance = new DbManager();
 
         return self::$_instance;
+    }
+
+    public function save()
+    {
+        return true;
     }
 
 }
