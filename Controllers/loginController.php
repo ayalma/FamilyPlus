@@ -1,5 +1,6 @@
 <?php
-require_once '../DBManager/DbManager.php';
+require_once("LoginRestHandler.php");
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi
@@ -7,12 +8,34 @@ require_once '../DBManager/DbManager.php';
  * Time: 1:24 PM
  */
 
-$dbManager = DbManager::getInstance();
 
-$response["tag"] = $_POST['tag'];
-$response["login"] = $dbManager->save();
+$view = "";
+if (isset($_GET["view"]))
+    $view = $_GET["view"];
+/*
+controls the RESTful services
+URL mapping
+*/
+switch ($view) {
 
-echo json_encode($response);
+    case "login":
+        // to handle REST Url /LoginController/login/
+        $loginRestHandler = new loginRestHandler();
+        $loginRestHandler->login();
+        break;
+
+    case "single":
+        // to handle REST Url /mobile/show/<id>/
+        /*  $mobileRestHandler = new MobileRestHandler();
+          $mobileRestHandler->getMobile($_GET["id"]);*/
+        break;
+
+    case "" :
+        //404 - not found;
+        break;
+}
+?>
+
         
         
 
