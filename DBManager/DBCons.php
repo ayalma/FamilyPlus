@@ -8,10 +8,11 @@
  */
 class DBCons
 {
-    public static $_host = "localhost:3306";
+    public static $_host = "localhost";
     public static $_user = "root";
-    public static $_password = "";
+    public static $_password = "gamor2012";
     public static $db_name = "FamilyPlus";
+    public static $port = "3306";
 
     public static $_DEVICE_TABLE = "Devices";
     public static $_DEVICE_COL_SERIAL = "serial";
@@ -20,5 +21,9 @@ class DBCons
     public static $_DEVICE_COL_MODEL = "model";
     public static $_DEVICE_COL_REGISTER_ID = "register_id";
     public static $_DEVICE_COL_USER_ID = "uid";
+
+    public static $_USER_TABLE = "Users";
+    public static $_USER_COL_MOBILE_NUMBER = "m_number";
+    public static $_USER_COL_FNAME = "fname";
     
 }

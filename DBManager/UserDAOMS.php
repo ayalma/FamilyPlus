@@ -1,5 +1,6 @@
 <?php
 include_once 'UserDAO.php';
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi
@@ -22,6 +23,14 @@ class UserDAOMS implements UserDAO
      */
     public function save(User $user)
     {
-        // TODO: Implement save() method.
+        $sql = 'INSERT INTO ' . DBCons::$_USER_TABLE .
+            ' (' . DBCons::$_USER_COL_MOBILE_NUMBER .
+            ',' . DBCons::$_USER_COL_FNAME . ') Values (?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+
+        $statement->bind_param('ds', $user->getMNumber(), $user->getFName());
+
+        return $statement->execute();
     }
 }
