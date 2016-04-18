@@ -12,4 +12,13 @@ class DBCons
     public static $_user = "root";
     public static $_password = "gamor2012";
     public static $db_name = "FamilyPlus";
+
+    public static $_DEVICE_TABLE = "Devices";
+    public static $_DEVICE_COL_SERIAL = "serial";
+    public static $_DEVICE_COL_API_NUMBER = "api_number";
+    public static $_DEVICE_COL_BRAND = "brand";
+    public static $_DEVICE_COL_MODEL = "model";
+    public static $_DEVICE_COL_REGISTER_ID = "register_id";
+    public static $_DEVICE_COL_USER_ID = "uid";
+    
 }
