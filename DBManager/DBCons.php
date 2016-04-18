@@ -12,4 +12,5 @@ class DBCons
     public static $_user = "root";
     public static $_password = "gamor2012";
     public static $db_name = "FamilyPlus";
+    
 }
