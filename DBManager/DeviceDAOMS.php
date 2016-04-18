@@ -33,7 +33,7 @@ class DeviceDAOMS implements DeviceDAO
         $statement = $this->_connection->prepare($sql);
 
         $statement->bind_param('sddsss', $_device->getSerial(), $_userId, $_device->getApiNumber(), $_device->getBrand(), $_device->getModel(), $_device->getRegisterId());
-        
+
         return $statement->execute();
     }
 }
