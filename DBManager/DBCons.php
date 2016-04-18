@@ -10,7 +10,7 @@ class DBCons
 {
     public static $_host = "localhost:3306";
     public static $_user = "root";
-    public static $_password = "gamor2012";
+    public static $_password = "";
     public static $db_name = "FamilyPlus";
 
     public static $_DEVICE_TABLE = "Devices";
