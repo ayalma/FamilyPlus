@@ -1,11 +1,7 @@
 # Turn rewrite engine on
-
-
 Options +FollowSymLinks
 RewriteEngine on
 
-
 # map neat URL to internal URL
-
 RewriteRule ^LoginController/login([0-9]+)$ Controllers/loginController.php?view=login [nc,qsa]
 #RewriteRule ^LoginController/register/([0-9]+)$   loginController.php?view=single&id=$1 [nc,qsa]
