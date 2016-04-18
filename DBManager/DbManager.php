@@ -7,6 +7,7 @@ include_once 'BuyItemDAOMS.php';
 include_once 'EventsDAOMS.php';
 include_once 'RoleDAOMS.php';
 include_once 'UserDAOMS.php';
+include_once 'DeviceDAOMS.php';
 
 
 /**
@@ -26,6 +27,7 @@ class DbManager
     private $_buyItemDao;
     private $_eventsDao;
     private $_roleDao;
+    private $_deviceDao;
 
     function __construct()
     {
@@ -41,6 +43,7 @@ class DbManager
             $this->_buyItemDao = new BuyItemDAOMS($this->_connection);
             $this->_eventsDao = new EventsDAOMS($this->_connection);
             $this->_roleDao = new RoleDAOMS($this->_connection);
+            $this->_deviceDao = new DeviceDAOMS($this->_connection);
 
 
         } catch (Exception $_e) {
@@ -56,9 +59,18 @@ class DbManager
         return self::$_instance;
     }
 
-    public function save()
+    /**
+     * all method related to Device Model.
+     */
+
+    /**
+     * @param Device $device will save in database.
+     * @param $userId of user that device belong to him/his.
+     * @return bool status of saving.
+     */
+    public function save(Device $device, $userId)
     {
-        return true;
+        return $this->_deviceDao->save($device, $userId);
     }
 
 }

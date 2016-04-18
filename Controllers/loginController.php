@@ -24,7 +24,7 @@ switch ($view) {
         $loginRestHandler->login();
         break;
 
-    case "single":
+    case "register":
         // to handle REST Url /mobile/show/<id>/
         /*  $mobileRestHandler = new MobileRestHandler();
           $mobileRestHandler->getMobile($_GET["id"]);*/

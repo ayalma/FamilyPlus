@@ -1,6 +1,7 @@
 <?php
 require_once '../DBManager/DbManager.php';
 include_once 'SimpleRest.php';
+include_once '../Models/Device.php';
 
 /**
  * Created by PhpStorm.
@@ -12,8 +13,9 @@ class loginRestHandler extends SimpleRest
 {
     function login()
     {
+        $_device = new Device("testSErial", 23, 'Huawei', 'g730', "test reg id");
 
-        $response["login"] = DbManager::getInstance()->save();
+        $response["login"] = DbManager::getInstance()->save($_device, '09195479702');
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
