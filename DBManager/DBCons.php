@@ -10,7 +10,7 @@ class DBCons
 {
     public static $_host = "localhost";
     public static $_user = "root";
-    public static $_password = "gamor2012";
+    public static $_password = "";
     public static $db_name = "FamilyPlus";
     public static $port = "3306";
 
@@ -25,5 +25,9 @@ class DBCons
     public static $_USER_TABLE = "Users";
     public static $_USER_COL_MOBILE_NUMBER = "m_number";
     public static $_USER_COL_FNAME = "fname";
+
+    public static $_LOGINCODE_TABLE = "LoginCodes";
+    public static $_LOGINCODE_COL_USER_ID = "uid";
+    public static $_LOGINCODE_COL_CODE = "code";
     
 }

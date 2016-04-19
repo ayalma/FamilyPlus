@@ -8,6 +8,8 @@ include_once 'EventsDAOMS.php';
 include_once 'RoleDAOMS.php';
 include_once 'UserDAOMS.php';
 include_once 'DeviceDAOMS.php';
+include_once 'LoGinCodeDAO.php';
+
 
 
 /**
@@ -28,6 +30,7 @@ class DbManager
     private $_eventsDao;
     private $_roleDao;
     private $_deviceDao;
+    private $_logincodeDao;
 
     function __construct()
     {
@@ -44,6 +47,7 @@ class DbManager
             $this->_eventsDao = new EventsDAOMS($this->_connection);
             $this->_roleDao = new RoleDAOMS($this->_connection);
             $this->_deviceDao = new DeviceDAOMS($this->_connection);
+            $this->_logincodeDao = new LoginCodeDAOMS($this->_connection);
 
 
         } catch (Exception $_e) {
