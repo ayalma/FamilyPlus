@@ -9,8 +9,8 @@
 class Group
 {
     private $_id; //Group ID
-    private $_admin; //Role of User
-    private $_users = array(); // lsit of each Groups Users
+    private $_admin; //group admin
+    private $_users = array(); // list of each Group Users
 
     /**
      * Group constructor.

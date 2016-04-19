@@ -1,5 +1,8 @@
 <?php
 require_once("LoginRestHandler.php");
+require_once("TestRestHandler.php");
+include_once '../Models/User.php';
+
 
 /**
  * Created by PhpStorm.
@@ -20,18 +23,19 @@ switch ($view) {
 
     case "login":
         // to handle REST Url /LoginController/login/
-        $loginRestHandler = new loginRestHandler();
-        $loginRestHandler->login();
+        $user = new User("a", '', "", "", "");
+        LoginRestHandler::getInstance()->login($user);
         break;
 
-    case "register":
+    case "msg":
         // to handle REST Url /mobile/show/<id>/
         /*  $mobileRestHandler = new MobileRestHandler();
           $mobileRestHandler->getMobile($_GET["id"]);*/
+        LoginRestHandler::getInstance()->getstatus($_GET['id']);
         break;
 
-    case "" :
-        //404 - not found;
+    case "getUser" :
+        TestRestHandler::getInstance()->getUser($_GET['userId']);
         break;
 }
 ?>

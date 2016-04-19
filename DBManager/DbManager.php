@@ -65,12 +65,31 @@ class DbManager
 
     /**
      * @param Device $device will save in database.
-     * @param $userId of user that device belong to him/his.
+     * @param $userId : of user that device belong to him/his.
      * @return bool status of saving.
      */
     public function save(Device $device, $userId)
     {
         return $this->_deviceDao->save($device, $userId);
+    }
+
+    /**
+     * all method related to User Model.
+     * @param User $user will save in database.
+     * @return mixed status of saving as boolean.
+     */
+    public function saveUser(User $user)
+    {
+        return $this->_userDao->save($user);
+    }
+
+    /**
+     * @param $userId : id of user must be load from db.
+     * @return user : user or null if id don't match.
+     */
+    public function getUser($userId)
+    {
+        return $this->_userDao->load($userId);
     }
 
 }

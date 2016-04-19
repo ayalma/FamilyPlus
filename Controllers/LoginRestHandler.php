@@ -2,6 +2,7 @@
 require_once '../DBManager/DbManager.php';
 include_once 'SimpleRest.php';
 include_once '../Models/Device.php';
+include_once 'SmsSender.php';
 
 /**
  * Created by PhpStorm.
@@ -9,18 +10,58 @@ include_once '../Models/Device.php';
  * Date: 4/17/16
  * Time: 10:19 PM
  */
-class loginRestHandler extends SimpleRest
+class LoginRestHandler extends SimpleRest
 {
-    function login()
-    {
-        $_device = new Device("testSErial", 23, 'Huawei', 'g730', "test reg id");
+    private static $_instance = null;
 
-        $response["login"] = DbManager::getInstance()->save($_device, '9104801235');
+    /**
+     * LoginRestHandler constructor.
+     */
+    private function __construct()
+    {
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance == null)
+            self::$_instance = new LoginRestHandler();
+        return self::$_instance;
+    }
+
+    function login(User $user)
+    {
+
+        // $response["login"] = DbManager::getInstance()->save($_device, "12");
+
+        //send messsage to phone number and send notification to him.
+        $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
+        $smsSender = new SmsSender($url, "username", "password", "number");
+
+        $mobile = '0xxxxxxxxxx';
+        $msg = 'رمز درخواستی شما :2225';
+
+        $method = 'SendMessage';
+
+
+        $smsSender->connect();
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
 
+        $response['msg status'] = $smsSender->sendMessage($method, $mobile, $msg, '1');
+
+        echo json_encode($response);
+    }
+
+    function getstatus($msgId)
+    {
+
+        $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
+        $smsSender = new SmsSender($url, "alimohammadi350@gmail.com", "gamor2012", "3000853853");
+        $smsSender->connect();
+
+        $response['msgStatus'] = $smsSender->getMessageStatus($msgId);
         echo json_encode($response);
     }
 }
