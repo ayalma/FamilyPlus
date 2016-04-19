@@ -15,7 +15,7 @@ class loginRestHandler extends SimpleRest
     {
         $_device = new Device("testSErial", 23, 'Huawei', 'g730', "test reg id");
 
-        $response["login"] = DbManager::getInstance()->save($_device, '09195479702');
+        $response["login"] = DbManager::getInstance()->save($_device, '9104801235');
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];

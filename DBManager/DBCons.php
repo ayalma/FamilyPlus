@@ -8,10 +8,11 @@
  */
 class DBCons
 {
-    public static $_host = "localhost:3306";
+    public static $_host = "localhost";
     public static $_user = "root";
     public static $_password = "";
     public static $db_name = "FamilyPlus";
+    public static $Port = "3306";
 
     public static $_DEVICE_TABLE = "Devices";
     public static $_DEVICE_COL_SERIAL = "serial";
