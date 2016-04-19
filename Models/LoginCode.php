@@ -8,36 +8,36 @@
  */
 class LoginCode
 {
-    private $_uid;
+    private $_userId;
     private $_code;
 
     /**
      * LoginCode constructor.
-     * @param $_id
-     * @param $_uid
+     * @param $_userId
      * @param $_code
      */
-    public function __construct($_uid, $_code)
+    public function __construct($_userId, $_code)
     {
-        $this->_uid = $_uid;
+        $this->_userId = $_userId;
         $this->_code = $_code;
-    }
-    
-    /**
-     * @return mixed
-     */
-    public function getUid()
-    {
-        return $this->_uid;
     }
 
     /**
-     * @param mixed $uid
+     * @return mixed
      */
-    public function setUid($uid)
+    public function getUserId()
     {
-        $this->_uid = $uid;
+        return $this->_userId;
     }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->_userId = $userId;
+    }
+
 
     /**
      * @return mixed

@@ -5,18 +5,19 @@
  * Date: 4/19/2016
  * Time: 7:44 PM
  */
-interface LoGinCodeDAO
+interface LoginCodeDAO
 {
 
+
     /**
-     * @param User $user user will be save in data base.
-     * @return mixed status of saving as boolean.
+     * @param LoginCode $LoginCode will save in db
+     * @return boolean return status of saving.
      */
-    public function save(User $user);
+    public function save(LoginCode $LoginCode);
 
     /**
      * @param $userId : id of requested user.
-     * @return user that contains requested userId.
+     * @return User that contains requested userId.
      */
     public function load($userId);
 

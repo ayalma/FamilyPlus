@@ -1,5 +1,5 @@
 <?php
-include_once 'LoGinCodeDAO.php.php';
+include_once 'LoginCodeDAO.php';
 
 /**
  * Created by PhpStorm.
@@ -7,7 +7,7 @@ include_once 'LoGinCodeDAO.php.php';
  * Date: 4/19/2016
  * Time: 7:46 PM
  */
-class LoginCodeDAOMS implements LoGinCodeDAO
+class LoginCodeDAOMS implements LoginCodeDAO
 {
 
     private $_connection;
@@ -18,19 +18,19 @@ class LoginCodeDAOMS implements LoGinCodeDAO
     }
 
     /**
-     * @param User $user user will be save in data base.
+     * @param LoginCode $loginCode will be save in data base.
      * @return mixed status of saving as boolean.
      */
-    public function save(User $user)
+    public function save(LoginCode $loginCode)
     {
         $sql = 'INSERT INTO ' . DBCons::$_LOGINCODE_TABLE .
             ' (' . DBCons::$_LOGINCODE_COL_USER_ID .
             ',' . DBCons::$_LOGINCODE_COL_CODE . ') VALUES (?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('di' , $user->getMNumber() ,$user->getMNumber());
+        $statement->bind_param('di', $loginCode->getUserId(), $loginCode->getCode());
         return $statement->execute();
-     }
+    }
 
     /**
      * @param $userId : id of requested user.
