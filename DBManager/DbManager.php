@@ -96,4 +96,13 @@ class DbManager
         return $this->_userDao->load($userId);
     }
 
+    /**
+     * @param $userId : id of user (it is him/his phone number).
+     * @return  array : all role of user in his groups peerTopPeer.
+     */
+    public function getRoles($userId)
+    {
+        return $this->_userDao->getRoles($userId);
+    }
+
 }

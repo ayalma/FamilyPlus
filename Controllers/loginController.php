@@ -37,6 +37,8 @@ switch ($view) {
     case "getUser" :
         TestRestHandler::getInstance()->getUser($_GET['userId']);
         break;
+    case 'getRoles' :
+        TestRestHandler::getInstance()->getRoles($_GET['userId']);
 }
 ?>
 
