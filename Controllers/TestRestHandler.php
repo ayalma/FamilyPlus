@@ -31,16 +31,17 @@ class TestRestHandler extends SimpleRest
 
     public function getUser($userId)
     {
-        $user = DbManager::getInstance()->getUser($userId);
-
+        $user = User::fromJSON('{"fName":"ali","mNumber":"12"}');
+        // $user = DbManager::getInstance()->getUser($userId);
+        
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
         $respons['userId'] = $userId;
         $respons['fname'] = $user->getFName();
-        $respons['user'] = json_encode($user);
+        $respons['user'] = $user;
 
-        echo json_encode($respons);
+        echo json_encode($respons);  
     }
 
 }
