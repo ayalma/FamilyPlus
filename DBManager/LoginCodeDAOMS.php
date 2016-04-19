@@ -29,15 +29,38 @@ class LoginCodeDAOMS implements LoginCodeDAO
 
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('di', $loginCode->getUserId(), $loginCode->getCode());
-        return $statement->execute();
+
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
     }
 
     /**
-     * @param $userId : id of requested user.
-     * @return user that contains requested userId.
+     * @param $userId : id of user that loginCode belong to him/his.
+     * @return LoginCode : last login code sent to user.
      */
     public function load($userId)
     {
-        // TODO: Implement load() method.
+        $sql = 'SELECT * FROM ' . DBCons::$_LOGINCODE_TABLE .
+            ' WHERE ' . DBCons::$_LOGINCODE_COL_ID .
+            ' = (SELECT max(' . DBCons::$_LOGINCODE_COL_ID .
+            ') FROM ' . DBCons::$_LOGINCODE_TABLE . ' WHERE ' .
+            DBCons::$_DEVICE_COL_USER_ID . '= ?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+        $statement->execute();
+
+        $statement->bind_result($id, $userId, $code);
+        if ($statement->fetch()) {
+            $statement->close();
+            return new LoginCode($userId, $code);
+        } else {
+            $statement->close();
+            return null;
+        }
+
+
     }
 }
