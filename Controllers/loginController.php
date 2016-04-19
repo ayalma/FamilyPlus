@@ -1,6 +1,8 @@
 <?php
 require_once("LoginRestHandler.php");
+require_once("TestRestHandler.php");
 include_once '../Models/User.php';
+
 
 /**
  * Created by PhpStorm.
@@ -32,8 +34,8 @@ switch ($view) {
         LoginRestHandler::getInstance()->getstatus($_GET['id']);
         break;
 
-    case "" :
-        //404 - not found;
+    case "getUser" :
+        TestRestHandler::getInstance()->getUser($_GET['userId']);
         break;
 }
 ?>

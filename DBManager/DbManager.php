@@ -83,4 +83,13 @@ class DbManager
         return $this->_userDao->save($user);
     }
 
+    /**
+     * @param $userId : id of user must be load from db.
+     * @return user : user or null if id don't match.
+     */
+    public function getUser($userId)
+    {
+        return $this->_userDao->load($userId);
+    }
+
 }
