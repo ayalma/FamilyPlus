@@ -22,6 +22,17 @@ class User implements JsonSerializable
         $this->_mNumber = $_mNumber;
     }
 
+    public static function fromJSON($json)
+    {
+
+        $jsonValue = json_decode($json);
+        $obj = new User('', '');
+        foreach ($jsonValue as $key => $value)
+            $obj->{'_' . $key} = $value;
+        return $obj;
+
+    }
+
     /**
      * @return mixed
      */
@@ -54,7 +65,6 @@ class User implements JsonSerializable
         $this->_mNumber = $mNumber;
     }
 
-
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -67,6 +77,7 @@ class User implements JsonSerializable
         $json = array();
 
         foreach ($this as $key => $value) {
+            $key = str_replace('_', '', $key);
             $json[$key] = $value;
         }
         return $json; // or json_encode($json)

@@ -25,5 +25,10 @@ class DBCons
     public static $_USER_TABLE = "Users";
     public static $_USER_COL_MOBILE_NUMBER = "m_number";
     public static $_USER_COL_FNAME = "fname";
-    
+
+    public static $_GU_TABLE = "Group_User";
+    public static $_GU_GROUP_ID = "gid";
+    public static $_GU_USER_ID = "uid";
+    public static $_GU_ROLE = "role";
+
 }

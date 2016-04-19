@@ -1,5 +1,6 @@
 <?php
 include_once 'UserDAO.php';
+include_once '../Models/Role.php';
 
 /**
  * Created by PhpStorm.
@@ -49,9 +50,15 @@ class UserDAOMS implements UserDAO
         $statement->execute();
         $statement->bind_result($fname);
 
-        if ($statement->fetch())
+        if ($statement->fetch()) {
+
+            $statement->close();
             return new User($fname, $userId);
-        else return 'no user found';
+
+        } else {
+            $statement->close();
+            return 'no user found';
+        }
     }
 
     /**
@@ -60,7 +67,27 @@ class UserDAOMS implements UserDAO
      */
     public function getRoles($userId)
     {
-        // TODO: Implement getRoles() method.
+        $sql = 'SELECT * FROM ' . DBCons::$_GU_TABLE .
+            ' WHERE ' . DBCons::$_GU_USER_ID . '= ?';
+
+        $statement = $this->_connection->prepare($sql);
+
+        $statement->bind_param('d', $userId);
+        $statement->execute();
+
+        $statement->bind_result($groupId, $userId, $role);
+
+        $roles = array();
+        $roles[0] = new Role(0, 0);
+
+        $i = 0;
+        while ($statement->fetch()) {
+            $roles[$i] = new Role($role, $groupId);
+            $i++;
+        }
+        $statement->close();
+
+        return $roles;
     }
 
     /**
