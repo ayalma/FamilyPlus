@@ -40,12 +40,28 @@ class BuyItemDAOMS implements BuyItemDAO
 
     public function loadbyUser($userId)
     {
-        $sql = ' SELECT * FROM ' .DBCons::$_BUYITEMS_TABLE .
-                ' WHERE ' . DBCons::$_BUYITEMS_DATE .'= ?';
+
+
     }
 
     public function loadbyDate($date)
     {
-        // TODO: Implement loadbyDate() method.
+        $sql = ' SELECT * FROM ' .DBCons::$_BUYITEMS_TABLE .
+            ' WHERE ' . DBCons::$_BUYITEMS_DATE .'= ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i' , $date);
+        $statement->execute();
+
+        $statement->bind_result($id , $m_nimber , $name , $purchased , $price , $date);
+        if($statement->fetch())
+        {
+            $statement->close();
+            return new BuyItem($name , $purchased , $price , $date);
+        }else
+        {
+            $statement->close();
+            return null;
+        }
     }
 }
