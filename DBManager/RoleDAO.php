@@ -8,5 +8,9 @@
  */
 interface RoleDAO
 {
-
+    /**
+     * @param $userId : id of user (it is him/his phone number).
+     * @return  array : all role of user in his groups peerTopPeer.
+     */
+    public function loadByUserID($userId);
 }
