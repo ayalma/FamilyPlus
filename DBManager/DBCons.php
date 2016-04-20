@@ -38,5 +38,31 @@ class DBCons
     public static $_BUYITEMS_PURCHASED = "purchased";
     public static $_BUYITEMS_PRICE = "price";
     public static $_BUYITEMS_DATE = "date";
+
+    public static $_GROUP_TABLE = "Groups";
+    public static $_GROUP_COL_ID = "id";
+    public static $_GROUP_COL_ADMIN = "admin";
+    public static $_GROUP_COL_NAME = "name";
+
+    public static $_GU_TABLE = "Group_User";
+    public static $_GU_COL_GROUP_ID = "gid";
+    public static $_GU_COL_USER_ID = "uid";
+    public static $_GU_COL_ROlE = "role";
+
+    public static $_EVENT_TABLE = "Events";
+    public static $_EVENT_COL_ID = "id";
+    public static $_EVENT_COL_EVENT_TYPE_ID = "eid";
+    public static $_EVENT_COL_USER_ID = "uid";
+    public static $_EVENT_COL_DATE = "date";
+    public static $_EVENT_COL_MESSAGE = "message";
+    public static $_EVENT_COL_REPEAT_TYPE = "repeat_type";
+
+    public static $_EVENTTYPE_TABLE = "EventTypes";
+    public static $_EVENTTYPE_COL_ID = "id";
+    public static $_EVENT_COL_NAME = "name";
+
+    public static $_EU_TABLE = "Event_User";
+    public static $_EU_COL_USER_ID = "uid";
+    public static $_EU_COL_EVENT_ID = "eid";
     
 }
