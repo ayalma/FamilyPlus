@@ -8,8 +8,7 @@ include_once 'EventsDAOMS.php';
 include_once 'RoleDAOMS.php';
 include_once 'UserDAOMS.php';
 include_once 'DeviceDAOMS.php';
-include_once 'LoGinCodeDAO.php';
-
+include_once 'LoginCodeDAO.php';
 
 
 /**
@@ -30,7 +29,8 @@ class DbManager
     private $_eventsDao;
     private $_roleDao;
     private $_deviceDao;
-    private $_logincodeDao;
+    private $_loginCodeDao;
+    private $_eventTypeDao;
 
     function __construct()
     {
@@ -47,8 +47,8 @@ class DbManager
             $this->_eventsDao = new EventsDAOMS($this->_connection);
             $this->_roleDao = new RoleDAOMS($this->_connection);
             $this->_deviceDao = new DeviceDAOMS($this->_connection);
-            $this->_logincodeDao = new LoginCodeDAOMS($this->_connection);
-
+            $this->_loginCodeDao = new LoginCodeDAOMS($this->_connection);
+            $this->_eventTypeDao = new EventTypeDAOMS($this->_connection);
 
         } catch (Exception $_e) {
             error_log($_e->getMessage());
@@ -91,7 +91,7 @@ class DbManager
      * @param $userId : id of user must be load from db.
      * @return user : user or null if id don't match.
      */
-    public function getUser($userId)
+    public function loadUser($userId)
     {
         return $this->_userDao->load($userId);
     }
@@ -102,7 +102,20 @@ class DbManager
      */
     public function getRoles($userId)
     {
-        return $this->_userDao->getRoles($userId);
+        return null;
+    }
+
+
+    /**
+     * all method related to Device EventType.
+     */
+    /**
+     * @param $eventTypeId
+     * @return EventType:
+     */
+    public function loadEventType($eventTypeId)
+    {
+        return $this->_eventTypeDao->loadByEventId($eventTypeId);
     }
 
 }

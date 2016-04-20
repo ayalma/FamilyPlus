@@ -16,17 +16,15 @@ class User implements JsonSerializable
      private $_buyItems = array();// list of buyItem belong to user*/
 
 
-    function __construct($_fName, $_mNumber)
+    function __construct($_fName = "", $_mNumber = "")
     {
         $this->_fName = $_fName;
         $this->_mNumber = $_mNumber;
     }
 
-    public static function fromJSON($json)
+    public static function fromJSON($json, $obj)
     {
-
-        $jsonValue = json_decode($json);
-        $obj = new User('', '');
+        $jsonValue = json_decode($json, true);
         foreach ($jsonValue as $key => $value)
             $obj->{'_' . $key} = $value;
         return $obj;
