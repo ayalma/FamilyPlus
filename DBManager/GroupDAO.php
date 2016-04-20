@@ -1,5 +1,5 @@
 <?php
-
+include_once '../Models/Group.php';
 /**
  * dao of Group model.
  * Created by PhpStorm.

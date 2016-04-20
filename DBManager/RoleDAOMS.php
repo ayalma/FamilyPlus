@@ -1,6 +1,8 @@
 <?php
 
+include_once '../Models/Role.php';
 include_once 'RoleDAO.php';
+include_once 'DBCons.php';
 
 /**
  * Created by PhpStorm.

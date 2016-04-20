@@ -1,5 +1,5 @@
 <?php
-
+include_once '../Models/User.php';
 /**
  * Created by PhpStorm.
  * User: alimohammadi

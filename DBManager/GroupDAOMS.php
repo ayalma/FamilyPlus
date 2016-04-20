@@ -2,6 +2,7 @@
 
 include_once 'GroupDAO.php';
 include_once '../Models/Group.php';
+include_once 'DBCons.php';
 
 /**
  * Created by PhpStorm.

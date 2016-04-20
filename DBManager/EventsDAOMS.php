@@ -2,6 +2,8 @@
 
 include_once 'EventsDAO.php';
 include_once '../Models/Event.php';
+include_once 'DBCons.php';
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi
