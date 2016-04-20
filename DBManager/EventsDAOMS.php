@@ -1,6 +1,7 @@
 <?php
 
 include_once 'EventsDAO.php';
+include_once '../Models/Event.php';
 /**
  * Created by PhpStorm.
  * User: alimohammadi
@@ -11,18 +12,37 @@ class EventsDAOMS implements EventsDAO
 {
     private $_connection;
 
-    function __construct($_connection)
+    function __construct(mysqli $_connection)
     {
         $this->_connection = $_connection;
     }
 
-    public function save(Events $events)
+
+    /**
+     * @param Event $events : will save in database.
+     * @param $userId : id of user that this id belong to him
+     * @return boolean : status of saving as boolean.
+     */
+    public function save(Event $events, $userId)
     {
-        
+        // TODO: Implement save() method.
     }
 
-    public function load($eventId)
+    /**
+     * @param $eventId : id of event.
+     * @return Event : event that match with id.
+     */
+    public function loadById($eventId)
     {
-        // TODO: Implement load() method.
+        // TODO: Implement loadById() method.
+    }
+
+    /**
+     * @param $userId : of user that event is for him/his.
+     * @return array : array of Event.
+     */
+    public function loadByUserId($userId)
+    {
+        // TODO: Implement loadByUserId() method.
     }
 }

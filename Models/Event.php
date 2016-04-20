@@ -6,7 +6,7 @@
  * Date: 4/16/16
  * Time: 10:43 AM
  */
-class Events
+class Event
 {
     private $_eventType;
     private $_date;
@@ -14,7 +14,7 @@ class Events
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct($_eventType, $_date, $_users, $_message, $_repeatType)
+    function __construct(EventType $_eventType, $_date, $_users, $_message, $_repeatType)
     {
         $this->_eventType = $_eventType;
         $this->_date = $_date;
