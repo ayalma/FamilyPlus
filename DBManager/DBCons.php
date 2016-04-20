@@ -59,7 +59,7 @@ class DBCons
 
     public static $_EVENTTYPE_TABLE = "EventTypes";
     public static $_EVENTTYPE_COL_ID = "id";
-    public static $_EVENT_COL_NAME = "name";
+    public static $_EVENTTYPE_COL_NAME = "name";
 
     public static $_EU_TABLE = "Event_User";
     public static $_EU_COL_USER_ID = "uid";

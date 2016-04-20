@@ -79,6 +79,9 @@ class DbManager
 
     /**
      * all method related to User Model.
+     */
+
+    /**
      * @param User $user will save in database.
      * @return mixed status of saving as boolean.
      */
@@ -107,15 +110,44 @@ class DbManager
 
 
     /**
-     * all method related to Device EventType.
+     * all method related to  EventType.
      */
+
     /**
-     * @param $eventTypeId
-     * @return EventType:
+     * @param $eventTypeId : id of eventType.
+     * @return EventType: eventType contains requested id.
      */
     public function loadEventType($eventTypeId)
     {
         return $this->_eventTypeDao->loadByEventId($eventTypeId);
+    }
+
+    public function saveEventType(EventType $eventType)
+    {
+        return $this->_eventTypeDao->save($eventType);
+    }
+
+    /**
+     * all method related to LoginCode.
+     */
+
+    /**
+     * @param  LoginCode : $loginCode loginCode will save database.
+     * @return boolean status of saving .
+     */
+
+    public function saveLoginCode(LoginCode $loginCode)
+    {
+        return $this->_loginCodeDao->save($loginCode);
+    }
+
+    /**
+     * @param $userId : id of user loginCode belong to him.
+     * @return LoginCode : last loginCode for requested userId.
+     */
+    public function loadLoginCode($userId)
+    {
+        return $this->_loginCodeDao->load($userId);
     }
 
 }

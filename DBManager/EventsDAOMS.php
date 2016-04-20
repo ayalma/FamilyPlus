@@ -52,8 +52,9 @@ class EventsDAOMS implements EventsDAO
     }
 
     /**
-     * @param Event $events
-     * @return bool
+     * @param int $userId id of user that event sent to him/his.
+     * @param int $eventId : id of event.
+     * @return bool status of save.
      */
     private function SaveUser($userId, $eventId)
     {

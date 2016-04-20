@@ -2,6 +2,7 @@
 
 include_once 'EventTypeDAO.php';
 include_once '../Models/EventType.php';
+include_once 'DBCons.php';
 
 /**
  * Created by PhpStorm.
@@ -19,8 +20,46 @@ class EventTypeDAOMS implements EventTypeDAO
         $this->_connection = $_connection;
     }
 
-    public function loadByEventId($eventId)
+    /**
+     * @param int $eventTypeId id of event type.
+     * @return EventType|null : eventType or null if id don't exist.
+     */
+    public function loadByEventId($eventTypeId)
     {
-        // TODO: Implement loadByEventId() method.
+        $sql = 'SELECT ' . DBCons::$_EVENTTYPE_COL_NAME . ' from ' .
+            DBCons::$_EVENTTYPE_TABLE .
+            ' WHERE ' . DBCons::$_EVENTTYPE_COL_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $eventTypeId);
+        $statement->bind_result($name);
+
+        $statement->execute();
+        if ($statement->fetch()) {
+            $statement->close();
+            return new EventType($eventTypeId, $name);
+        } else {
+            $statement->close();
+            return null;
+        }
+    }
+
+    /**
+     * @param EventType $eventType will save in db.
+     * @return boolean return save status as boolean.
+     */
+    public function save(EventType $eventType)
+    {
+        $sql = 'INSERT INTO ' . DBCons::$_EVENTTYPE_TABLE .
+            ' (' . DBCons::$_EVENTTYPE_COL_NAME . ') VALUES (?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('s', $eventType->getName());
+
+
+        $result = $statement->execute();
+        $statement->close();
+
+        return $result;
     }
 }

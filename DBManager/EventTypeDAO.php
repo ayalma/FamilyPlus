@@ -1,4 +1,5 @@
 <?php
+include_once '../Models/EventType.php';
 
 /**
  * EventType Model database Access Structure
@@ -10,5 +11,15 @@
 interface EventTypeDAO
 {
 
-    public function loadByEventId($eventId);
+    /**
+     * @param EventType $eventType will save in db.
+     * @return boolean return save status as boolean.
+     */
+    public function save(EventType $eventType);
+
+    /**
+     * @param int $eventTypeId id of event type.
+     * @return EventType|null : eventType or null if id don't exist.
+     */
+    public function loadByEventId($eventTypeId);
 }
