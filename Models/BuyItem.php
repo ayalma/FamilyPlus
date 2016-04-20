@@ -11,13 +11,23 @@ class BuyItem
     private $_name; // item name.
     private $_purchased; // this mean that is item bought by user.
     private $_price;// price of item.
+    private $_date;
 
-    function __construct($_name, $_purchased, $_price)
+    /**
+     * BuyItem constructor.
+     * @param $_name
+     * @param $_purchased
+     * @param $_price
+     * @param $_date
+     */
+    public function __construct($_name, $_purchased, $_price, $_date)
     {
         $this->_name = $_name;
         $this->_purchased = $_purchased;
         $this->_price = $_price;
+        $this->_date = $_date;
     }
+
 
     /**
      * @return mixed
@@ -67,6 +77,23 @@ class BuyItem
         $this->_price = $price;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->_date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->_date = $date;
+    }
+
+    
 
 
 

@@ -31,5 +31,12 @@ class DBCons
     public static $_LOGINCODE_COL_CODE = "code";
     public static $_LOGINCODE_COL_ID = "id";
     public static $_LOGINCODE_COL_EXPIRED = 'expired';
+
+    public static $_BUYITEMS_TABLE = "BuyItems";
+    public static $_BUYITEMS_M_NUMBER = "m_number";
+    public static $_BUYITEMS_NAME = "name";
+    public static $_BUYITEMS_PURCHASED = "purchased";
+    public static $_BUYITEMS_PRICE = "price";
+    public static $_BUYITEMS_DATE = "date";
     
 }
