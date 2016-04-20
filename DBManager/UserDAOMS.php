@@ -68,7 +68,7 @@ class UserDAOMS implements UserDAO
     public function getRoles($userId)
     {
         $sql = 'SELECT * FROM ' . DBCons::$_GU_TABLE .
-            ' WHERE ' . DBCons::$_GU_USER_ID . '= ?';
+            ' WHERE ' . DBCons::$_GU_COL_USER_ID . '= ?';
 
         $statement = $this->_connection->prepare($sql);
 
@@ -96,7 +96,8 @@ class UserDAOMS implements UserDAO
      */
     public function getGroups($userId)
     {
-        // TODO: Implement getGroups() method.
+        /* $sql = 'SELECT * FROM '.DBCons::.' WHERE id IN (SELECT gid FROM Group_User WHERE uid = 09195479702)';*/
+        return null;
     }
 
     /**
