@@ -29,11 +29,23 @@ class BuyItemDAOMS implements BuyItemDAO
             ' , '. DBCons::$_BUYITEMS_DATE .') VALUES (?,?,?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        return ;
+        $statement->bind_param('dsidi' , $userId , $buyItem->getName() , $buyItem->getPurchased()
+                                ,$buyItem->getPrice() , $buyItem->getDate());
+
+        $result = $statement->execute();
+        $statement->close();
+        return $result;
+    }
+    
+
+    public function loadbyUser($userId)
+    {
+        $sql = ' SELECT * FROM ' .DBCons::$_BUYITEMS_TABLE .
+                ' WHERE ' . DBCons::$_BUYITEMS_DATE .'= ?';
     }
 
-    public function load($buyItem)
+    public function loadbyDate($date)
     {
-        // TODO: Implement load() method.
+        // TODO: Implement loadbyDate() method.
     }
 }

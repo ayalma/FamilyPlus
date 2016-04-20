@@ -13,10 +13,10 @@ interface BuyItemDAO
      * @return boolean return status of saving.
      */
     public function save(BuyItem $buyItem ,$userId);
+    
+    public function loadbyUser($userId);
 
-
-
-    public function load($buyItem);
+    public function loadbyDate($date);
 
 
 
