@@ -31,7 +31,8 @@ class TestRestHandler extends SimpleRest
 
     public function getUser($userId)
     {
-        $user = User::fromJSON('{"fName":"ali","mNumber":"12"}');
+        $user = new User();
+        $user = User::fromJSON('{"fName":"ali","mNumber":"12"}', $user);
         // $user = DbManager::getInstance()->getUser($userId);
 
         $statusCode = 200;

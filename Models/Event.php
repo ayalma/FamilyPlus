@@ -16,7 +16,7 @@ class Event
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct(EventType $_eventType, User $_user , $_date, $_users, $_message, $_repeatType)
+    function __construct(EventType $_eventType, User $_user, $_date, $_users, $_message, $_repeatType)
     {
         $this->_eventType = $_eventType;
         $this->_user = $_user;
@@ -35,7 +35,7 @@ class Event
     }
 
     /**
-     * @param mixed EventType
+     * @param EventType $eventType
      */
     public function setEventType($eventType)
     {
@@ -121,7 +121,8 @@ class Event
     {
         $this->_user = $user;
     }
-
+    
+    
 
 
 
