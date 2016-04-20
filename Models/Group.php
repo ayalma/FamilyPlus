@@ -8,22 +8,23 @@
  */
 class Group
 {
-    private $_id; //Group ID
+    private $_id;    //Group ID
     private $_admin; //group admin
-    private $_users = array(); // list of each Group Users
+    private $_name; //group name.
 
     /**
      * Group constructor.
      * @param $_id
      * @param $_admin
-     * @param array $_users
+     * @param $_name
      */
-    public function __construct($_id, $_admin, array $_users)
+    public function __construct($_id, $_admin, $_name)
     {
         $this->_id = $_id;
         $this->_admin = $_admin;
-        $this->_users = $_users;
+        $this->_name = $_name;
     }
+
 
     /**
      * @return mixed
@@ -56,21 +57,6 @@ class Group
     {
         $this->_admin = $admin;
     }
-
-    /**
-     * @return array
-     */
-    public function getUsers()
-    {
-        return $this->_users;
-    }
-
-    /**
-     * @param array $users
-     */
-    public function setUsers($users)
-    {
-        $this->_users = $users;
-    }
+    
 
 }
