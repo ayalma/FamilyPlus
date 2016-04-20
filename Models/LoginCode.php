@@ -10,20 +10,24 @@ class LoginCode
 {
     private $_userId;
     private $_code;
+    private $_expired;
 
     /**
      * LoginCode constructor.
-     * @param $_userId
-     * @param $_code
+     * @param $_userId : id of user this login code belong to him/his.
+     * @param $_code : login code
+     * @param $_expired : is usable or no.
      */
-    public function __construct($_userId, $_code)
+    public function __construct($_userId, $_code, $_expired)
     {
         $this->_userId = $_userId;
         $this->_code = $_code;
+        $this->_expired = $_expired;
     }
 
+
     /**
-     * @return mixed
+     * @return int
      */
     public function getUserId()
     {
@@ -31,7 +35,7 @@ class LoginCode
     }
 
     /**
-     * @param mixed $userId
+     * @param int $userId
      */
     public function setUserId($userId)
     {
@@ -40,7 +44,7 @@ class LoginCode
 
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getCode()
     {
@@ -48,12 +52,29 @@ class LoginCode
     }
 
     /**
-     * @param mixed $code
+     * @param int $code
      */
     public function setCode($code)
     {
         $this->_code = $code;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getExpired()
+    {
+        return $this->_expired;
+    }
+
+    /**
+     * @param boolean $expired
+     */
+    public function setExpired($expired)
+    {
+        $this->_expired = $expired;
+    }
+    
     
 
 }

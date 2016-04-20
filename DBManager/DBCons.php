@@ -30,5 +30,6 @@ class DBCons
     public static $_LOGINCODE_COL_USER_ID = "uid";
     public static $_LOGINCODE_COL_CODE = "code";
     public static $_LOGINCODE_COL_ID = "id";
+    public static $_LOGINCODE_COL_EXPIRED = 'expired';
     
 }

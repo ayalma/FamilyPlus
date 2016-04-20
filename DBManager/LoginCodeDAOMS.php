@@ -25,10 +25,11 @@ class LoginCodeDAOMS implements LoginCodeDAO
     {
         $sql = 'INSERT INTO ' . DBCons::$_LOGINCODE_TABLE .
             ' (' . DBCons::$_LOGINCODE_COL_USER_ID .
-            ',' . DBCons::$_LOGINCODE_COL_CODE . ') VALUES (?,?)';
+            ',' . DBCons::$_LOGINCODE_COL_CODE .
+            ',' . DBCons::$_LOGINCODE_COL_EXPIRED . ') VALUES (?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('di', $loginCode->getUserId(), $loginCode->getCode());
+        $statement->bind_param('dii', $loginCode->getUserId(), $loginCode->getCode(), intval($loginCode->getExpired()));
 
         $res = $statement->execute();
         $statement->close();
@@ -52,10 +53,10 @@ class LoginCodeDAOMS implements LoginCodeDAO
         $statement->bind_param('d', $userId);
         $statement->execute();
 
-        $statement->bind_result($id, $userId, $code);
+        $statement->bind_result($id, $userId, $code, $expired);
         if ($statement->fetch()) {
             $statement->close();
-            return new LoginCode($userId, $code);
+            return new LoginCode($userId, $code, $expired);
         } else {
             $statement->close();
             return null;
