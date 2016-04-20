@@ -1,5 +1,6 @@
 <?php
-
+include_once 'User.php';
+include_once 'EventType.php';
 /**
  * Created by PhpStorm.
  * User: alimohammadi
@@ -10,13 +11,15 @@ class Event
 {
     private $_eventType;
     private $_date;
+    private $_user;
     private $_repeatType;
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct(EventType $_eventType, $_date, $_users, $_message, $_repeatType)
+    function __construct(EventType $_eventType, User $_user , $_date, $_users, $_message, $_repeatType)
     {
         $this->_eventType = $_eventType;
+        $this->_user = $_user;
         $this->_date = $_date;
         $this->_users = $_users;
         $this->_message = $_message;
@@ -24,7 +27,7 @@ class Event
     }
 
     /**
-     * @return mixed
+     * @return EventType
      */
     public function getEventType()
     {
@@ -32,7 +35,7 @@ class Event
     }
 
     /**
-     * @param mixed $eventType
+     * @param mixed EventType
      */
     public function setEventType($eventType)
     {
@@ -102,6 +105,23 @@ class Event
     {
         $this->_users = $users;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->_user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->_user = $user;
+    }
+
 
 
 

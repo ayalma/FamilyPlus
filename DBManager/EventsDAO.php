@@ -13,7 +13,7 @@ interface EventsDAO
      * @param $userId : id of user that this id belong to him
      * @return boolean : status of saving as boolean.
      */
-    public function save(Event $events, $userId);
+    public function save(Event $events);
 
     /**
      * @param $eventId : id of event.

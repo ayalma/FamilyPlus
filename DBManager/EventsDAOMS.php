@@ -25,9 +25,33 @@ class EventsDAOMS implements EventsDAO
      * @param $userId : id of user that this id belong to him
      * @return boolean : status of saving as boolean.
      */
-    public function save(Event $events, $userId)
+    public function save(Event $events)
     {
-        // TODO: Implement save() method.
+        $sql = ' INSERT INTO ' . DBCons::$_EVENT_TABLE .
+            ' ( ' . DBCons::$_EU_COL_EVENT_ID .
+            ' , ' . DBCons::$_EVENT_COL_USER_ID .
+            ' , ' . DBCons::$_EVENT_COL_DATE .
+            ' , ' . DBCons::$_EVENT_COL_MESSAGE .
+            ' , ' . DBCons::$_EVENT_COL_REPEAT_TYPE . ' )  VALUES (?,?,?,?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('idisi', $events->getEventType()->getId(), $events->getUser()->getMNumber()
+            , $events->getDate(), $events->getMessage(), $events->getRepeatType());
+
+        $result = $statement->execute();
+
+        if ($result) {
+            $sql = ' INSERT INTO ' . DBCons::$_EU_TABLE .
+                ' ( ' . DBCons::$_EU_COL_USER_ID .
+                ' , ' . DBCons::$_EU_COL_EVENT_ID . ' )  VALUES (?,?)';
+
+            $statement = $this->_connection->prepare($sql);
+            
+            $statement->bind_param('di', $events->getUser()->getMNumber(), $events->getEventType()->getId());
+
+            $res = $statement->execute();
+        }
+        return $res && $result;
     }
 
     /**
@@ -36,7 +60,7 @@ class EventsDAOMS implements EventsDAO
      */
     public function loadById($eventId)
     {
-        // TODO: Implement loadById() method.
+
     }
 
     /**
