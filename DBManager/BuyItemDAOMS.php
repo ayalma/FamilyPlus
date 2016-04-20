@@ -1,5 +1,9 @@
 <?php
+
 include_once 'BuyItemDAO.php';
+include_once '../Models/BuyItem.php';
+include_once 'DBCons.php';
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

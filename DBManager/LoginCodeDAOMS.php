@@ -1,5 +1,7 @@
 <?php
 include_once 'LoginCodeDAO.php';
+include_once '../Models/LoginCode.php';
+include_once 'DBCons.php';
 
 /**
  * Created by PhpStorm.

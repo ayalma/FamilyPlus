@@ -1,5 +1,6 @@
 <?php
 
+include_once '../Models/BuyItem.php';
 /**
  * Created by PhpStorm.
  * User: alimohammadi

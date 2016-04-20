@@ -1,6 +1,7 @@
 <?php
 include_once 'UserDAO.php';
-include_once '../Models/Role.php';
+include_once '../Models/User.php';
+include_once 'DBCons.php';
 
 /**
  * Created by PhpStorm.

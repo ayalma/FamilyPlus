@@ -1,4 +1,5 @@
 <?php
+include_once '../Models/LoginCode.php';
 /**
  * Created by PhpStorm.
  * User: Mohsen
