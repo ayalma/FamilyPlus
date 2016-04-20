@@ -40,17 +40,31 @@ class EventsDAOMS implements EventsDAO
             , $events->getDate(), $events->getMessage(), $events->getRepeatType());
 
         $result = $statement->execute();
+        $eventId = $statement->insert_id;
         $res = false;
         if ($result) {
-            $sql = ' INSERT INTO ' . DBCons::$_EU_TABLE .
-                ' ( ' . DBCons::$_EU_COL_USER_ID .
-                ' , ' . DBCons::$_EU_COL_EVENT_ID . ' )  VALUES (?,?)';
 
-            $statement = $this->_connection->prepare($sql);
-            $statement->bind_param('di', $events->getUser()->getMNumber(), $events->getEventType()->getId());
-            $res = $statement->execute();
+            foreach ($events->getUsers() as $userId)
+                $res = $this->SaveUser($userId, $eventId);
         }
         return $res && $result;
+
+    }
+
+    /**
+     * @param Event $events
+     * @return bool
+     */
+    private function SaveUser($userId, $eventId)
+    {
+        $sql = ' INSERT INTO ' . DBCons::$_EU_TABLE .
+            ' ( ' . DBCons::$_EU_COL_USER_ID .
+            ' , ' . DBCons::$_EU_COL_EVENT_ID . ' )  VALUES (?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('di', $userId, $eventId);
+        $res = $statement->execute();
+        return $res;
 
     }
 
@@ -118,4 +132,6 @@ class EventsDAOMS implements EventsDAO
     {
         // TODO: Implement loadByUserId() method.
     }
+
+
 }

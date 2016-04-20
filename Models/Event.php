@@ -91,7 +91,7 @@ class Event
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getUsers()
     {
