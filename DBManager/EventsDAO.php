@@ -8,5 +8,7 @@
  */
 interface EventsDAO
 {
+    public function save(Events $events);
 
+    public function load($eventId);
 }

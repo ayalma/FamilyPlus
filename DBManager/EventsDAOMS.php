@@ -16,4 +16,13 @@ class EventsDAOMS implements EventsDAO
         $this->_connection = $_connection;
     }
 
+    public function save(Events $events)
+    {
+        
+    }
+
+    public function load($eventId)
+    {
+        // TODO: Implement load() method.
+    }
 }
