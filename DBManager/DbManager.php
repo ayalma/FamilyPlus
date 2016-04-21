@@ -8,7 +8,8 @@ include_once 'EventsDAOMS.php';
 include_once 'RoleDAOMS.php';
 include_once 'UserDAOMS.php';
 include_once 'DeviceDAOMS.php';
-include_once 'LoginCodeDAO.php';
+include_once 'LoginCodeDAOMS.php';
+include_once 'EventTypeDAOMS.php';
 
 
 /**

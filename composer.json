@@ -1,0 +1,15 @@
+{
+  "name": "ayalma/FamilyPlus",
+  "description": "little social network for family",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "alimohammadi",
+      "email": "alimohammadi350@gmail.com"
+    }
+  ],
+  "require": {
+    "php-gcm/php-gcm": "1.1.1"
+  }
+}

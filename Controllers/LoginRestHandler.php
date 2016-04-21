@@ -28,6 +28,36 @@ class LoginRestHandler extends SimpleRest
         return self::$_instance;
     }
 
+    function requestCode($mobileNumber)
+    {
+        //send messsage to phone number and send notification to him.
+        $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
+        $smsSender = new SmsSender($url, "alimohammadi350@gmail.com", "gamor2012", "3000853853");
+
+
+        $msg = 'رمز درخواستی شما :2225';
+
+        $method = 'SendMessage';
+
+
+        $smsSender->connect();
+
+        $statusCode = 200;
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];
+        $this->setHttpHeaders($requestContentType, $statusCode);
+
+        $result = $smsSender->sendMessage($method, $mobileNumber, $msg, '1');
+
+        if ((int)$result) {
+            DbManager::getInstance()->saveLoginCode(new LoginCode($mobileNumber, 2225));
+            $response['code'] = 2225;
+            $response['res'] = $result;
+        } else
+            $response['error'] = $result;
+
+        echo json_encode($response);
+    }
+
     function login(User $user)
     {
 

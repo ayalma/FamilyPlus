@@ -18,11 +18,10 @@ class LoginCode
      * @param $_code : login code
      * @param $_expired : is usable or no.
      */
-    public function __construct($_userId, $_code, $_expired)
+    public function __construct($_userId, $_code)
     {
         $this->_userId = $_userId;
         $this->_code = $_code;
-        $this->_expired = $_expired;
     }
 
 

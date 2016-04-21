@@ -19,6 +19,16 @@ if (isset($_GET["view"]))
 controls the RESTful services
 URL mapping
 */
+
+function setHttpHeaders($contentType, $statusCode)
+{
+    $statusMessage = 'Bad Request';
+
+    header('HTTP/1.1' . " " . $statusCode . " " . $statusMessage);
+    header("Content-Type:" . $contentType); // . is concatenation in php
+
+}
+
 switch ($view) {
 
     case "login":
@@ -39,8 +49,18 @@ switch ($view) {
         break;
     case 'getRoles' :
         TestRestHandler::getInstance()->getRoles($_GET['userId']);
+        break;
+    case 'requestCode' :
+
+        if (isset($_POST['mobileNumber'])) {
+            LoginRestHandler::getInstance()->requestCode($_POST['mobileNumber']);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            echo 'no mobile available';
+        }
+        break;
 }
-?>
+
 
         
         
