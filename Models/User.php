@@ -1,4 +1,7 @@
 <?php
+namespace Models;
+
+use JsonSerializable;
 
 /**
  * Created by PhpStorm.

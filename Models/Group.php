@@ -1,5 +1,5 @@
 <?php
-
+namespace Models;
 /**
  * Created by PhpStorm.
  * User: Mohsen

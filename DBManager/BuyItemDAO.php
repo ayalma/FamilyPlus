@@ -1,6 +1,10 @@
 <?php
+namespace DBManger;
+require "../vendor/autoload.php";
 
-include_once '../Models/BuyItem.php';
+use Models\BuyItem;
+
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi
@@ -13,12 +17,11 @@ interface BuyItemDAO
      * @param BuyItem $buyItem will save in db
      * @return boolean return status of saving.
      */
-    public function save(BuyItem $buyItem ,$userId);
-    
+    public function save(BuyItem $buyItem, $userId);
+
     public function loadbyUser($userId);
 
     public function loadbyDate($date);
-
 
 
 }

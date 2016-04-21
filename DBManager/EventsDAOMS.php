@@ -1,9 +1,9 @@
 <?php
+namespace DBManger;
+require "../vendor/autoload.php";
 
-include_once 'EventsDAO.php';
-include_once '../Models/Event.php';
-include_once 'DBCons.php';
-include_once 'DbManager.php';
+use Models\Event;
+use mysqli;
 
 /**
  * Created by PhpStorm.
@@ -23,7 +23,6 @@ class EventsDAOMS implements EventsDAO
 
     /**
      * @param Event $events : will save in database.
-     * @param $userId : id of user that this id belong to him
      * @return boolean : status of saving as boolean.
      */
     public function save(Event $events)

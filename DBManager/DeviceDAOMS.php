@@ -1,8 +1,10 @@
 <?php
+namespace DBManger;
 
-include_once 'DeviceDAO.php';
-include_once '../Models/Device.php';
-include_once 'DBCons.php';
+use Models\Device;
+use mysqli;
+
+require "../vendor/autoload.php";
 
 /**
  * Created by PhpStorm.

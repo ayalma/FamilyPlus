@@ -1,5 +1,6 @@
 <?php
-include_once 'RoleDAO.php';
+namespace DBManger;
+require "../vendor/autoload.php";
 /**
  * Created by PhpStorm.
  * User: alimohammadi

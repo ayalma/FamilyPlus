@@ -1,7 +1,7 @@
 <?php
-require_once("LoginRestHandler.php");
-require_once("TestRestHandler.php");
-include_once '../Models/User.php';
+namespace Controllers;
+require "../vendor/autoload.php";
+use Models\User;
 
 
 /**

@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 include_once 'User.php';
 include_once 'EventType.php';
 /**

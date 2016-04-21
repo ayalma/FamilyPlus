@@ -1,5 +1,5 @@
 <?php
-
+namespace Models;
 /**
  * class that contains all data about events types.
  * Created by PhpStorm.

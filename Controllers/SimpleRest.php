@@ -1,5 +1,9 @@
 <?php
 
+namespace Controllers;
+
+require "../vendor/autoload.php";
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

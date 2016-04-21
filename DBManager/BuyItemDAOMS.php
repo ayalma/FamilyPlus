@@ -1,8 +1,10 @@
 <?php
+namespace DBManger;
 
-include_once 'BuyItemDAO.php';
-include_once '../Models/BuyItem.php';
-include_once 'DBCons.php';
+use Models\BuyItem;
+use mysqli;
+
+require "../vendor/autoload.php";
 
 /**
  * Created by PhpStorm.
@@ -40,7 +42,7 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->close();
         return $result;
     }
-    
+
 
     public function loadbyUser($userId)
     {

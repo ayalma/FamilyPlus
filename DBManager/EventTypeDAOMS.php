@@ -1,8 +1,9 @@
 <?php
+namespace DBManger;
+require "../vendor/autoload.php";
 
-include_once 'EventTypeDAO.php';
-include_once '../Models/EventType.php';
-include_once 'DBCons.php';
+use Models\EventType;
+use mysqli;
 
 /**
  * Created by PhpStorm.

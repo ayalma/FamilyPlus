@@ -1,7 +1,9 @@
 <?php
-include_once 'LoginCodeDAO.php';
-include_once '../Models/LoginCode.php';
-include_once 'DBCons.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+
+use Models\LoginCode;
+use mysqli;
 
 /**
  * Created by PhpStorm.

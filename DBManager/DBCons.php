@@ -1,5 +1,5 @@
 <?php
-
+namespace DBManger;
 /**
  * Created by PhpStorm.
  * User: alimohammadi

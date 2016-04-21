@@ -1,5 +1,10 @@
 <?php
-include_once '../Models/LoginCode.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+use Models\LoginCode;
+use Models\User;
+
+
 /**
  * Created by PhpStorm.
  * User: Mohsen
@@ -8,7 +13,6 @@ include_once '../Models/LoginCode.php';
  */
 interface LoginCodeDAO
 {
-
 
     /**
      * @param LoginCode $LoginCode will save in db

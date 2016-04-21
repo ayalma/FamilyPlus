@@ -1,8 +1,10 @@
 <?php
-require_once '../DBManager/DbManager.php';
-include_once 'SimpleRest.php';
-include_once '../Models/Device.php';
-include_once 'SmsSender.php';
+namespace Controllers;
+require "../vendor/autoload.php";
+
+use DBManger\DbManager;
+use Models\LoginCode;
+use Models\User;
 
 /**
  * Created by PhpStorm.
@@ -32,7 +34,7 @@ class LoginRestHandler extends SimpleRest
     {
         //send messsage to phone number and send notification to him.
         $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
-        $smsSender = new SmsSender($url, "alimohammadi350@gmail.com", "gamor2012", "3000853853");
+        $smsSender = new SmsSender($url, "username", "pass", "number");
 
 
         $msg = 'رمز درخواستی شما :2225';

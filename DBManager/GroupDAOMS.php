@@ -1,8 +1,9 @@
 <?php
+namespace DBManger;
+require "../vendor/autoload.php";
 
-include_once 'GroupDAO.php';
-include_once '../Models/Group.php';
-include_once 'DBCons.php';
+use Models\Group;
+use mysqli;
 
 /**
  * Created by PhpStorm.

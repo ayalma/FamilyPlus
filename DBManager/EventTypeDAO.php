@@ -1,5 +1,8 @@
 <?php
-include_once '../Models/EventType.php';
+namespace DBManger;
+
+require "../vendor/autoload.php";
+use Models\EventType;
 
 /**
  * EventType Model database Access Structure

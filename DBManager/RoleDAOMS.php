@@ -1,8 +1,9 @@
 <?php
+namespace DBManger;
 
-include_once '../Models/Role.php';
-include_once 'RoleDAO.php';
-include_once 'DBCons.php';
+require "../vendor/autoload.php";
+use Models\Role;
+use mysqli;
 
 /**
  * Created by PhpStorm.
@@ -34,6 +35,8 @@ class RoleDAOMS implements RoleDAO
         $statement->bind_param('d', $userId);
         $statement->execute();
 
+        $groupId = 0;
+        $role = 0;
         $statement->bind_result($groupId, $userId, $role);
 
         $roles = array();

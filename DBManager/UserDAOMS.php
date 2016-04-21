@@ -1,7 +1,9 @@
 <?php
-include_once 'UserDAO.php';
-include_once '../Models/User.php';
-include_once 'DBCons.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+use Models\User;
+use mysqli;
+
 
 /**
  * Created by PhpStorm.

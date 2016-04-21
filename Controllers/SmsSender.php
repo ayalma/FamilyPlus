@@ -1,5 +1,10 @@
 <?php
 
+namespace Controllers;
+require "../vendor/autoload.php";
+
+use SoapClient;
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

@@ -1,5 +1,8 @@
 <?php
-include_once '../Models/Event.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+use Models\Event;
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

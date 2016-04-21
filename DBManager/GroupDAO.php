@@ -1,5 +1,6 @@
 <?php
-include_once '../Models/Group.php';
+namespace DBManger;
+require "../vendor/autoload.php";
 /**
  * dao of Group model.
  * Created by PhpStorm.

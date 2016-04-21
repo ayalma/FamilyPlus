@@ -1,5 +1,9 @@
 <?php
-include_once '../Models/User.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+use Models\User;
+
+
 /**
  * Created by PhpStorm.
  * User: alimohammadi

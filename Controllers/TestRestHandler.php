@@ -1,7 +1,9 @@
 <?php
-include_once 'SimpleRest.php';
-require_once '../DBManager/DbManager.php';
-include_once '../Models/User.php';
+namespace Controllers;
+require "../vendor/autoload.php";
+
+use DBManger\DbManager;
+use Models\User;
 
 /**
  * Created by PhpStorm.

@@ -1,5 +1,9 @@
 <?php
-include_once '../Models/Device.php';
+namespace DBManger;
+require "../vendor/autoload.php";
+
+use Models\Device;
+
 
 /**
  * Created by PhpStorm.

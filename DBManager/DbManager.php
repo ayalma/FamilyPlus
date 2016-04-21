@@ -1,16 +1,12 @@
 <?php
+namespace DBManger;
+require "../vendor/autoload.php";
 
-include_once 'DBCons.php';
-
-include_once 'UserDAOMS.php';
-include_once 'BuyItemDAOMS.php';
-include_once 'EventsDAOMS.php';
-include_once 'RoleDAOMS.php';
-include_once 'UserDAOMS.php';
-include_once 'DeviceDAOMS.php';
-include_once 'LoginCodeDAOMS.php';
-include_once 'EventTypeDAOMS.php';
-
+use Exception;
+use Models\Device;
+use Models\EventType;
+use Models\LoginCode;
+use Models\User;
 
 /**
  * DbManager class that list all method that access to database.
