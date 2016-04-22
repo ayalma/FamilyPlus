@@ -1,5 +1,5 @@
 <?php
-namespace DBManger;
+namespace DBManager;
 
 use Models\Device;
 use mysqli;

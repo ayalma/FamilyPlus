@@ -2,9 +2,9 @@
 namespace Controllers;
 require "../vendor/autoload.php";
 
-use DBManger\DbManager;
+use DBManager\DbManager;
 use ir\ayalma\SmsSender\Config;
-use ir\ayalma\SmsSender\SmsSender;
+use ir\ayalma\SmsSender\SmsManager;
 use Models\LoginCode;
 use Models\User;
 
@@ -44,14 +44,14 @@ class LoginRestHandler extends SimpleRest
         $method = 'SendMessage';
 
 
-        SmsSender::getInstance()->init(new Config($url, 'alimohammadi350@gmail.com', 'gamor2012', '3000853853'));
-        SmsSender::getInstance()->connect();
+        SmsManager::getInstance()->init(new Config($url, 'username', 'pass', 'number'));
+
         
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
 
-        $result = SmsSender::getInstance()->sendMessage($mobileNumber, $msg, '1');
+        $result = SmsManager::getInstance()->sendMessageV7($mobileNumber, $msg, 1111111, 1);
 
         if ((int)$result) {
             DbManager::getInstance()->saveLoginCode(new LoginCode($mobileNumber, 2225));
@@ -92,11 +92,17 @@ class LoginRestHandler extends SimpleRest
     function getstatus($msgId)
     {
 
-        /*$url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
-        $smsSender = new SmsSender($url, "alimohammadi350@gmail.com", "gamor2012", "3000853853");
-        $smsSender->connect();
 
-        $response['msgStatus'] = $smsSender->getMessageStatus($msgId);
-        echo json_encode($response);*/
+        SmsManager::getInstance()->init(new Config('', 'alimohammadi7117@gmail.com', 'gamor2012', '3000853853'));
+
+
+        $statusCode = 200;
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];
+        $this->setHttpHeaders($requestContentType, $statusCode);
+
+        $result = SmsManager::getInstance()->getMessagesStatusV7($msgId);
+
+        $response['msgStatus'] = $result;
+        echo json_encode($response);
     }
 }

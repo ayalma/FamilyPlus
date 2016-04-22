@@ -1,9 +1,9 @@
 <?php
 namespace Controllers;
-require "../vendor/autoload.php";
+include_once '../vendor/autoload.php';
 
-use DBManger\DbManager;
-use Models\User;
+use DBManager\DbManager;
+
 
 /**
  * Created by PhpStorm.
@@ -33,9 +33,9 @@ class TestRestHandler extends SimpleRest
 
     public function getUser($userId)
     {
-        $user = new User();
-        $user = User::fromJSON('{"fName":"ali","mNumber":"12"}', $user);
-        // $user = DbManager::getInstance()->getUser($userId);
+        /* $user = new User();
+         $user = User::fromJSON('{"fName":"ali","mNumber":"12"}', $user);*/
+        $user = DbManager::getInstance()->loadUser($userId);
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];

@@ -1,5 +1,5 @@
 <?php
-namespace DBManger;
+namespace DBManager;
 require "../vendor/autoload.php";
 /**
  * dao of Group model.

@@ -1,5 +1,5 @@
 <?php
-namespace DBManger;
+namespace DBManager;
 require "../vendor/autoload.php";
 
 use Models\Group;
