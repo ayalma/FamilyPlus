@@ -129,8 +129,8 @@ class DbManager
      */
 
     /**
-     * @param  LoginCode : $loginCode loginCode will save database.
-     * @return boolean status of saving .
+     * @param LoginCode $loginCode e loginCode will save database.
+     * @return bool status of saving .
      */
 
     public function saveLoginCode(LoginCode $loginCode)

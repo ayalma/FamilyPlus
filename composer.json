@@ -10,13 +10,14 @@
     }
   ],
   "require": {
-    "php-gcm/php-gcm": "1.1.1"
+    "php-gcm/php-gcm": "1.1.1",
+    "ayalma/sms_sender": "^1.0"
   },
   "autoload": {
     "psr-4": {
       "DBManager\\": "DBManager/",
       "Models\\": "Models/",
-      "Controllers\\": "Controllers"
+      "Controllers\\": "Controllers/"
     }
   }
 }
