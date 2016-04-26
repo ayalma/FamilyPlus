@@ -3,6 +3,7 @@ namespace Controllers;
 require "../vendor/autoload.php";
 
 use DBManager\DbManager;
+use Firebase\JWT\JWT;
 use ir\ayalma\SmsSender\Config;
 use ir\ayalma\SmsSender\SmsManager;
 use Models\LoginCode;
@@ -34,75 +35,96 @@ class LoginRestHandler extends SimpleRest
 
     function requestCode($mobileNumber)
     {
-        //send messsage to phone number and send notification to him.
-        $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
-        // $smsSender = new SmsSender($url, "username", "pass", "number");
+        $url = '';
 
+        $code = mt_rand(100000, 999999);
+        $msg = "رمز درخواستی شما :" . $code;
 
-        $msg = 'رمز درخواستی شما :2225';
-
-        $method = 'SendMessage';
-
-
-        SmsManager::getInstance()->init(new Config($url, 'username', 'pass', 'number'));
-
+        SmsManager::getInstance()->init(new Config($url, 'username', 'password', '3000853853'));
         
-        $statusCode = 200;
-        $requestContentType = $_SERVER['HTTP_ACCEPT'];
-        $this->setHttpHeaders($requestContentType, $statusCode);
 
         $result = SmsManager::getInstance()->sendMessageV7($mobileNumber, $msg, 1111111, 1);
 
         if ((int)$result) {
-            DbManager::getInstance()->saveLoginCode(new LoginCode($mobileNumber, 2225));
-            $response['code'] = 2225;
+
+            $user = DbManager::getInstance()->loadUser($mobileNumber);
+            DbManager::getInstance()->saveLoginCode(new LoginCode($mobileNumber, $code));
+            $response['register'] = ($user == null);
+            $response['codeSent'] = true;
             $response['res'] = $result;
-        } else
+
+        } else {
             $response['error'] = $result;
+            $statusCode = 500;
+            $requestContentType = $_SERVER['HTTP_ACCEPT'];
+            $this->setHttpHeaders($requestContentType, $statusCode);
+        }
 
         echo json_encode($response);
     }
 
-    function login(User $user)
+    function signUp(User $user, $code)
     {
-
-        // $response["login"] = DbManager::getInstance()->save($_device, "12");
-
-        //send messsage to phone number and send notification to him.
-        /*  $url = 'http://www.afe.ir/WebService/V5/BoxService.asmx?wsdl';
-          $smsSender = new SmsSender($url, "username", "password", "number");
-  
-          $mobile = '0xxxxxxxxxx';
-          $msg = 'رمز درخواستی شما :2225';
-  
-          $method = 'SendMessage';
-  
-  
-          $smsSender->connect();
-  
-          $statusCode = 200;
-          $requestContentType = $_SERVER['HTTP_ACCEPT'];
-          $this->setHttpHeaders($requestContentType, $statusCode);
-  
-          $response['msg status'] = $smsSender->sendMessage($method, $mobile, $msg, '1');
-  
-          echo json_encode($response);*/
-    }
-
-    function getstatus($msgId)
-    {
-
-
-        SmsManager::getInstance()->init(new Config('', 'alimohammadi7117@gmail.com', 'gamor2012', '3000853853'));
-
+        $loginCode = DbManager::getInstance()->loadLoginCode($user->getMNumber());
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
 
-        $result = SmsManager::getInstance()->getMessagesStatusV7($msgId);
+        if ($loginCode != null && $loginCode->getExpired() == false) {
+            //todo set code is expired.
+            $response['signUp'] = $code == $loginCode->getCode() && DbManager::getInstance()->saveUser($user);
+            $response['accessToken'] = $this->getJwt($user->getMNumber(), $user->getFName());
+        } else {
+            $response['login'] = false;
+        }
 
-        $response['msgStatus'] = $result;
+        echo json_encode($response);
+    }
+
+    private function getJwt($name, $userId)
+    {
+        $tokenId = base64_encode(mcrypt_create_iv(32));
+        $issuedAt = time();
+        $notBefore = $issuedAt + 10;             //Adding 10 seconds
+        $serverName = 'familyPlus Server'; // Retrieve the server name from config file
+
+        /*
+         * Create the token as an array
+         */
+        $data = [
+            'iat' => $issuedAt,         // Issued at: time when the token was generated
+            'jti' => $tokenId,          // Json Token Id: an unique identifier for the token
+            'iss' => $serverName,       // Issuer
+            'nbf' => $notBefore,        // Not before
+            'data' => [                  // Data related to the signer user
+                'userId' => $userId, // userId from the users table
+                'name' => $name, //  name
+            ]
+        ];
+
+        $jwt = JWT::encode($data, 'sampleKey', 'HS512');
+
+        return $jwt;
+    }
+
+    function signIn($mobileNumber, $code)
+    {
+        $loginCode = DbManager::getInstance()->loadLoginCode($mobileNumber);
+
+        $statusCode = 200;
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];
+        $this->setHttpHeaders($requestContentType, $statusCode);
+        $name = DbManager::getInstance()->loadUser($mobileNumber)->getFName();
+
+        if ($loginCode != null && $loginCode->getExpired() == false) {
+            //todo set code is expired.
+            $response['signIn'] = $code == $loginCode->getCode();
+            $response['accessToken'] = $this->getJwt($mobileNumber, $name);
+        } else {
+            $response['login'] = false;
+        }
+
         echo json_encode($response);
     }
 }

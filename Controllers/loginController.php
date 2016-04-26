@@ -1,7 +1,6 @@
 <?php
 namespace Controllers;
 require "../vendor/autoload.php";
-use Models\User;
 
 
 /**
@@ -31,24 +30,31 @@ function setHttpHeaders($contentType, $statusCode)
 
 switch ($view) {
 
-    case "login":
-        // to handle REST Url /LoginController/login/
-        $user = new User("a", '', "", "", "");
-        LoginRestHandler::getInstance()->login($user);
+    case "signUp":
+
+        if (isset($_POST['user']) && $_POST['code']) {
+            $code = $_POST['code'];
+            // $user = User::fromJSON()$_POST['user'];
+            //LoginRestHandler::getInstance()->signIn($mobileNumber, $code);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            echo headers_list();
+        }
+
         break;
 
-    case "msg":
-        // to handle REST Url /mobile/show/<id>/
-        /*  $mobileRestHandler = new MobileRestHandler();
-          $mobileRestHandler->getMobile($_GET["id"]);*/
-        LoginRestHandler::getInstance()->getstatus($_GET['id']);
-        break;
+    case "signIn":
 
-    case "getUser" :
-        TestRestHandler::getInstance()->getUser($_GET['userId']);
-        break;
-    case 'getRoles' :
-        TestRestHandler::getInstance()->getRoles($_GET['userId']);
+        if (isset($_POST['code']) && isset($_POST['mobileNumber'])) {
+
+            $code = $_POST['code'];
+            $mobileNumber = $_POST['mobileNumber'];
+            LoginRestHandler::getInstance()->signIn($mobileNumber, $code);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            echo 'bad request';
+        }
+
         break;
     case 'requestCode' :
 

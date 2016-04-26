@@ -4,6 +4,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/ayalma/sms_sender" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-gcm/php-gcm" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -13,11 +15,15 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/ayalma/sms_sender" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
+          <root url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
           <root url="file://$MODULE_DIR$/vendor/php-gcm/php-gcm" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/ayalma/sms_sender" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
+          <root url="file://$MODULE_DIR$/vendor/netresearch/jsonmapper" />
           <root url="file://$MODULE_DIR$/vendor/php-gcm/php-gcm" />
         </SOURCES>
       </library>

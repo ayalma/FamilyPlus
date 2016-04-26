@@ -80,7 +80,7 @@ class DbManager
 
     /**
      * @param User $user will save in database.
-     * @return mixed status of saving as boolean.
+     * @return boolean status of saving as boolean.
      */
     public function saveUser(User $user)
     {

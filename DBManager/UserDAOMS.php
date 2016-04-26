@@ -23,7 +23,7 @@ class UserDAOMS implements UserDAO
 
     /**
      * @param User $user user will be save in data base.
-     * @return mixed status of saving as boolean.
+     * @return boolean status of saving as boolean.
      */
     public function save(User $user)
     {

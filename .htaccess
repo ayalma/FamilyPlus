@@ -2,9 +2,11 @@
 Options +FollowSymLinks
 RewriteEngine on
 # map neat URL to internal URL
-RewriteRule ^LoginController/login$ Controllers/loginController.php?view=login [nc,qsa]
+RewriteRule ^LoginController/signUp Controllers/loginController.php?view=signUp [nc,qsa]
 RewriteRule ^LoginController/requestCode$ Controllers/loginController.php?view=requestCode [nc,qsa]
-RewriteRule ^LoginController/register/([0-9]+)$   Controllers/loginController.php?view=msg&id=$1 [nc,qsa]
+RewriteRule ^LoginController/signIn$   Controllers/loginController.php?view=signIn [nc,qsa]
 #end of LoginControllerMapping
 RewriteRule ^Test/getUser/([0-9]+)$ Controllers/loginController.php?view=getUser&userId=$1 [nc,qsa]
 RewriteRule ^Test/getRoles/([0-9]+)$ Controllers/loginController.php?view=getRoles&userId=$1 [nc,qsa]
+#all method routing
+RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=registerDevice [nc,qsa]

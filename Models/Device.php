@@ -25,7 +25,7 @@ class Device
      * @param $_model
      * @param $_registerId
      */
-    public function __construct($_serial, $_apiNumber, $_brand, $_model, $_registerId)
+    public function __construct($_serial = '', $_apiNumber = 0, $_brand = '', $_model = '', $_registerId = '')
     {
         $this->_serial = $_serial;
         $this->_apiNumber = $_apiNumber;
