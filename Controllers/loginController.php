@@ -14,10 +14,7 @@ require "../vendor/autoload.php";
 $view = "";
 if (isset($_GET["view"]))
     $view = $_GET["view"];
-/*
-controls the RESTful services
-URL mapping
-*/
+
 
 function setHttpHeaders($contentType, $statusCode)
 {
@@ -30,26 +27,15 @@ function setHttpHeaders($contentType, $statusCode)
 
 switch ($view) {
 
-    case "signUp":
-
-        if (isset($_POST['user']) && $_POST['code']) {
-            $code = $_POST['code'];
-            // $user = User::fromJSON()$_POST['user'];
-            //LoginRestHandler::getInstance()->signIn($mobileNumber, $code);
-        } else {
-            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-            echo headers_list();
-        }
-
-        break;
-
     case "signIn":
 
-        if (isset($_POST['code']) && isset($_POST['mobileNumber'])) {
+        if (isset($_POST['code']) && isset($_POST['mobileNumber']) && $_POST['register']) {
 
             $code = $_POST['code'];
             $mobileNumber = $_POST['mobileNumber'];
-            LoginRestHandler::getInstance()->signIn($mobileNumber, $code);
+            $register = $_POST['register'];
+
+            LoginRestHandler::getInstance()->signIn($mobileNumber, $code, $register);
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             echo 'bad request';
@@ -64,6 +50,23 @@ switch ($view) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             echo 'no mobile available';
         }
+        break;
+    case 'updateName' :
+
+        $authToken = Util::getAuthToken(apache_request_headers());
+
+        if ($authToken == null)
+            break;
+
+        if (!isset($_POST['name'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+
+
+        $data = $authToken['data'];
+        $userId = $data->userId;
+        LoginRestHandler::getInstance()->updateName($userId, $_POST['name']);
         break;
 }
 

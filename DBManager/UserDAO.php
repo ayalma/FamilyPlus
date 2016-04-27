@@ -24,5 +24,12 @@ interface UserDAO
      * @return user that contains requested userId.
      */
     public function load($userId);
+
+    /**
+     * @param $userId :id of requested user.
+     * @param $userName : username for user.
+     * @return boolean :status of updating as boolean.
+     */
+    public function updateName($userId, $userName);
     
 }

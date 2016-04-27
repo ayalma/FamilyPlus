@@ -64,4 +64,25 @@ class UserDAOMS implements UserDAO
         }
     }
 
+    /**
+     * @param $userId : id of user.
+     * @param $userName : name of user.
+     * @return boolean : status of saving.
+     */
+    public function updateName($userId, $userName)
+    {
+        $sql = 'UPDATE ' . DBCons::$_USER_TABLE
+            . ' SET ' . DBCons::$_USER_COL_FNAME
+            . '= ? WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER . '=?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('sd', $userName, $userId);
+
+        $res = $statement->execute();
+
+        $statement->close();
+
+        return $res;
+    }
+
 }

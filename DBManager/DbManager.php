@@ -87,6 +87,11 @@ class DbManager
         return $this->_userDao->save($user);
     }
 
+    public function updateUserName($userId, $userName)
+    {
+        return $this->_userDao->updateName($userId, $userName);
+    }
+
     /**
      * @param $userId : id of user must be load from db.
      * @return user : user or null if id don't match.

@@ -22,7 +22,7 @@ class SimpleRest
     {
         $statusMessage = $this->getHttpStatusMessage($statusCode);
 
-        header($this->httpVersion . " " . $statusCode . " " . $statusMessage);
+        header($this->httpVersion . "" . $statusCode . "" . $statusMessage);
         header("Content-Type:" . $contentType); // . is concatenation in php
 
     }

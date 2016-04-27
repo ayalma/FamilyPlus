@@ -38,7 +38,7 @@ class LoginRestHandler extends SimpleRest
         $url = '';
 
         $code = mt_rand(100000, 999999);
-        $msg = "رمز درخواستی شما :" . $code;
+        $msg = "رمز درخواستی شما:" . $code . "\n طراحی وتوسعه ی : گروه برنامه نویسی آی آلما";
 
         SmsManager::getInstance()->init(new Config($url, 'username', 'password', '3000853853'));
         
@@ -63,26 +63,46 @@ class LoginRestHandler extends SimpleRest
         echo json_encode($response);
     }
 
-    function signUp(User $user, $code)
+    function updateName($userId, $name)
     {
-        $loginCode = DbManager::getInstance()->loadLoginCode($user->getMNumber());
+
+        $res = DbManager::getInstance()->updateUserName($userId, $name);
 
         $statusCode = 200;
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
 
-        if ($loginCode != null && $loginCode->getExpired() == false) {
+        $response['update'] = $res;
+        echo json_encode($response);
+    }
+
+    function signIn($mobileNumber, $code, $register)
+    {
+        $loginCode = DbManager::getInstance()->loadLoginCode($mobileNumber);
+
+        $statusCode = 200;
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];
+        $this->setHttpHeaders($requestContentType, $statusCode);
+
+
+        if ($loginCode != null && $loginCode->getExpired() == false && $loginCode->getCode() == $code) {
             //todo set code is expired.
-            $response['signUp'] = $code == $loginCode->getCode() && DbManager::getInstance()->saveUser($user);
-            $response['accessToken'] = $this->getJwt($user->getMNumber(), $user->getFName());
+            if ($register)
+                DbManager::getInstance()->saveUser(new User('', $mobileNumber));
+
+            $response['signIn'] = true;
+            $response['accessToken'] = $this->getJwt($mobileNumber);
+
         } else {
-            $response['login'] = false;
+            $response['loginCode'] = $loginCode->getCode();
+            $response['signIn'] = false;
+            $response['accessToken'] = "hello";
         }
 
         echo json_encode($response);
     }
 
-    private function getJwt($name, $userId)
+    private function getJwt($userId)
     {
         $tokenId = base64_encode(mcrypt_create_iv(32));
         $issuedAt = time();
@@ -99,32 +119,11 @@ class LoginRestHandler extends SimpleRest
             'nbf' => $notBefore,        // Not before
             'data' => [                  // Data related to the signer user
                 'userId' => $userId, // userId from the users table
-                'name' => $name, //  name
             ]
         ];
 
         $jwt = JWT::encode($data, 'sampleKey', 'HS512');
 
         return $jwt;
-    }
-
-    function signIn($mobileNumber, $code)
-    {
-        $loginCode = DbManager::getInstance()->loadLoginCode($mobileNumber);
-
-        $statusCode = 200;
-        $requestContentType = $_SERVER['HTTP_ACCEPT'];
-        $this->setHttpHeaders($requestContentType, $statusCode);
-        $name = DbManager::getInstance()->loadUser($mobileNumber)->getFName();
-
-        if ($loginCode != null && $loginCode->getExpired() == false) {
-            //todo set code is expired.
-            $response['signIn'] = $code == $loginCode->getCode();
-            $response['accessToken'] = $this->getJwt($mobileNumber, $name);
-        } else {
-            $response['login'] = false;
-        }
-
-        echo json_encode($response);
     }
 }

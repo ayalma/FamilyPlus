@@ -57,7 +57,7 @@ class LoginCodeDAOMS implements LoginCodeDAO
         $statement->bind_param('d', $userId);
         $statement->execute();
 
-        $statement->bind_result($id, $userId, $code, $expired);
+        $statement->bind_result($userId, $code, $id, $expired);
         if ($statement->fetch()) {
             $statement->close();
             return new LoginCode($userId, $code, $expired);
