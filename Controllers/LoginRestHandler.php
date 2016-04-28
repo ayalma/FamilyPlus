@@ -38,10 +38,9 @@ class LoginRestHandler extends SimpleRest
         $url = '';
 
         $code = mt_rand(100000, 999999);
-        $msg = "رمز درخواستی شما:" . $code . "\n طراحی وتوسعه ی : گروه برنامه نویسی آی آلما";
+        $msg = "رمز درخواستی شما:" . $code . "\n طراحی وتوسعه : www.ayalma.ir";
 
         SmsManager::getInstance()->init(new Config($url, 'username', 'password', '3000853853'));
-        
 
         $result = SmsManager::getInstance()->sendMessageV7($mobileNumber, $msg, 1111111, 1);
 
@@ -53,6 +52,13 @@ class LoginRestHandler extends SimpleRest
             $response['codeSent'] = true;
             $response['res'] = $result;
 
+        } elseif ($result == 'TimeOut') {
+            $user = DbManager::getInstance()->loadUser($mobileNumber);
+            DbManager::getInstance()->saveLoginCode(new LoginCode($mobileNumber, $code));
+            $response['register'] = ($user == null);
+            $response['codeSent'] = true;
+            $response['res'] = $result;
+            //todo check if sms checkin id send to afe.ir get msgId and check message status.
         } else {
             $response['error'] = $result;
             $statusCode = 500;

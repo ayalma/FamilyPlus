@@ -9,8 +9,6 @@
 
 namespace Controllers;
 require "../vendor/autoload.php";
-use Firebase\JWT\JWT;
-use JsonMapper;
 use Models\Device;
 
 
@@ -22,7 +20,6 @@ controls the RESTful services
 URL mapping for all urls
 */
 
-$userId = '';
 function setHttpHeaders($contentType, $statusCode)
 {
     $statusMessage = getHttpStatusMessage($statusCode);
@@ -79,31 +76,22 @@ function getHttpStatusMessage($statusCode)
     return ($httpStatus[$statusCode]) ? $httpStatus[$statusCode] : $httpStatus[500];
 }
 
-if (!isset(apache_request_headers()['Authorization'])) {
-    setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-    die(400);
-} else {
-    try {
-        $acessToken = apache_request_headers()['Authorization'];
-        $token = JWT::decode($acessToken, 'sampleKey', array('HS512'));
-        $token = (array)$token;
-        $userId = ($token['data']['userId']);
 
-    } catch (\Exception $e) {
+$authToken = Util::getAuthToken(apache_request_headers());;
 
-        setHttpHeaders($_SERVER['HTTP_ACCEPT'], 401);
-        die(401);
+if ($authToken == null)
+    die(401);
 
-    }
-}
+$data = $authToken['data'];
+$userId = $data->userId;
 
 switch ($view) {
     case 'registerDevice':
+        $inputJSON = file_get_contents('php://input');
+        if ($inputJSON != null) {
 
-        if (isset($_POST['device'])) {
+            $device = Device::fromJSON($inputJSON);
 
-            $mapper = new JsonMapper();
-            $device = $mapper->map($_POST['device'], new Device());
             DeviceController::getInstance()->registerDevice($device, $userId);
 
         } else {

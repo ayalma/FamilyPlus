@@ -34,6 +34,16 @@ class Device
         $this->_registerId = $_registerId;
     }
 
+    public static function fromJSON($json)
+    {
+        $obj = new Device();
+        $jsonValue = json_decode($json, true);
+        foreach ($jsonValue as $key => $value)
+            $obj->{'_' . $key} = $value;
+        return $obj;
+
+    }
+
     /**
      * @return mixed
      */
@@ -104,7 +114,7 @@ class Device
     public function getModel()
     {
         return $this->_model;
-    }
+    } // registration token on gcm for user device.
 
     /**
      * @param mixed $model
@@ -112,7 +122,5 @@ class Device
     public function setModel($model)
     {
         $this->_model = $model;
-    } // registration token on gcm for user device.
-
-
+    }
 }

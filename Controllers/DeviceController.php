@@ -33,7 +33,7 @@ class DeviceController extends SimpleRest
 
     public function registerDevice(Device $device, $userId)
     {
-        $response['register'] = DbManager::getInstance()->save($device, $userId);
-        echo $response;
+        $response['save'] = DbManager::getInstance()->save($device, $userId);
+        echo json_encode($response);
     }
 }
