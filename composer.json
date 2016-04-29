@@ -19,7 +19,8 @@
     "psr-4": {
       "DBManager\\": "DBManager/",
       "Models\\": "Models/",
-      "Controllers\\": "Controllers/"
+      "Controllers\\": "Controllers/",
+      "Gcm\\": "Gcm/"
     }
   }
 }

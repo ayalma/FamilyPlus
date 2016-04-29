@@ -8,5 +8,6 @@ RewriteRule ^LoginController/signIn$ Controllers/loginController.php?view=signIn
 #end of LoginControllerMapping
 RewriteRule ^Test/getUser/([0-9]+)$ Controllers/loginController.php?view=getUser&userId=$1 [nc,qsa]
 RewriteRule ^Test/getRoles/([0-9]+)$ Controllers/loginController.php?view=getRoles&userId=$1 [nc,qsa]
+RewriteRule ^Test/sendGcm$ Controllers/Router.php?view=sendGcm [nc,qsa]
 #all method routing
 RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=registerDevice [nc,qsa]

@@ -74,6 +74,10 @@ class DbManager
         return $this->_deviceDao->save($device, $userId);
     }
 
+    public function loadUserRegIds($userId, $serial)
+    {
+        return $this->_deviceDao->loadRegIds($userId, $serial);
+    }
     /**
      * all method related to User Model.
      */

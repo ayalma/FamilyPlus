@@ -3,6 +3,8 @@ namespace Controllers;
 include_once '../vendor/autoload.php';
 
 use DBManager\DbManager;
+use Gcm\GcmHelper;
+use PHP_GCM\Message;
 
 
 /**
@@ -58,6 +60,11 @@ class TestRestHandler extends SimpleRest
         $respons['roles'] = json_encode($roles);
 
         echo json_encode($respons);
+    }
+
+    public function SendNotification($userId)
+    {
+        GcmHelper::getInstance()->sendNotification($userId, "", new Message("hello"));
     }
 
 }

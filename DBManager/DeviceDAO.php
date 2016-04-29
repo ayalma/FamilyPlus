@@ -14,4 +14,11 @@ use Models\Device;
 interface DeviceDAO
 {
     public function save(Device $_device, $_userID);
+
+    /**
+     * @param $userId string: id of user.
+     * @param $serial string: serial of device send this notification.
+     * @return array|null   : all register id belong to user.
+     */
+    public function loadRegIds($userId, $serial);
 }

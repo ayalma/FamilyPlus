@@ -99,4 +99,6 @@ switch ($view) {
             break;
         }
         break;
+    case 'sendGcm':
+        TestRestHandler::getInstance()->SendNotification($userId);
 }
