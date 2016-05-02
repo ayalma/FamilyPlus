@@ -30,7 +30,7 @@ class BuyItem
 
     public static function fromJSON($json)
     {
-        $obj = new Device();
+        $obj = new BuyItem();
         $jsonValue = json_decode($json, true);
         foreach ($jsonValue as $key => $value)
             $obj->{'_' . $key} = $value;
