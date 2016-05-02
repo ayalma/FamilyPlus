@@ -9,6 +9,7 @@
 
 namespace Controllers;
 require "../vendor/autoload.php";
+use Models\BuyItem;
 use Models\Device;
 
 
@@ -101,4 +102,19 @@ switch ($view) {
         break;
     case 'sendGcm':
         TestRestHandler::getInstance()->SendNotification($userId);
+        break;
+    case 'saveBuyItems':
+        $inputJSON = file_get_contents('php://input');
+        if ($inputJSON != null) {
+
+            $buyitems = BuyItem::fromJSON($inputJSON);
+
+            BuyItemsController::getInstance()->saveBuyItems($buyitems, $userId);
+
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        break;
+
 }

@@ -68,11 +68,11 @@ switch ($view) {
         $userId = $data->userId;
         LoginRestHandler::getInstance()->updateName($userId, $_POST['name']);
         break;
+    
+
 }
 
 
-        
-        
 
 
 

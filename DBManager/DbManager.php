@@ -3,6 +3,7 @@ namespace DBManager;
 require "../vendor/autoload.php";
 
 use Exception;
+use Models\BuyItem;
 use Models\Device;
 use Models\EventType;
 use Models\LoginCode;
@@ -155,6 +156,16 @@ class DbManager
     public function loadLoginCode($userId)
     {
         return $this->_loginCodeDao->load($userId);
+    }
+
+    /**
+     * @param BuyItem $item will save in database.
+     * @param $userId : of user that id belong to him/his.
+     * @return bool status of saving.
+     */
+    public function saveItems(BuyItem $item , $userId)
+    {
+        return $this->_buyItemDao->save( $item , $userId);
     }
 
 }

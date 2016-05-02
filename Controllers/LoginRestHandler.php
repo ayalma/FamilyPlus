@@ -40,7 +40,7 @@ class LoginRestHandler extends SimpleRest
         $code = mt_rand(100000, 999999);
         $msg = "رمز درخواستی شما:" . $code . "\n طراحی وتوسعه : www.ayalma.ir";
 
-        SmsManager::getInstance()->init(new Config($url, 'username', 'password', '3000853853'));
+        SmsManager::getInstance()->init(new Config($url, 'mohsencomp90@gmail.com', 'messicr7', '3000853853'));
 
         $result = SmsManager::getInstance()->sendMessageV7($mobileNumber, $msg, 1111111, 1);
 

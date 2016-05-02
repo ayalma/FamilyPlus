@@ -11,3 +11,4 @@ RewriteRule ^Test/getRoles/([0-9]+)$ Controllers/loginController.php?view=getRol
 RewriteRule ^Test/sendGcm$ Controllers/Router.php?view=sendGcm [nc,qsa]
 #all method routing
 RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=registerDevice [nc,qsa]
+RewriteRule ^BuyItemsController/saveBuyItems   Controllers/Router.php?view=saveBuyItems [nc,qsa]
