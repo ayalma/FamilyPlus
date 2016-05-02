@@ -27,7 +27,7 @@ class BuyItemDAOMS implements BuyItemDAO
      */
     public function save(BuyItem $buyItem , $userId)
     {
-        $sql = 'INSERT INTO ' . DBCons::$_LOGINCODE_TABLE .
+        $sql = 'INSERT INTO ' . DBCons::$_BUYITEMS_TABLE .
             ' (' . DBCons::$_BUYITEMS_M_NUMBER .
             ' , '. DBCons::$_BUYITEMS_NAME .
             ' , '. DBCons::$_BUYITEMS_PURCHASED .
