@@ -108,6 +108,16 @@ class GroupDAOMS implements GroupDAO
      */
     public function deleteMember($groupId, $userId)
     {
-        // TODO: Implement deleteMember() method.
+        $sql = 'DELETE FROM ' . DBCons::$_GU_TABLE
+            . ' WHERE ' . DBCons::$_GU_COL_GROUP_ID
+            . ' = ? AND ' . DBCons::$_GU_COL_USER_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('id', $groupId, $userId);
+        $res = $statement->execute();
+
+        $statement->close();
+        return $res;
+
     }
 }
