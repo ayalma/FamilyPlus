@@ -17,6 +17,7 @@ interface EventsDAO
      */
     public function save(Event $events);
 
+    
     /**
      * @param $eventId : id of event.
      * @return Event : event that match with id.

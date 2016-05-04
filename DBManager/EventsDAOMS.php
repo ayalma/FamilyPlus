@@ -44,7 +44,7 @@ class EventsDAOMS implements EventsDAO
         if ($result) {
 
             foreach ($events->getUsers() as $userId)
-                $res = $this->SaveUser($userId, $eventId);
+                $res = $this->SaveReceiver($userId, $eventId);
         }
         return $res && $result;
 
@@ -55,7 +55,7 @@ class EventsDAOMS implements EventsDAO
      * @param int $eventId : id of event.
      * @return bool status of save.
      */
-    private function SaveUser($userId, $eventId)
+    private function SaveReceiver($userId, $eventId)
     {
         $sql = ' INSERT INTO ' . DBCons::$_EU_TABLE .
             ' ( ' . DBCons::$_EU_COL_USER_ID .
@@ -87,7 +87,7 @@ class EventsDAOMS implements EventsDAO
             $statement->close();
             $event = new Event(DbManager::getInstance()->loadEventType($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
-                $date, $this->loadUser($eventId), $message, $repeatType);
+                $date, $this->loadReceiver($eventId), $message, $repeatType);
             return $event;
 
         } else {
@@ -100,7 +100,7 @@ class EventsDAOMS implements EventsDAO
      * @param $eventId : id of event will send to user.
      * @return array : id of users that message send to him/his.
      */
-    private function loadUser($eventId)
+    private function loadReceiver($eventId)
     {
         $sql = 'SELECT ' . DBCons::$_EU_COL_USER_ID . ' FROM ' . DBCons::$_EU_TABLE .
             ' WHERE ' . DBCons::$_EU_COL_EVENT_ID . ' = ?';
@@ -112,7 +112,7 @@ class EventsDAOMS implements EventsDAO
         $statement->execute();
 
         $userIds = array();
-        $userIds[0] = 'now user available';
+        $userIds[0] = 'no user available';
 
         $i = 0;
         while ($statement->fetch()) {
