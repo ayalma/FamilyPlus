@@ -1,5 +1,8 @@
 <?php
 namespace DBManager;
+
+use Models\Group;
+
 require "../vendor/autoload.php";
 /**
  * dao of Group model.
@@ -15,4 +18,25 @@ interface GroupDAO
      * @return : all groups that user is member in them.
      */
     public function loadByUserId($userId);
+
+    /**
+     * @param Group $group : group to save.
+     * @return int         : id of group
+     */
+    public function save(Group $group);
+
+    /**
+     * @param $groupId : id of group.
+     * @param $userId : id of group.
+     * @param $role : role of user in this group.
+     * @return boolean : status of adding as boolean.
+     */
+    public function saveMember($groupId, $userId, $role);
+
+    /**
+     * @param $groupId : id of group.
+     * @param $userId : id of user.
+     * @return boolean : status of removing.
+     */
+    public function deleteMember($groupId, $userId);
 }
