@@ -130,7 +130,24 @@ class EventsDAOMS implements EventsDAO
      */
     public function loadByUserId($userId)
     {
-        // TODO: Implement loadByUserId() method.
+        $sql = 'SELECT * FROM '
+            . DBCons::$_EVENT_TABLE . ' WHERE '
+            . DBCons::$_EVENT_COL_USER_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+
+        $statement->bind_result($date, $message, $repeatType, $eventId, $eventTypeId, $userId);
+
+        $events = array();
+        $i = 0;
+
+        while ($statement->fetch()) {
+            $events[$i] = new Event(DbManager::getInstance()->loadEventType($eventTypeId),
+                DbManager::getInstance()->loadUser($userId),
+                $date, $this->loadReceiver($eventId), $message, $repeatType);
+        }
+
     }
 
 
