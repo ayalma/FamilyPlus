@@ -108,7 +108,6 @@ switch ($view) {
         if ($inputJSON != null) {
 
             $buyitems = BuyItem::fromJSON($inputJSON);
-
             BuyItemsController::getInstance()->saveBuyItems($buyitems, $userId);
 
         } else {
@@ -116,5 +115,6 @@ switch ($view) {
             break;
         }
         break;
+
 
 }

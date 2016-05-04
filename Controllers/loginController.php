@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 require "../vendor/autoload.php";
+use Models\BuyItem;
 
 
 /**
@@ -63,13 +64,11 @@ switch ($view) {
             break;
         }
 
-
         $data = $authToken['data'];
         $userId = $data->userId;
         LoginRestHandler::getInstance()->updateName($userId, $_POST['name']);
         break;
-    
-
+   
 }
 
 
