@@ -79,6 +79,22 @@ switch ($view) {
             break;
         }
         break;
+    case 'AddMember' :
+
+        if (!isset($_POST['groupId']) || !isset($_POST['memberId']) || !isset($_POST['role'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        GroupController::getInstance()->AddMember($_POST['groupId'], $_POST['memberId'] , $_POST['role']);
+        break;
+    case 'DeleteMember' :
+
+        if (!isset($_POST['groupId']) || !isset($_POST['userId'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        GroupController::getInstance()->DeleteMember($_POST['groupId'], $_POST['userId'] );
+        break;
    
 }
 

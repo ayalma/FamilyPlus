@@ -37,4 +37,16 @@ class GroupController
         echo json_encode($response);
     }
 
+    public function AddMember($groupId, $userId, $role)
+    {
+        $response['save'] = DbManager::getInstance()->addMember($groupId , $userId , $role);
+        echo json_encode($response);
+    }
+    
+    public function DeleteMember($groupId, $userId)
+    {
+        $response['save'] = DbManager::getInstance()->deleteMember($groupId, $userId);
+        echo json_encode($response);
+    }
+
 }

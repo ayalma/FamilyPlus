@@ -180,4 +180,25 @@ class DbManager
         return $this->_groupDao->save($group);
     }
 
+    /**
+     * @param $groupId : id of group.
+     * @param $userId : id of group.
+     * @param $role : role of user in this group.
+     * @return boolean : status of adding as boolean.
+     */
+    public function addMember($groupId, $userId, $role)
+    {
+        return $this->_groupDao->saveMember($groupId , $userId , $role);
+    }
+
+    /**
+     * @param $groupId : id of group.
+     * @param $userId : id of user.
+     * @return boolean : status of removing.
+     */
+    public function deleteMember($groupId, $userId)
+    {
+        return $this->_groupDao->deleteMember($groupId, $userId);
+    }
+
 }
