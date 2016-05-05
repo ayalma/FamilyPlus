@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 require "../vendor/autoload.php";
-use Models\BuyItem;
+use Models\Group;
 
 
 /**
@@ -67,6 +67,17 @@ switch ($view) {
         $data = $authToken['data'];
         $userId = $data->userId;
         LoginRestHandler::getInstance()->updateName($userId, $_POST['name']);
+        break;
+    case 'creatGroup':
+        $inputJSON = file_get_contents('php://input');
+        if ($inputJSON != null) {
+
+            $group = Group::fromJSON($inputJSON);
+            GroupController::getInstance()->save($group);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
         break;
    
 }

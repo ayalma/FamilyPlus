@@ -6,6 +6,7 @@ use Exception;
 use Models\BuyItem;
 use Models\Device;
 use Models\EventType;
+use Models\Group;
 use Models\LoginCode;
 use Models\User;
 
@@ -29,6 +30,7 @@ class DbManager
     private $_deviceDao;
     private $_loginCodeDao;
     private $_eventTypeDao;
+    private $_groupDao;
 
     function __construct()
     {
@@ -47,6 +49,7 @@ class DbManager
             $this->_deviceDao = new DeviceDAOMS($this->_connection);
             $this->_loginCodeDao = new LoginCodeDAOMS($this->_connection);
             $this->_eventTypeDao = new EventTypeDAOMS($this->_connection);
+            $this->_groupDao = new GroupDAOMS($this->_connection);
 
         } catch (Exception $_e) {
             error_log($_e->getMessage());
@@ -166,6 +169,15 @@ class DbManager
     public function saveItems(BuyItem $item , $userId)
     {
         return $this->_buyItemDao->save( $item , $userId);
+    }
+
+    /**
+     * @param Group $group : group to save.
+     * @return int         : id of group
+     */
+    public function creatGroup(Group $group)
+    {
+        return $this->_groupDao->save($group);
     }
 
 }

@@ -115,6 +115,5 @@ switch ($view) {
             break;
         }
         break;
-
-
+    
 }
