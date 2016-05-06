@@ -172,10 +172,14 @@ class DbManager
     }
 
     /**
+     * all method related to group.
+     */
+    
+    /**
      * @param Group $group : group to save.
      * @return int         : id of group
      */
-    public function creatGroup(Group $group)
+    public function saveGroup(Group $group)
     {
         return $this->_groupDao->save($group);
     }
@@ -186,7 +190,7 @@ class DbManager
      * @param $role : role of user in this group.
      * @return boolean : status of adding as boolean.
      */
-    public function addMember($groupId, $userId, $role)
+    public function saveMember($groupId, $userId, $role)
     {
         return $this->_groupDao->saveMember($groupId , $userId , $role);
     }

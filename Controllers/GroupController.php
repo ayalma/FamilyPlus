@@ -33,17 +33,17 @@ class GroupController
     
     public function save(Group $group)
     {
-        $response['groupId'] = DbManager::getInstance()->creatGroup($group);
+        $response['groupId'] = DbManager::getInstance()->saveGroup($group);
         echo json_encode($response);
     }
 
-    public function AddMember($groupId, $userId, $role)
+    public function addMember($groupId, $userId, $role)
     {
-        $response['save'] = DbManager::getInstance()->addMember($groupId , $userId , $role);
+        $response['save'] = DbManager::getInstance()->saveMember($groupId, $userId, $role);
         echo json_encode($response);
     }
-    
-    public function DeleteMember($groupId, $userId)
+
+    public function deleteMember($groupId, $userId)
     {
         $response['save'] = DbManager::getInstance()->deleteMember($groupId, $userId);
         echo json_encode($response);

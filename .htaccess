@@ -2,16 +2,18 @@
 Options +FollowSymLinks
 RewriteEngine on
 # map neat URL to internal URL
-RewriteRule ^LoginController/updateName Controllers/loginController.php?view=updateName [nc,qsa]
-RewriteRule ^LoginController/requestCode$ Controllers/loginController.php?view=requestCode [nc,qsa]
-RewriteRule ^LoginController/signIn$ Controllers/loginController.php?view=signIn [nc,qsa]
-#end of LoginControllerMapping
+RewriteRule ^LoginController/updateName Controllers/loginRouter.php?view=updateName [nc,qsa]
+RewriteRule ^LoginController/requestCode$ Controllers/loginRouter.php?view=requestCode [nc,qsa]
+RewriteRule ^LoginController/signIn$ Controllers/loginRouter.php?view=signIn [nc,qsa]
+#end of login routing
 RewriteRule ^Test/getUser/([0-9]+)$ Controllers/loginController.php?view=getUser&userId=$1 [nc,qsa]
 RewriteRule ^Test/getRoles/([0-9]+)$ Controllers/loginController.php?view=getRoles&userId=$1 [nc,qsa]
 RewriteRule ^Test/sendGcm$ Controllers/Router.php?view=sendGcm [nc,qsa]
-#all method routing
+#all device routing
 RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=registerDevice [nc,qsa]
+#d
 RewriteRule ^BuyItemsController/saveBuyItems   Controllers/Router.php?view=saveBuyItems [nc,qsa]
-RewriteRule ^GroupController/save   Controllers/loginController.php?view=creatGroup [nc,qsa]
-RewriteRule ^GroupController/AddMember   Controllers/loginController.php?view=AddMember [nc,qsa]
-RewriteRule ^GroupController/DeleteMember   Controllers/loginController.php?view=DeleteMember [nc,qsa]
+# all group routing
+RewriteRule ^GroupController/save   Controllers/Router.php?view=createGroup [nc,qsa]
+RewriteRule ^GroupController/AddMember   Controllers/Router.php?view=addMember [nc,qsa]
+RewriteRule ^GroupController/DeleteMember   Controllers/Router.php?view=deleteMember [nc,qsa]

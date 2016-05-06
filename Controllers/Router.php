@@ -11,6 +11,7 @@ namespace Controllers;
 require "../vendor/autoload.php";
 use Models\BuyItem;
 use Models\Device;
+use Models\Group;
 
 
 $view = "";
@@ -87,6 +88,9 @@ $data = $authToken['data'];
 $userId = $data->userId;
 
 switch ($view) {
+
+    /*all routing for device*/
+
     case 'registerDevice':
         $inputJSON = file_get_contents('php://input');
         if ($inputJSON != null) {
@@ -103,6 +107,9 @@ switch ($view) {
     case 'sendGcm':
         TestRestHandler::getInstance()->SendNotification($userId);
         break;
+
+    /*all routing for buyItems*/
+
     case 'saveBuyItems':
         $inputJSON = file_get_contents('php://input');
         if ($inputJSON != null) {
@@ -115,5 +122,39 @@ switch ($view) {
             break;
         }
         break;
+
+    /*all routing for Event*/
+
+    /*all routing for Group*/
+    case 'createGroup':
+        $inputJSON = file_get_contents('php://input');
+        if ($inputJSON != null) {
+
+            $group = Group::fromJSON($inputJSON);
+            GroupController::getInstance()->save($group);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        break;
+    case 'addMember' :
+
+        if (!isset($_POST['groupId']) || !isset($_POST['memberId']) || !isset($_POST['role'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        GroupController::getInstance()->addMember($_POST['groupId'], $_POST['memberId'], $_POST['role']);
+        break;
+
+    case 'deleteMember' :
+
+        if (!isset($_POST['groupId']) || !isset($_POST['userId'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        GroupController::getInstance()->deleteMember($_POST['groupId'], $_POST['userId']);
+        break;
     
+
+
 }
