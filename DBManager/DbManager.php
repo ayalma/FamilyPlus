@@ -205,4 +205,13 @@ class DbManager
         return $this->_groupDao->deleteMember($groupId, $userId);
     }
 
+    /**
+     * @param $groupId : id of group.
+     * @return array: all users in this group
+     */
+    public function GroupUser($groupId)
+    {
+        return $this->_groupDao->loadGroupUser($groupId);
+    }
+
 }

@@ -15,5 +15,6 @@ RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=regis
 RewriteRule ^BuyItemsController/saveBuyItems   Controllers/Router.php?view=saveBuyItems [nc,qsa]
 # all group routing
 RewriteRule ^GroupController/save   Controllers/Router.php?view=createGroup [nc,qsa]
-RewriteRule ^GroupController/AddMember   Controllers/Router.php?view=addMember [nc,qsa]
-RewriteRule ^GroupController/DeleteMember   Controllers/Router.php?view=deleteMember [nc,qsa]
+RewriteRule ^GroupController/addMember   Controllers/Router.php?view=addMember [nc,qsa]
+RewriteRule ^GroupController/deleteMember   Controllers/Router.php?view=deleteMember [nc,qsa]
+RewriteRule ^GroupController/groupUser  Controllers/Router.php?view=groupUser [nc,qsa]

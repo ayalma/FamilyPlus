@@ -3,6 +3,7 @@ namespace DBManager;
 require "../vendor/autoload.php";
 
 use Models\Group;
+use Models\User;
 use mysqli;
 
 /**
@@ -118,6 +119,39 @@ class GroupDAOMS implements GroupDAO
 
         $statement->close();
         return $res;
+
+    }
+
+    /**
+     * @param $groupId : id of group.
+     * @return array: all users in this group
+     */
+    public function loadGroupUser($groupId)
+    {
+        $sql = 'Select * FROM '.DBCons::$_USER_TABLE
+            .' WHERE '.DBCons::$_USER_COL_MOBILE_NUMBER
+            .' IN (SELECT '.DBCons::$_GU_COL_USER_ID
+            .' FROM '.DBCons::$_GU_TABLE
+            .' WHERE '.DBCons::$_GU_COL_GROUP_ID.' = ?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $groupId);
+
+        $statement->bind_result($fname , $m_number);
+        $statement->execute();
+
+        $user = array();
+        $user[0] = 'no user available';
+
+        $i = 0;
+        while ($statement->fetch()) {
+            $user[$i] = new User($fname , $m_number);
+            $i++;
+        }
+
+        $statement->close();
+
+        return $user;
 
     }
 }

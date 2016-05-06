@@ -51,5 +51,11 @@ class GroupController
         $response['delete'] = DbManager::getInstance()->deleteMember($groupId, $userId);
         echo json_encode($response);
     }
+    
+    public function groupUser($groupId)
+    {
+        $response['groupUser'] = DbManager::getInstance()->GroupUser($groupId);
+        echo json_encode($response);
+    }
 
 }
