@@ -29,11 +29,14 @@ class GroupController
         }
         return self::$_instance;
     }
-    
-    
-    public function save(Group $group)
+
+
+    public function save(Group $group, $adminRole)
     {
         $response['groupId'] = DbManager::getInstance()->saveGroup($group);
+        if (is_int($response['groupId'])) {
+            $response['save'] = DbManager::getInstance()->saveMember($group->getId(), $group->getAdmin(), $adminRole);
+        }
         echo json_encode($response);
     }
 
@@ -45,7 +48,7 @@ class GroupController
 
     public function deleteMember($groupId, $userId)
     {
-        $response['save'] = DbManager::getInstance()->deleteMember($groupId, $userId);
+        $response['delete'] = DbManager::getInstance()->deleteMember($groupId, $userId);
         echo json_encode($response);
     }
 

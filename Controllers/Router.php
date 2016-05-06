@@ -128,10 +128,14 @@ switch ($view) {
     /*all routing for Group*/
     case 'createGroup':
         $inputJSON = file_get_contents('php://input');
-        if ($inputJSON != null) {
+        if ($inputJSON != null || $_POST['adminRole'] != null) {
 
             $group = Group::fromJSON($inputJSON);
-            GroupController::getInstance()->save($group);
+            $group->setAdmin($userId);
+
+            GroupController::getInstance()->save($group, $_POST['adminRole']);
+            
+            
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
