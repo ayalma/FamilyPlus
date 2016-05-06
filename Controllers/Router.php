@@ -158,13 +158,13 @@ switch ($view) {
         }
         GroupController::getInstance()->deleteMember($_POST['groupId'], $_POST['userId']);
         break;
-    case 'groupUser' :
+    case 'getgroupUser' :
 
         if (!isset($_GET['groupId'])) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
         }
-        GroupController::getInstance()->groupUser($_GET['groupId']);
+        GroupController::getInstance()->GetGroupUser($_GET['groupId']);
         break;
 
 }

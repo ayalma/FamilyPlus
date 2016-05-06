@@ -52,7 +52,7 @@ class GroupController
         echo json_encode($response);
     }
     
-    public function groupUser($groupId)
+    public function GetGroupUser($groupId)
     {
         $response['groupUser'] = DbManager::getInstance()->GroupUser($groupId);
         echo json_encode($response);
