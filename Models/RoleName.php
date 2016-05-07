@@ -11,8 +11,9 @@ abstract class RoleName
 
     const father = 0;
     const mother = 1;
-    const child = 2;
-    const grandFather = 3;
-    const grandMother = 4;
+    const son = 2;
+    const girl = 3;
+    const grandFather = 4;
+    const grandMother = 5;
 
 }
