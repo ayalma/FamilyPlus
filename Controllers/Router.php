@@ -127,12 +127,10 @@ switch ($view) {
 
     /*all routing for Group*/
     case 'createGroup':
-        $inputJSON = file_get_contents('php://input');
-        if ($inputJSON != null || $_POST['adminRole'] != null) {
+        if (isset($_POST['groupName']) || isset($_POST['adminRole'])) {
 
-            $group = Group::fromJSON($inputJSON);
-            $group->setAdmin($userId);
-
+            $group = new Group(0, $userId, $_POST['groupName']);
+            
             GroupController::getInstance()->save($group, $_POST['adminRole']);
             
             

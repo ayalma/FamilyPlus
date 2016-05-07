@@ -7,6 +7,7 @@
  */
 
 namespace Controllers;
+
 use DBManager\DbManager;
 use Models\Group;
 
@@ -23,8 +24,7 @@ class GroupController
 
     public static function getInstance()
     {
-        if(self::$_instance == null)
-        {
+        if (self::$_instance == null) {
             self::$_instance = new GroupController();
         }
         return self::$_instance;
@@ -34,7 +34,8 @@ class GroupController
     public function save(Group $group, $adminRole)
     {
         $response['groupId'] = DbManager::getInstance()->saveGroup($group);
-        if (is_int($response['groupId'])) {
+
+        if (is_int($response['groupId']) && $response['groupId'] != 0) {
             $response['save'] = DbManager::getInstance()->saveMember($group->getId(), $group->getAdmin(), $adminRole);
         }
         echo json_encode($response);
@@ -51,7 +52,7 @@ class GroupController
         $response['delete'] = DbManager::getInstance()->deleteMember($groupId, $userId);
         echo json_encode($response);
     }
-    
+
     public function GetGroupUser($groupId)
     {
         $response['groupUser'] = DbManager::getInstance()->GroupUser($groupId);
