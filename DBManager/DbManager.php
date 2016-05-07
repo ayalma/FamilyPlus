@@ -209,7 +209,7 @@ class DbManager
      * @param $groupId : id of group.
      * @return array: all users in this group
      */
-    public function GroupUser($groupId)
+    public function getGroupUsers($groupId)
     {
         return $this->_groupDao->loadGroupUser($groupId);
     }
