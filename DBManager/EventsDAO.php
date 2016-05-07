@@ -29,4 +29,17 @@ interface EventsDAO
      * @return array : array of Event.
      */
     public function loadByUserId($userId);
+
+    /**
+     * @param Event $events : will update in database.
+     * @return boolean : status of update as boolean.
+     */
+    public function edit(Event $events);
+
+    /**
+     * @param $userId : id of user.
+     * @param $eventId : id of event.
+     * @return boolean : status of remove as boolean.
+     */
+    public function remove($userId , $eventId);
 }

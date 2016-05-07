@@ -39,4 +39,10 @@ interface GroupDAO
      * @return boolean : status of removing.
      */
     public function deleteMember($groupId, $userId);
+
+    /**
+     * @param $groupId : id of group.
+     * @return array: all users in this group
+     */
+    public function loadGroupUser($groupId);
 }

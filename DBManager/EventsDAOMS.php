@@ -151,4 +151,22 @@ class EventsDAOMS implements EventsDAO
     }
 
 
+    /**
+     * @param Event $events : will update in database.
+     * @return boolean : status of update as boolean.
+     */
+    public function edit(Event $events)
+    {
+
+    }
+
+    /**
+     * @param $userId : id of user.
+     * @param $eventId : id of event.
+     * @return boolean : status of remove as boolean.
+     */
+    public function remove($userId, $eventId)
+    {
+
+    }
 }

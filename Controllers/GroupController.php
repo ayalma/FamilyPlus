@@ -33,10 +33,11 @@ class GroupController
 
     public function save(Group $group, $adminRole)
     {
-        $response['groupId'] = DbManager::getInstance()->saveGroup($group);
+        $groupId = DbManager::getInstance()->saveGroup($group);
+        $response['groupId'] = $groupId;
 
         if (is_int($response['groupId']) && $response['groupId'] != 0) {
-            $response['save'] = DbManager::getInstance()->saveMember($group->getId(), $group->getAdmin(), $adminRole);
+            $response['save'] = DbManager::getInstance()->saveMember($groupId, $group->getAdmin(), $adminRole);
         }
         echo json_encode($response);
     }
