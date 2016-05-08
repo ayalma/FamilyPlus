@@ -57,8 +57,7 @@ class GroupController
     public function GetGroupUser($groupId)
     {
         $res = DbManager::getInstance()->getGroupUsers($groupId);
-
-        json_encode($res);
+        echo json_encode($res);
     }
 
 }
