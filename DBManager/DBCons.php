@@ -68,7 +68,12 @@ class DBCons
     public static $_BIU_TABLE = "BuyItem_User";
     public static $_BIU_COL_USER_ID = "uid";
     public static $_BIU_COL_BUY_ITEM_ID = "bid";
-    
+
+    public static $_IMAGE_TABLE = "Images";
+    public static $_IMAGE_COL_ID = "id";
+    public static $_IMAGE_COL_USER_ID = "uid";
+    public static $_IMAGE_COL_IMAGE = "image";
+    public static $_IMAGE_COL_TYPE = "type";
     
     
 }

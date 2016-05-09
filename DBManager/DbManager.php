@@ -7,6 +7,7 @@ use Models\BuyItem;
 use Models\Device;
 use Models\EventType;
 use Models\Group;
+use Models\Image;
 use Models\LoginCode;
 use Models\User;
 
@@ -31,6 +32,7 @@ class DbManager
     private $_loginCodeDao;
     private $_eventTypeDao;
     private $_groupDao;
+    private $_imageDao;
 
     function __construct()
     {
@@ -50,6 +52,7 @@ class DbManager
             $this->_loginCodeDao = new LoginCodeDAOMS($this->_connection);
             $this->_eventTypeDao = new EventTypeDAOMS($this->_connection);
             $this->_groupDao = new GroupDAOMS($this->_connection);
+            $this->_imageDao = new ImageDAOMS($this->_connection);
 
         } catch (Exception $_e) {
             error_log($_e->getMessage());
@@ -119,6 +122,45 @@ class DbManager
         return null;
     }
 
+
+    /**
+     * all method related to  Image.
+     */
+
+
+    /**
+     * @param Image $image
+     * @param $userId
+     * @return bool
+     */
+    public function saveImage(Image $image, $userId)
+    {
+        return $this->_imageDao->save($image, $userId);
+    }
+
+
+    /**
+     * @param $userId
+     * @return array|null
+     */
+    public function loadImage($userId)
+    {
+        return $this->_imageDao->load($userId);
+    }
+
+    /**
+     * @param $imageId
+     * @return Image|null
+     */
+    public function loadImageById($imageId)
+    {
+        return $this->_imageDao->loadById($imageId);
+    }
+
+    public function deleteImage($imageId)
+    {
+        return $this->_imageDao->delete($imageId);
+    }
 
     /**
      * all method related to  EventType.
