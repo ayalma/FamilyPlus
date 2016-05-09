@@ -64,5 +64,11 @@ class DBCons
     public static $_EU_TABLE = "Event_User";
     public static $_EU_COL_USER_ID = "uid";
     public static $_EU_COL_EVENT_ID = "eid";
+
+    public static $_BIU_TABLE = "BuyItem_User";
+    public static $_BIU_COL_USER_ID = "uid";
+    public static $_BIU_COL_BUY_ITEM_ID = "bid";
+    
+    
     
 }
