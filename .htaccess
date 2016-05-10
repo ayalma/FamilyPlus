@@ -18,3 +18,5 @@ RewriteRule ^GroupController/save   Controllers/Router.php?view=createGroup [nc,
 RewriteRule ^GroupController/addMember   Controllers/Router.php?view=addMember [nc,qsa]
 RewriteRule ^GroupController/deleteMember   Controllers/Router.php?view=deleteMember [nc,qsa]
 RewriteRule ^GroupController/GetGroupUser  Controllers/Router.php?view=getgroupUser [nc,qsa]
+# all image routing
+RewriteRule ^ImageController/save  Controllers/Router.php?view=saveImage [nc,qsa]
