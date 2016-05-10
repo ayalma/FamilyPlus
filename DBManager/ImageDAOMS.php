@@ -30,7 +30,18 @@ class ImageDAOMS implements ImageDAO
      */
     function save(Image $image, $userId)
     {
-        // TODO: Implement save() method.
+        $sql = 'INSERT  INTO ' . DBCons::$_IMAGE_TABLE
+            . ' (' . DBCons::$_IMAGE_COL_USER_ID
+            . ', ' . DBCons::$_IMAGE_COL_IMAGE
+            . ', ' . DBCons::$_IMAGE_COL_TYPE . ') VALUES (?,?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('dbi', $userId, $image->getImage(), $image->getType());
+
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
     }
 
     /**
@@ -39,7 +50,30 @@ class ImageDAOMS implements ImageDAO
      */
     function load($userId)
     {
-        // TODO: Implement load() method.
+        $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
+            . ',' . DBCons::$_IMAGE_COL_IMAGE
+            . ',' . DBCons::$_IMAGE_COL_TYPE
+            . ' FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_USER_ID . ' = ?';
+
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+
+        $statement->bind_result($imageId, $image, $type);
+        $statement->execute();
+
+        $images = array();
+        $i = 0;
+
+        while ($statement->fetch()) {
+            $images[$i] = new Image($imageId, $image, $type);
+            $i++;
+        }
+
+        $statement->close();
+
+        return $images;
     }
 
     /**
@@ -48,7 +82,28 @@ class ImageDAOMS implements ImageDAO
      */
     function loadById($id)
     {
-        // TODO: Implement loadById() method.
+        $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
+            . ',' . DBCons::$_IMAGE_COL_IMAGE
+            . ',' . DBCons::$_IMAGE_COL_TYPE
+            . ' FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
+
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $id);
+
+        $statement->bind_result($imageId, $image, $type);
+        $statement->execute();
+
+        $image = null;
+
+        if ($statement->fetch()) {
+            $image = new Image($imageId, $image, $type);
+        }
+
+        $statement->close();
+
+        return $image;
     }
 
     /**
@@ -57,6 +112,16 @@ class ImageDAOMS implements ImageDAO
      */
     function delete($id)
     {
-        // TODO: Implement delete() method.
+        $sql = 'DELETE FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $id);
+
+        $res = $statement->execute();
+        $statement->execute();
+
+        return $res;
+
     }
 }

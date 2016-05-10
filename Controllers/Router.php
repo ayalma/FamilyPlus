@@ -165,4 +165,52 @@ switch ($view) {
         GroupController::getInstance()->GetGroupUser($_GET['groupId']);
         break;
 
+    /*all routing for Image*/
+
+    case 'saveImage':
+
+        // this method is not implemented yet
+        /*  if (!isset($_GET['groupId'])) {
+              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+              break;
+          }
+
+          $image = new Image(0,25,0);
+
+          ImageController::getInstance()->save($image,$userId);*/
+
+        break;
+
+    case "getImageById":
+        // this method is not implemented yet
+        /* if (!isset($_GET['groupId'])) {
+             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+             break;
+         }
+
+         $id = 0;
+
+         ImageController::getInstance()->getImageById($id);*/
+
+        break;
+    case "getImages":
+
+        ImageController::getInstance()->getImages($userId);
+        break;
+
+    case "deleteImage":
+
+        /* // this method is not implemented yet
+         if (!isset($_GET['groupId'])) {
+             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+             break;
+         }
+
+         $imageId = 0;
+
+         ImageController::getInstance()->delete($imageId);*/
+        break;
+
+
+
 }
