@@ -22,6 +22,5 @@ interface BuyItemDAO
     public function loadbyUser($userId);
 
     public function loadbyDate($date);
-
-
+    
 }

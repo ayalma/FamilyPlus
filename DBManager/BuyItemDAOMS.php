@@ -39,6 +39,31 @@ class BuyItemDAOMS implements BuyItemDAO
                                 ,$buyItem->getPrice() , $buyItem->getDate());
 
         $result = $statement->execute();
+        $buyitemId = $statement->insert_id;
+        $res = false;
+        if ($result) {
+
+            foreach ($buyItem->getUsers() as $reciverUserId)
+                $res = $this->saveReciver($reciverUserId, $buyitemId);
+        }
+        return $res && $result;
+    }
+
+    /**
+     * @param int $userId id of user that event sent to him/his.
+     * @param int $butItemId : id of item.
+     * @return bool status of save.
+     */
+    private function saveReciver($userId, $buyItemId)
+    {
+        $sql = 'INSERT INTO ' . DBCons::$_BIU_TABLE .
+            ' (' . DBCons::$_BIU_COL_USER_ID .
+            ' , '. DBCons::$_BIU_COL_BUY_ITEM_ID.') VALUES (?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('di' , $userId , $buyItemId);
+
+        $result = $statement->execute();
         $statement->close();
         return $result;
     }
@@ -85,4 +110,6 @@ class BuyItemDAOMS implements BuyItemDAO
             return null;
         }
     }
+
+
 }

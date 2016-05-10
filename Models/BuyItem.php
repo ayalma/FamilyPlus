@@ -12,6 +12,8 @@ class BuyItem
     private $_purchased; // this mean that is item bought by user.
     private $_price;// price of item.
     private $_date;
+    private $_users; // user that will received this items.
+
 
     /**
      * BuyItem constructor.
@@ -19,13 +21,15 @@ class BuyItem
      * @param $_purchased
      * @param $_price
      * @param $_date
+     * @param $_users
      */
-    public function __construct($_name, $_purchased, $_price, $_date)
+    public function __construct($_name, $_purchased, $_price, $_date , $_users)
     {
         $this->_name = $_name;
         $this->_purchased = $_purchased;
         $this->_price = $_price;
         $this->_date = $_date;
+        $this->_users = $_users;
     }
 
     public static function fromJSON($json)
@@ -101,6 +105,22 @@ class BuyItem
     public function setDate($date)
     {
         $this->_date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->_users;
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users)
+    {
+        $this->_users = $users;
     }
 
     
