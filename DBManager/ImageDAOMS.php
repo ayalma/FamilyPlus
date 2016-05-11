@@ -32,11 +32,16 @@ class ImageDAOMS implements ImageDAO
     {
         $sql = 'INSERT  INTO ' . DBCons::$_IMAGE_TABLE
             . ' (' . DBCons::$_IMAGE_COL_USER_ID
-            . ', ' . DBCons::$_IMAGE_COL_IMAGE
-            . ', ' . DBCons::$_IMAGE_COL_TYPE . ') VALUES (?,?,?)';
+            . ', ' . DBCons::$_IMAGE_COL_TYPE
+            . ', ' . DBCons::$_IMAGE_COL_FILE_TYPE
+            . ', ' . DBCons::$_IMAGE_COL_SIZE
+            . ', ' . DBCons::$_IMAGE_COL_NAME
+            . ') VALUES (?,?,?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('dbi', $userId, $image->getImage(), $image->getType());
+
+        $statement->bind_param('disis', $userId, $image->getType(),
+            $image->getFileType(), $image->getSize(), $image->getName());
 
         $res = $statement->execute();
         $statement->close();
@@ -51,7 +56,6 @@ class ImageDAOMS implements ImageDAO
     function load($userId)
     {
         $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
-            . ',' . DBCons::$_IMAGE_COL_IMAGE
             . ',' . DBCons::$_IMAGE_COL_TYPE
             . ' FROM ' . DBCons::$_IMAGE_TABLE
             . ' WHERE ' . DBCons::$_IMAGE_COL_USER_ID . ' = ?';
@@ -60,14 +64,14 @@ class ImageDAOMS implements ImageDAO
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('d', $userId);
 
-        $statement->bind_result($imageId, $image, $type);
+        $statement->bind_result($imageId, $type);
         $statement->execute();
 
         $images = array();
         $i = 0;
 
         while ($statement->fetch()) {
-            $images[$i] = new Image($imageId, $image, $type);
+            $images[$i] = new Image($imageId, $type);// this line may hav err
             $i++;
         }
 
@@ -83,8 +87,10 @@ class ImageDAOMS implements ImageDAO
     function loadById($id)
     {
         $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
-            . ',' . DBCons::$_IMAGE_COL_IMAGE
             . ',' . DBCons::$_IMAGE_COL_TYPE
+            . ',' . DBCons::$_IMAGE_COL_FILE_TYPE
+            . ',' . DBCons::$_IMAGE_COL_SIZE
+            . ',' . DBCons::$_IMAGE_COL_NAME
             . ' FROM ' . DBCons::$_IMAGE_TABLE
             . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
 
@@ -92,13 +98,13 @@ class ImageDAOMS implements ImageDAO
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('i', $id);
 
-        $statement->bind_result($imageId, $image, $type);
+        $statement->bind_result($imageId, $type, $fileType, $size, $name);
         $statement->execute();
 
         $image = null;
 
         if ($statement->fetch()) {
-            $image = new Image($imageId, $image, $type);
+            $image = new Image($name, $fileType, $size, $type);
         }
 
         $statement->close();

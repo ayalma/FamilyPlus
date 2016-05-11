@@ -12,6 +12,7 @@ require "../vendor/autoload.php";
 use Models\BuyItem;
 use Models\Device;
 use Models\Group;
+use Models\Image;
 
 
 $view = "";
@@ -130,10 +131,10 @@ switch ($view) {
         if (isset($_POST['groupName']) || isset($_POST['adminRole'])) {
 
             $group = new Group(0, $userId, $_POST['groupName']);
-            
+
             GroupController::getInstance()->save($group, $_POST['adminRole']);
-            
-            
+
+
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
@@ -169,28 +170,38 @@ switch ($view) {
 
     case 'saveImage':
 
-        // this method is not implemented yet
-        /*  if (!isset($_GET['groupId'])) {
-              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-              break;
-          }
+        if (!isset($_POST['type'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
 
-          $image = new Image(0,25,0);
 
-          ImageController::getInstance()->save($image,$userId);*/
+        echo json_encode($_POST['type']);
+
+        $fileName = $_FILES['picture']['name'];
+        $tmpName = $_FILES['picture']['tmp_name'];
+        $fileSize = $_FILES['picture']['size'];
+        $fileType = $_FILES['picture']['type'];
+
+        $distination = '/var/www/html/FamilyPlus/upload';
+        move_uploaded_file($tmpName, $distination . '/' . $fileName);
+
+
+        $image = new Image($fileName, $fileType, $fileSize, $_POST['type']);
+
+        ImageController::getInstance()->save($image, $userId);
 
         break;
 
     case "getImageById":
-        // this method is not implemented yet
-        /* if (!isset($_GET['groupId'])) {
+
+        if (!isset($_GET['id'])) {
              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
              break;
          }
 
-         $id = 0;
 
-         ImageController::getInstance()->getImageById($id);*/
+        ImageController::getInstance()->getImageById($_GET['id']);
 
         break;
     case "getImages":
@@ -210,7 +221,6 @@ switch ($view) {
 
          ImageController::getInstance()->delete($imageId);*/
         break;
-
 
 
 }

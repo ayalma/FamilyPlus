@@ -41,8 +41,15 @@ class ImageController
 
     public function getImageById($imageId)
     {
-        $response = DbManager::getInstance()->loadImageById($imageId);
-        echo json_encode($response);
+        $image = DbManager::getInstance()->loadImageById($imageId);
+
+        header("Content-length:" . $image->getSize());
+        header("Content-type:" . $image->getFileType());
+        header("Content-Disposition: attachment; filename=" . $image->getName());
+
+        $distination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        echo file_get_contents($distination);
+
     }
 
     public function getImages($userId)

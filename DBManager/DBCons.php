@@ -10,7 +10,7 @@ class DBCons
 {
     public static $_host = "localhost";
     public static $_user = "root";
-    public static $_password = "";
+    public static $_password = "gamor2012";
     public static $db_name = "FamilyPlus";
     public static $port = "3306";
 
@@ -72,8 +72,10 @@ class DBCons
     public static $_IMAGE_TABLE = "Images";
     public static $_IMAGE_COL_ID = "id";
     public static $_IMAGE_COL_USER_ID = "uid";
-    public static $_IMAGE_COL_IMAGE = "image";
     public static $_IMAGE_COL_TYPE = "type";
+    public static $_IMAGE_COL_FILE_TYPE = "file_type";
+    public static $_IMAGE_COL_SIZE = "size";
+    public static $_IMAGE_COL_NAME = "name";
     
     
 }

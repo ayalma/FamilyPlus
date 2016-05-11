@@ -13,19 +13,24 @@ namespace Models;
 class Image
 {
     private $_id;
-    private $_image;
+    private $_name;
+    private $_fileType;
+    private $_size;
     private $_type;
 
     /**
      * Image constructor.
-     * @param $_id
+     * @param $_name
+     * @param $_fileType
+     * @param $_size
      * @param $_image
-     * @param $_type // 0 for profile and 1 for backdrop;
+     * @param $_type
      */
-    public function __construct($_id, $_image, $_type)
+    public function __construct($_name, $_fileType, $_size, $_type)
     {
-        $this->_id = $_id;
-        $this->_image = $_image;
+        $this->_name = $_name;
+        $this->_fileType = $_fileType;
+        $this->_size = $_size;
         $this->_type = $_type;
     }
 
@@ -46,21 +51,6 @@ class Image
         $this->_id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->_image;
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function setImage($image)
-    {
-        $this->_image = $image;
-    }
 
     /**
      * @return mixed
@@ -77,6 +67,56 @@ class Image
     {
         $this->_type = $type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileType()
+    {
+        return $this->_fileType;
+    }
+
+    /**
+     * @param mixed $fileType
+     */
+    public function setFileType($fileType)
+    {
+        $this->_fileType = $fileType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->_size;
+    }
+
+    /**
+     * @param int $size
+     */
+    public function setSize($size)
+    {
+        $this->_size = $size;
+    }
+    
+    
     
 
 }

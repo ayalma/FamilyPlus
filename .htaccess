@@ -20,3 +20,4 @@ RewriteRule ^GroupController/deleteMember   Controllers/Router.php?view=deleteMe
 RewriteRule ^GroupController/GetGroupUser  Controllers/Router.php?view=getgroupUser [nc,qsa]
 # all image routing
 RewriteRule ^ImageController/save  Controllers/Router.php?view=saveImage [nc,qsa]
+RewriteRule ^ImageController/getImageById  Controllers/Router.php?view=getImageById [nc,qsa]
