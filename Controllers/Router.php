@@ -184,6 +184,9 @@ switch ($view) {
         $fileType = $_FILES['picture']['type'];
 
         $distination = '/var/www/html/FamilyPlus/upload';
+
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;
         move_uploaded_file($tmpName, $distination . '/' . $fileName);
 
 
