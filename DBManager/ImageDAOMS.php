@@ -70,7 +70,7 @@ class ImageDAOMS implements ImageDAO
 
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('id', $userId, $type);
+        $statement->bind_param('id', $type, $userId);
 
         $statement->bind_result($imageId, $type, $fileType, $size, $name);
         $statement->execute();
