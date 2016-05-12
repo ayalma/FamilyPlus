@@ -129,14 +129,6 @@ class DbManager
 
 
     /**
-     * @param $userid
-     * @return int : id of image
-     */
-    public function getImageID($userid)
-    {
-        return $this->_imageDao->GetImageId($userid);
-    }
-    /**
      * @param Image $image
      * @param $userId
      * @return bool
@@ -149,11 +141,12 @@ class DbManager
 
     /**
      * @param $userId
-     * @return array|null
+     * @param $type : type of image
+     * @return Image|null
      */
-    public function loadImage($userId)
+    public function loadImage($userId, $type)
     {
-        return $this->_imageDao->load($userId);
+        return $this->_imageDao->load($userId, $type);
     }
 
     /**

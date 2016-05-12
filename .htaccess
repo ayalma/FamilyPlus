@@ -21,4 +21,4 @@ RewriteRule ^GroupController/GetGroupUser  Controllers/Router.php?view=getgroupU
 # all image routing
 RewriteRule ^ImageController/save  Controllers/Router.php?view=saveImage [nc,qsa]
 RewriteRule ^ImageController/getImageById  Controllers/Router.php?view=getImageById [nc,qsa]
-RewriteRule ^ImageController/getImageId  Controllers/Router.php?view=getimageId [nc,qsa]
+RewriteRule ^ImageController/getImagesByUser  Controllers/Router.php?view=getImagesByUser [nc,qsa]

@@ -47,15 +47,25 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
+        $distination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($distination);
 
     }
 
-    public function getImages($userId)
+    public function getImages($userId, $type)
     {
-        $response = DbManager::getInstance()->loadImage($userId);
-        echo json_encode($response);
+        $image = DbManager::getInstance()->loadImage($userId, $type);
+        if ($image == null) {
+            header('HTTP/1.1' . " " . 204 . " " . 'No Content');
+            return;
+        }
+
+        header("Content-length:" . $image->getSize());
+        header("Content-type:" . $image->getFileType());
+        header("Content-Disposition: attachment; filename=" . $image->getName());
+
+        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        echo file_get_contents($destination);
     }
 
     public function delete($imageId)
@@ -63,12 +73,6 @@ class ImageController
         $response['delete'] = DbManager::getInstance()->deleteImage($imageId);
         echo json_encode($response);
     }
-
-    public function getImageId($userID)
-    {
-        $response['imageID'] = DbManager::getInstance()->getImageID($userID);
-        echo json_encode($response);
-    }
-
+    
 
 }

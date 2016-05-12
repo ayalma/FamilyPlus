@@ -207,9 +207,15 @@ switch ($view) {
         ImageController::getInstance()->getImageById($_GET['id']);
 
         break;
-    case "getImages":
 
-        ImageController::getInstance()->getImages($userId);
+    case "getImagesByUser":
+
+        if (!isset($_GET['type'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+
+        ImageController::getInstance()->getImages($userId, $_GET['type']);
         break;
 
     case "deleteImage":
@@ -224,8 +230,5 @@ switch ($view) {
 
          ImageController::getInstance()->delete($imageId);*/
         break;
-    case 'getimageId':
-
-        ImageController::getInstance()->getImageId($userId);
-        break;
+   
 }

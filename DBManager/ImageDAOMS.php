@@ -51,33 +51,39 @@ class ImageDAOMS implements ImageDAO
 
     /**
      * @param $userId : id of user this image is for him/his.
-     * @return array|null
+     * @param $type
+     * @return Image|null
      */
-    function load($userId)
+    function load($userId, $type)
     {
-        $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
+        $sql = 'SELECT  ' . DBCons::$_IMAGE_COL_ID
             . ',' . DBCons::$_IMAGE_COL_TYPE
+            . ',' . DBCons::$_IMAGE_COL_FILE_TYPE
+            . ',' . DBCons::$_IMAGE_COL_SIZE
+            . ',' . DBCons::$_IMAGE_COL_NAME
             . ' FROM ' . DBCons::$_IMAGE_TABLE
-            . ' WHERE ' . DBCons::$_IMAGE_COL_USER_ID . ' = ?';
+            . ' WHERE ' . DBCons::$_IMAGE_COL_TYPE
+            . ' = ? AND ' . DBCons::$_IMAGE_COL_ID
+            . ' = (SELECT max(' . DBCons::$_IMAGE_COL_ID
+            . ') FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_USER_ID . ' = ?)';
 
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('d', $userId);
+        $statement->bind_param('id', $userId, $type);
 
-        $statement->bind_result($imageId, $type);
+        $statement->bind_result($imageId, $type, $fileType, $size, $name);
         $statement->execute();
 
-        $images = array();
-        $i = 0;
+        $image = null;
 
-        while ($statement->fetch()) {
-            $images[$i] = new Image($imageId, $type);// this line may hav err
-            $i++;
+        if ($statement->fetch()) {
+            $image = new Image($name, $fileType, $size, $type);
         }
 
         $statement->close();
 
-        return $images;
+        return $image;
     }
 
     /**
@@ -131,21 +137,4 @@ class ImageDAOMS implements ImageDAO
 
     }
 
-    /**
-     * @param $userId : id of image
-     * @return int : id of image.
-     */
-     function GetImageId($userId)
-    {
-        $sql = 'SELECT MAX(id) FROM ' . DBCons::$_IMAGE_TABLE
-            . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
-
-        $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('i', $id);
-
-        $res = $statement->execute();
-        $statement->close();
-
-        return $res;
-    }
 }

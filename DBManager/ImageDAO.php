@@ -22,9 +22,10 @@ interface ImageDAO
 
     /**
      * @param $userId : id of user this image is for him/his.
-     * @return array|null
+     * @param $type : type of image.
+     * @return Image|null
      */
-    function load($userId);
+    function load($userId, $type);
 
     /**
      * @param $id :id of image.
@@ -38,10 +39,5 @@ interface ImageDAO
      */
     function delete($id);
 
-    /**
-     * @param $userId : id of user
-     * @return int : id of image
-     */
-    function GetImageId($userId);
 
 }
