@@ -129,6 +129,14 @@ class DbManager
 
 
     /**
+     * @param $userid
+     * @return int : id of image
+     */
+    public function getImageID($userid)
+    {
+        return $this->_imageDao->GetImageId($userid);
+    }
+    /**
      * @param Image $image
      * @param $userId
      * @return bool

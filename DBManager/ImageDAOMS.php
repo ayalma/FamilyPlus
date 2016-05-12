@@ -130,4 +130,22 @@ class ImageDAOMS implements ImageDAO
         return $res;
 
     }
+
+    /**
+     * @param $userId : id of image
+     * @return int : id of image.
+     */
+     function GetImageId($userId)
+    {
+        $sql = 'SELECT MAX(id) FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $id);
+
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
+    }
 }

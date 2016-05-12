@@ -47,7 +47,7 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $distination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($distination);
 
     }
@@ -63,5 +63,12 @@ class ImageController
         $response['delete'] = DbManager::getInstance()->deleteImage($imageId);
         echo json_encode($response);
     }
+
+    public function getImageId($userID)
+    {
+        $response['imageID'] = DbManager::getInstance()->getImageID($userID);
+        echo json_encode($response);
+    }
+
 
 }

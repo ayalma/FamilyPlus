@@ -37,4 +37,11 @@ interface ImageDAO
      * @return boolean : status of deleting.
      */
     function delete($id);
+
+    /**
+     * @param $userId : id of user
+     * @return int : id of image
+     */
+    function GetImageId($userId);
+
 }
