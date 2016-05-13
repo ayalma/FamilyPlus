@@ -91,7 +91,6 @@ class GroupDAOMS implements GroupDAO
             . ' (' . DBCons::$_GU_COL_GROUP_ID
             . ', ' . DBCons::$_GU_COL_USER_ID
             . ', ' . DBCons::$_GU_COL_ROlE . ') VALUES (?,?,?)';
-
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('idi', $groupId, $userId, $role);
 

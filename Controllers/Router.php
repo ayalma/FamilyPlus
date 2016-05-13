@@ -141,12 +141,14 @@ switch ($view) {
         }
         break;
     case 'addMember' :
-
-        if (!isset($_POST['groupId']) || !isset($_POST['memberId']) || !isset($_POST['role'])) {
+        
+        if (!isset($_POST['groupId']) || !isset($_POST['memberId']) || !isset($_POST['Role'])) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
         }
-        GroupController::getInstance()->addMember($_POST['groupId'], $_POST['memberId'], $_POST['role']);
+
+
+        GroupController::getInstance()->addMember($_POST['groupId'], $_POST['memberId'], $_POST['Role']);
         break;
 
     case 'deleteMember' :
@@ -225,7 +227,7 @@ switch ($view) {
              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
              break;
          }
-        
+
         ImageController::getInstance()->delete($userId, $_GET['type']);
         break;
    
