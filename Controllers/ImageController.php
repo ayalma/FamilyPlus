@@ -64,7 +64,7 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $destination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
+        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($destination);
     }
 
@@ -79,18 +79,7 @@ class ImageController
         echo json_encode($response);
     }
 
-    public function getImageByUserId($userID)
-    {
-        $image = DbManager::getInstance()->loadImageByUserId($userID);
 
-        header("Content-length:" . $image->getSize());
-        header("Content-type:" . $image->getFileType());
-        header("Content-Disposition: attachment; filename=" . $image->getName());
-
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
-        echo file_get_contents($distination);
-
-    }
     
 
 }

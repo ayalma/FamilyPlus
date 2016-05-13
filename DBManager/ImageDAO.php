@@ -25,7 +25,7 @@ interface ImageDAO
      * @param $type : type of image.
      * @return Image|null
      */
-    function load($type,$userId);
+    function load($userId, $type);
 
     /**
      * @param $id :id of image.

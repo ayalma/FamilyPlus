@@ -154,9 +154,9 @@ class DbManager
      * @param $type : type of image
      * @return Image|null
      */
-    public function loadImage($userId,$type)
+    public function loadImage($userId, $type)
     {
-        return $this->_imageDao->load($userId,$type);
+        return $this->_imageDao->load($userId, $type);
     }
 
     /**
@@ -166,15 +166,6 @@ class DbManager
     public function loadImageById($imageId)
     {
         return $this->_imageDao->loadById($imageId);
-    }
-
-    /**
-     * @param $userID
-     * @return Image|null
-     */
-    public function loadImageByUserId($userID)
-    {
-        return $this->_imageDao->loadByUserId($userID);
     }
 
     public function deleteImage($imageId)
@@ -227,15 +218,15 @@ class DbManager
      * @param $userId : of user that id belong to him/his.
      * @return bool status of saving.
      */
-    public function saveItems(BuyItem $item , $userId)
+    public function saveItems(BuyItem $item, $userId)
     {
-        return $this->_buyItemDao->save( $item , $userId);
+        return $this->_buyItemDao->save($item, $userId);
     }
 
     /**
      * all method related to group.
      */
-    
+
     /**
      * @param Group $group : group to save.
      * @return int         : id of group
@@ -253,7 +244,7 @@ class DbManager
      */
     public function saveMember($groupId, $userId, $role)
     {
-        return $this->_groupDao->saveMember($groupId , $userId , $role);
+        return $this->_groupDao->saveMember($groupId, $userId, $role);
     }
 
     /**
