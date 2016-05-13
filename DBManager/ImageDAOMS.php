@@ -79,6 +79,7 @@ class ImageDAOMS implements ImageDAO
 
         if ($statement->fetch()) {
             $image = new Image($name, $fileType, $size, $type);
+            $image->setId($imageId);
         }
 
         $statement->close();
@@ -131,7 +132,8 @@ class ImageDAOMS implements ImageDAO
         $statement->bind_param('i', $id);
 
         $res = $statement->execute();
-        $statement->execute();
+
+        $statement->close();
 
         return $res;
 
