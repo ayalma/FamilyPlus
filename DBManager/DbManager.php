@@ -117,9 +117,19 @@ class DbManager
      * @param $userId : id of user (it is him/his phone number).
      * @return  array : all role of user in his groups peerTopPeer.
      */
-    public function getRoles($userId)
+    public function loadUserRoles($userId)
     {
-        return null;
+        return $this->_roleDao->loadByUserID($userId);
+    }
+
+    /**
+     * @param $userId
+     * @param $groupId
+     * @return array|int
+     */
+    public function loadUserRolesByGroupId($userId, $groupId)
+    {
+        return $this->_roleDao->loadByUserIdAndGroup($userId, $groupId);
     }
 
 

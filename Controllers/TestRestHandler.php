@@ -49,18 +49,6 @@ class TestRestHandler extends SimpleRest
         echo json_encode($respons);
     }
 
-    public function getRoles($userId)
-    {
-        $roles = DbManager::getInstance()->getRoles($userId);
-
-        $statusCode = 200;
-        $requestContentType = $_SERVER['HTTP_ACCEPT'];
-        $this->setHttpHeaders($requestContentType, $statusCode);
-
-        $respons['roles'] = json_encode($roles);
-
-        echo json_encode($respons);
-    }
 
     public function SendNotification($userId)
     {

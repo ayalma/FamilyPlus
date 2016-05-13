@@ -28,7 +28,7 @@ class RoleDAOMS implements RoleDAO
     public function loadByUserID($userId)
     {
         $sql = 'SELECT * FROM ' . DBCons::$_GU_TABLE .
-            ' WHERE ' . DBCons::$_GU_COL_USER_ID . '= ?';
+            ' WHERE ' . DBCons::$_GU_COL_USER_ID . '=?';
 
         $statement = $this->_connection->prepare($sql);
 
@@ -51,5 +51,39 @@ class RoleDAOMS implements RoleDAO
 
         return $roles;
     }
+
+    public function loadByUserIdAndGroup($userId, $groupId)
+    {
+        $sql = 'SELECT * FROM ' . DBCons::$_GU_TABLE .
+            ' WHERE ' . DBCons::$_GU_COL_USER_ID . '= ? AND '
+            . DBCons::$_GU_COL_GROUP_ID . '=?';
+
+        $statement = $this->_connection->prepare($sql);
+
+        /*if ( false===$statement ) {
+            // and since all the following operations need a valid/ready statement object
+            // it doesn't make sense to go on
+            // you might want to use a more sophisticated mechanism than die()
+            // but's it's only an example
+            die('prepare() failed: ' . htmlspecialchars($this->_connection->error));
+        }*/
+
+        $statement->bind_param('di', $userId, $groupId);
+        $statement->execute();
+
+        $statement->bind_result($groupId, $userId, $role);
+
+        $roles = array();
+
+        $i = 0;
+        while ($statement->fetch()) {
+            $roles[$i] = new Role($role, $groupId);
+            $i++;
+        }
+        $statement->close();
+
+        return $roles;
+    }
+
 
 }

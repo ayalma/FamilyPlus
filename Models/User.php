@@ -14,9 +14,10 @@ class User implements JsonSerializable
     private $_fName;
     private $_mNumber; // mobile number
 
-    /* private $_groups = array(); // list of group belong to user
+    /* private $_groups = array(); // list of group belong to user*/
      private $_roles = array(); // list of role belong to user
-     private $_buyItems = array();// list of buyItem belong to user*/
+
+    /*private $_buyItems = array();// list of buyItem belong to user*/
 
 
     function __construct($_fName = "", $_mNumber = "")
@@ -83,4 +84,22 @@ class User implements JsonSerializable
         }
         return $json; // or json_encode($json)
     }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->_roles;
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->_roles = $roles;
+    }
+
+
 }

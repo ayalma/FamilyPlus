@@ -14,4 +14,11 @@ interface RoleDAO
      * @return  array : all role of user in his groups peerTopPeer.
      */
     public function loadByUserID($userId);
+
+    /**
+     * @param $userId : id of user.
+     * @param $groupId : id of group.
+     * @return int
+     */
+    public function loadByUserIdAndGroup($userId, $groupId);
 }

@@ -139,13 +139,17 @@ class GroupDAOMS implements GroupDAO
 
         $statement->bind_result($fname , $m_number);
         $statement->execute();
+        $statement->store_result();
 
         $user = array();
         $user[0] = 'no user available';
 
         $i = 0;
         while ($statement->fetch()) {
-            $user[$i] = new User($fname , $m_number);
+            $tempUser = new User($fname, $m_number);
+
+            $tempUser->setRoles(DbManager::getInstance()->loadUserRolesByGroupId($tempUser->getMNumber(), $groupId));
+            $user[$i] = $tempUser;
             $i++;
         }
 
