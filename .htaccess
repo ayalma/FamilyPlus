@@ -23,3 +23,4 @@ RewriteRule ^ImageController/save  Controllers/Router.php?view=saveImage [nc,qsa
 RewriteRule ^ImageController/getImageById  Controllers/Router.php?view=getImageById [nc,qsa]
 RewriteRule ^ImageController/getImagesByUser  Controllers/Router.php?view=getImagesByUser [nc,qsa]
 RewriteRule ^ImageController/deleteImage Controllers/Router.php?view=deleteImage [nc,qsa]
+RewriteRule ^ImageController/getImageByUserId Controllers/Router.php?view=getImageByUserId [nc,qsa]

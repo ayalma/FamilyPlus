@@ -154,9 +154,9 @@ class DbManager
      * @param $type : type of image
      * @return Image|null
      */
-    public function loadImage($userId, $type)
+    public function loadImage($userId,$type)
     {
-        return $this->_imageDao->load($userId, $type);
+        return $this->_imageDao->load($userId,$type);
     }
 
     /**
@@ -166,6 +166,15 @@ class DbManager
     public function loadImageById($imageId)
     {
         return $this->_imageDao->loadById($imageId);
+    }
+
+    /**
+     * @param $userID
+     * @return Image|null
+     */
+    public function loadImageByUserId($userID)
+    {
+        return $this->_imageDao->loadByUserId($userID);
     }
 
     public function deleteImage($imageId)

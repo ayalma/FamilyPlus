@@ -47,14 +47,14 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $distination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($distination);
 
     }
 
-    public function getImages($userId, $type)
+    public function getImages($userId,$type)
     {
-        $image = DbManager::getInstance()->loadImage($userId, $type);
+        $image = DbManager::getInstance()->loadImage($userId,$type);
         if ($image == null) {
             header('HTTP/1.1' . " " . 204 . " " . 'No Content');
             return;
@@ -64,19 +64,32 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $destination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($destination);
     }
 
     public function delete($userId, $type)
     {
-        $image = DbManager::getInstance()->loadImage($userId, $type);
-        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $image = DbManager::getInstance()->loadImage($userId,$type);
+        $destination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
         $res = unlink($destination);
 
         $response['delete'] = DbManager::getInstance()->deleteImage($image->getId()) && $res;
 
         echo json_encode($response);
+    }
+
+    public function getImageByUserId($userID)
+    {
+        $image = DbManager::getInstance()->loadImageByUserId($userID);
+
+        header("Content-length:" . $image->getSize());
+        header("Content-type:" . $image->getFileType());
+        header("Content-Disposition: attachment; filename=" . $image->getName());
+
+        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
+        echo file_get_contents($distination);
+
     }
     
 

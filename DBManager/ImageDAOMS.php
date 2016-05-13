@@ -54,7 +54,7 @@ class ImageDAOMS implements ImageDAO
      * @param $type
      * @return Image|null
      */
-    function load($userId, $type)
+    function load( $userId,$type)
     {
         $sql = 'SELECT  ' . DBCons::$_IMAGE_COL_ID
             . ',' . DBCons::$_IMAGE_COL_TYPE
@@ -138,6 +138,35 @@ class ImageDAOMS implements ImageDAO
         return $res;
 
     }
+
+    function loadByUserId($userID)
+    {
+        $sql = 'SELECT ' . DBCons::$_IMAGE_COL_ID
+            . ',' . DBCons::$_IMAGE_COL_TYPE
+            . ',' . DBCons::$_IMAGE_COL_FILE_TYPE
+            . ',' . DBCons::$_IMAGE_COL_SIZE
+            . ',' . DBCons::$_IMAGE_COL_NAME
+            . ' FROM ' . DBCons::$_IMAGE_TABLE
+            . ' WHERE ' . DBCons::$_IMAGE_COL_USER_ID . ' = ?';
+
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userID);
+
+        $statement->bind_result($imageId, $type, $fileType, $size, $name);
+        $statement->execute();
+
+        $image = null;
+
+        if ($statement->fetch()) {
+            $image = new Image($name, $fileType, $size, $type);
+        }
+
+        $statement->close();
+
+        return $image;
+    }
+
 
 
 
