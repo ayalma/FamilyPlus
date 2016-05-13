@@ -122,7 +122,7 @@ class ImageDAOMS implements ImageDAO
      * @param $id : id of image
      * @return boolean : status of deleting.
      */
-    function deleteById($id)
+    function delete($id)
     {
         $sql = 'DELETE FROM ' . DBCons::$_IMAGE_TABLE
             . ' WHERE ' . DBCons::$_IMAGE_COL_ID . ' = ?';
@@ -137,23 +137,6 @@ class ImageDAOMS implements ImageDAO
 
     }
 
-    function delete($userId, $type)
-    {
-        $sql = 'DELETE FROM ' . DBCons::$_IMAGE_TABLE
-            . ' WHERE ' . DBCons::$_IMAGE_COL_ID
-            . ' = (SELECT max(' . DBCons::$_IMAGE_COL_ID
-            . ') FROM ' . DBCons::$_IMAGE_TABLE . ' WHERE '
-            . DBCons::$_IMAGE_COL_USER_ID . '=? AND '
-            . DBCons::$_IMAGE_COL_TYPE . '=?)';
-
-        $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('di', $userId, $type);
-
-        $res = $statement->execute();
-        $statement->execute();
-
-        return $res;
-    }
 
 
 }

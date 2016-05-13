@@ -37,15 +37,8 @@ interface ImageDAO
      * @param $id : id of image
      * @return boolean : status of deleting.
      */
-    function deleteById($id);
-
-    /**
-     * this method will delete user last image in db with type.
-     * @param $userId : id of user.
-     * @param $type : type of image.
-     * @return boolean: status of saving as boolean.
-     */
-    function delete($userId, $type);
+    function delete($id);
+    
 
 
 }

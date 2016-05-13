@@ -74,7 +74,7 @@ class ImageController
         $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
         $res = unlink($destination);
 
-        $response['delete'] = DbManager::getInstance()->deleteImage($userId, $type) && $res;
+        $response['delete'] = DbManager::getInstance()->deleteImage($image->getId()) && $res;
 
         echo json_encode($response);
     }
