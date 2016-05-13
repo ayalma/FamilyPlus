@@ -158,11 +158,15 @@ class DbManager
         return $this->_imageDao->loadById($imageId);
     }
 
-    public function deleteImage($imageId)
+    public function deleteImage($userId, $type)
     {
-        return $this->_imageDao->delete($imageId);
+        return $this->_imageDao->delete($userId, $type);
     }
 
+    public function deleteImageById($imageId)
+    {
+        return $this->_imageDao->deleteById($imageId);
+    }
     /**
      * all method related to  EventType.
      */

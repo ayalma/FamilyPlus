@@ -183,7 +183,7 @@ switch ($view) {
         $fileSize = $_FILES['picture']['size'];
         $fileType = $_FILES['picture']['type'];
 
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload';
+        $distination = '/var/www/html/FamilyPlus/upload/';
 
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;
@@ -220,15 +220,13 @@ switch ($view) {
 
     case "deleteImage":
 
-        /* // this method is not implemented yet
-         if (!isset($_GET['groupId'])) {
+        // this method is not implemented yet
+        if (!isset($_GET['type'])) {
              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
              break;
          }
-
-         $imageId = 0;
-
-         ImageController::getInstance()->delete($imageId);*/
+        
+        ImageController::getInstance()->delete($userId, $_GET['type']);
         break;
    
 }

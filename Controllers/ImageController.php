@@ -68,9 +68,14 @@ class ImageController
         echo file_get_contents($destination);
     }
 
-    public function delete($imageId)
+    public function delete($userId, $type)
     {
-        $response['delete'] = DbManager::getInstance()->deleteImage($imageId);
+        $image = DbManager::getInstance()->loadImage($userId, $type);
+        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $res = unlink($destination);
+
+        $response['delete'] = DbManager::getInstance()->deleteImage($userId, $type) && $res;
+
         echo json_encode($response);
     }
     
