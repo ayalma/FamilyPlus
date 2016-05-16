@@ -120,8 +120,15 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->bind_param('i', $BuyItemId);
 
         $result = $statement->execute();
-        $statement->close();
-        return $result;
+        if ($statement->fetch()) {
+            $statement->close();
+            return $result;
+        }else
+        {
+            $statement->close();
+            return null;
+        }
+        
     }
 
     public function loadbyUser($userId)
@@ -155,7 +162,15 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement = $this->_connection->prepare($sql);
         $res = $statement->bind_param('i', $titleId);
         $statement->execute();
-        return $res;
+        if ($statement->fetch()) {
+            $statement->close();
+            return $res;
+        }else
+        {
+            $statement->close();
+            return null;
+        }
+
     }
 
 
