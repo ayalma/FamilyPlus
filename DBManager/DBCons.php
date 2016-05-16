@@ -10,7 +10,7 @@ class DBCons
 {
     public static $_host = "localhost";
     public static $_user = "root";
-    public static $_password = "gamor2012";
+    public static $_password = "";
     public static $db_name = "FamilyPlus";
     public static $port = "3306";
 
@@ -38,6 +38,12 @@ class DBCons
     public static $_BUYITEMS_PURCHASED = "purchased";
     public static $_BUYITEMS_PRICE = "price";
     public static $_BUYITEMS_DATE = "date";
+    public static $_BUYITEMS_QNTY = "qnty";
+    public static $_BUYITEMS_ITEM_GROUP = 'item_group';
+
+    public static $_BG_TABLE = "BuyItemGroups";
+    public static $_BG_COL_ID = "id";
+    public static $_BG_COL_TITLE = "title";
 
     public static $_GROUP_TABLE = "Groups";
     public static $_GROUP_COL_ID = "id";
