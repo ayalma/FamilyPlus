@@ -12,8 +12,9 @@ class BuyItem
     private $_purchased; // this mean that is item bought by user.
     private $_price;// price of item.
     private $_date;
-    private $_users; // user that will received this items.
-
+    private $_users;// user that will received this items.
+    private $_qunty;
+    private $_title;
 
     /**
      * BuyItem constructor.
@@ -22,15 +23,20 @@ class BuyItem
      * @param $_price
      * @param $_date
      * @param $_users
+     * @param $_qunty
+     * @param $_title
      */
-    public function __construct($_name, $_purchased, $_price, $_date , $_users)
+    public function __construct($_name = '', $_purchased = '', $_price = '', $_date = '', $_users = '', $_qunty = '', $_title = '')
     {
         $this->_name = $_name;
         $this->_purchased = $_purchased;
         $this->_price = $_price;
         $this->_date = $_date;
         $this->_users = $_users;
+        $this->_qunty = $_qunty;
+        $this->_title = $_title;
     }
+
 
     public static function fromJSON($json)
     {
@@ -123,10 +129,37 @@ class BuyItem
         $this->_users = $users;
     }
 
+    /**
+     * @return int
+     */
+    public function getQunty()
+    {
+        return $this->_qunty;
+    }
+
+    /**
+     * @param int $qunty
+     */
+    public function setQunty($qunty)
+    {
+        $this->_qunty = $qunty;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->_title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->_title = $title;
+    }
     
-
-
-
-
-
+    
 }
