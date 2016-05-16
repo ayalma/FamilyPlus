@@ -119,14 +119,27 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->bind_param('d', $userId);
         $statement->execute();
 
-        $statement->bind_result($id, $m_nimber, $name, $purchased, $price, $date);
+        $statement->bind_result($id, $m_number , $item_group ,  $name, $purchased, $price, $date , $qnty);
+        $title = $this->getTitle($item_group);
+        $buyItem = null;
         if ($statement->fetch()) {
-            $statement->close();
-            return new BuyItem($name, $purchased, $price, $date);
-        } else {
-            $statement->close();
-            return null;
+            $buyItem =  new BuyItem($name, $purchased, $price, $date,'',$qnty ,$title );
         }
+            $statement->close();
+            return $buyItem;
+
+    }
+
+    private function getTitle($titleId)
+    {
+        $sql = 'SELECT '.DBCons::$_BG_COL_TITLE.
+            ' FROME '.DBCons::$_BG_TABLE.
+            ' WHERE '.DBCons::$_BG_COL_ID.'=? ';
+
+        $statement = $this->_connection->prepare($sql);
+        $res = $statement->bind_param('i', $titleId);
+        $statement->execute();
+        return $res;
     }
 
     public function loadbyDate($date)

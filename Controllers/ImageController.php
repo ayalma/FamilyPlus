@@ -64,7 +64,7 @@ class ImageController
         header("Content-type:" . $image->getFileType());
         header("Content-Disposition: attachment; filename=" . $image->getName());
 
-        $destination = '/var/www/html/FamilyPlus/upload/' . $image->getName();
+        $destination = 'C:/xampp/htdocs/FamilyPlus/upload/' . $image->getName();
         echo file_get_contents($destination);
     }
 

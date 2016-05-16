@@ -185,7 +185,7 @@ switch ($view) {
         $fileSize = $_FILES['picture']['size'];
         $fileType = $_FILES['picture']['type'];
 
-        $distination = '/var/www/html/FamilyPlus/upload/';
+        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/';
 
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;
