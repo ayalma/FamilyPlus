@@ -110,6 +110,20 @@ class BuyItemDAOMS implements BuyItemDAO
         return $result;
     }
 
+    private function loadReciver($BuyItemId)
+    {
+        $sql = 'SELECT '.DBCons::$_BIU_COL_USER_ID.
+            ' FROME '.DBCons::$_BIU_TABLE.
+            ' WHERE '.DBCons::$_BIU_COL_BUY_ITEM_ID.'=?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $BuyItemId);
+
+        $result = $statement->execute();
+        $statement->close();
+        return $result;
+    }
+
     public function loadbyUser($userId)
     {
         $sql = ' SELECT * FROM ' . DBCons::$_BUYITEMS_TABLE .
@@ -121,9 +135,11 @@ class BuyItemDAOMS implements BuyItemDAO
 
         $statement->bind_result($id, $m_number , $item_group ,  $name, $purchased, $price, $date , $qnty);
         $title = $this->getTitle($item_group);
+        $user = $this->loadReciver($id);
+
         $buyItem = null;
         if ($statement->fetch()) {
-            $buyItem =  new BuyItem($name, $purchased, $price, $date,'',$qnty ,$title );
+            $buyItem =  new BuyItem($name, $purchased, $price, $date, $user ,$qnty ,$title );
         }
             $statement->close();
             return $buyItem;
@@ -141,6 +157,7 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->execute();
         return $res;
     }
+
 
     public function loadbyDate($date)
     {
