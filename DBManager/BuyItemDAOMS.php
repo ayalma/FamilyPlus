@@ -119,7 +119,8 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('i', $BuyItemId);
 
-        $result = $statement->execute();
+        $statement->execute();
+        $result =  $statement->bind_result($userId);
         if ($statement->fetch()) {
             $statement->close();
             return $result;
@@ -128,7 +129,7 @@ class BuyItemDAOMS implements BuyItemDAO
             $statement->close();
             return null;
         }
-        
+
     }
 
     public function loadbyUser($userId)
@@ -160,8 +161,10 @@ class BuyItemDAOMS implements BuyItemDAO
             ' WHERE '.DBCons::$_BG_COL_ID.'=? ';
 
         $statement = $this->_connection->prepare($sql);
-        $res = $statement->bind_param('i', $titleId);
+        $statement->bind_param('i', $titleId);
         $statement->execute();
+        $res =  $statement->bind_result($title);
+
         if ($statement->fetch()) {
             $statement->close();
             return $res;
