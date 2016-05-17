@@ -6,7 +6,7 @@ namespace Models;
  * Date: 4/16/16
  * Time: 10:43 AM
  */
-class BuyItem
+class BuyItem implements \JsonSerializable
 {
     private $_name; // item name.
     private $_purchased; // this mean that is item bought by user.
@@ -160,6 +160,24 @@ class BuyItem
     {
         $this->_title = $title;
     }
-    
-    
+
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        $json = array();
+
+        foreach ($this as $key => $value) {
+            $key = str_replace('_', '', $key);
+            $json[$key] = $value;
+        }
+        
+        return $json; // or json_encode($json)
+    }
 }

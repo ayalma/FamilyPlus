@@ -124,6 +124,11 @@ switch ($view) {
         }
         break;
 
+    case 'loadBuyItems':
+
+        BuyItemsController::getInstance()->loadBuyItems($userId);
+        break;
+
     /*all routing for Event*/
 
     /*all routing for Group*/
@@ -185,7 +190,7 @@ switch ($view) {
         $fileSize = $_FILES['picture']['size'];
         $fileType = $_FILES['picture']['type'];
 
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/';
+        $distination = '/var/www/html/FamilyPlus/upload/';
 
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;

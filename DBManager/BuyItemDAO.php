@@ -15,12 +15,13 @@ interface BuyItemDAO
 {
     /**
      * @param BuyItem $buyItem will save in db
-     * @return boolean return status of saving.
+     * @param $userId : id of user
+     * @return bool return status of saving.
      */
     public function save(BuyItem $buyItem, $userId);
 
-    public function loadbyUser($userId);
+    public function loadByUser($userId);
 
-    public function loadbyDate($date);
+    public function loadByDate($date);
     
 }

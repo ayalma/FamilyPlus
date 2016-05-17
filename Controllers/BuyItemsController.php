@@ -38,4 +38,11 @@ class BuyItemsController
         echo json_encode($response);
     }
 
+    public function loadBuyItems($userId)
+    {
+        $buyitems = DbManager::getInstance()->loadItems($userId);
+
+        echo json_encode($buyitems);
+    }
+
 }

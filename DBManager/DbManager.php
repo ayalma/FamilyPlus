@@ -213,6 +213,8 @@ class DbManager
         return $this->_loginCodeDao->load($userId);
     }
 
+    /*all method related to buyitems*/
+
     /**
      * @param BuyItem $item will save in database.
      * @param $userId : of user that id belong to him/his.
@@ -222,6 +224,16 @@ class DbManager
     {
         return $this->_buyItemDao->save($item, $userId);
     }
+
+    /**
+     * @param $userId : id of user.
+     * @return array(BuyItem)|null : return buyitems of user.
+     */
+    public function loadItems($userId)
+    {
+        return $this->_buyItemDao->loadByUser($userId);
+    }
+    
 
     /**
      * all method related to group.
