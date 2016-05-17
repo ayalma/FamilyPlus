@@ -120,10 +120,11 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->bind_param('i', $BuyItemId);
 
         $statement->execute();
-        $result =  $statement->bind_result($userId);
+        $statement->bind_result($userId);
+
         if ($statement->fetch()) {
             $statement->close();
-            return $result;
+            return $userId;
         }else
         {
             $statement->close();
@@ -163,11 +164,11 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('i', $titleId);
         $statement->execute();
-        $res =  $statement->bind_result($title);
+        $statement->bind_result($title);
 
         if ($statement->fetch()) {
             $statement->close();
-            return $res;
+            return $title;
         }else
         {
             $statement->close();
