@@ -131,6 +131,7 @@ class BuyItemDAOMS implements BuyItemDAO
             $user = $this->loadReciver($id);
 
             $buyItems[$i] = new BuyItem($name, $purchased, $price, $date, $user, $qnty, $title);
+            $buyItems[$i]->setId($id);
             $i++;
         }
         $statement->close();
@@ -201,7 +202,8 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement->bind_result($id, $m_nimber, $name, $purchased, $price, $date);
         if ($statement->fetch()) {
             $statement->close();
-            return new BuyItem($name, $purchased, $price, $date);
+            $buyItem = new BuyItem($name, $purchased, $price, $date);
+            $buyItem->setId($id);
         } else {
             $statement->close();
             return null;
@@ -209,4 +211,23 @@ class BuyItemDAOMS implements BuyItemDAO
     }
 
 
+    /**
+     * @param $buyItemId : item id.
+     * @param $price : price to be update.
+     * @return bool      :status of updating
+     */
+    public function updatePrice($buyItemId, $price)
+    {
+        $sql = 'UPDATE ' . DBCons::$_BUYITEMS_TABLE
+            . ' SET ' . DBCons::$_BUYITEMS_PRICE
+            . '= ? WHERE ' . DBCons::$_BUYITEMS_COL_ID . '= ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('di', $price, $buyItemId);
+
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
+    }
 }

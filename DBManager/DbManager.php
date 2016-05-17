@@ -233,7 +233,17 @@ class DbManager
     {
         return $this->_buyItemDao->loadByUser($userId);
     }
-    
+
+
+    /**
+     * @param $buyItemId : item id.
+     * @param $price : item new price
+     * @return bool      : status of updating
+     */
+    public function updateItemPrice($buyItemId, $price)
+    {
+        return $this->_buyItemDao->updatePrice($buyItemId, $price);
+    }
 
     /**
      * all method related to group.

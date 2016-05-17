@@ -25,16 +25,15 @@ class BuyItemsController
 
     public static function getInstance()
     {
-        if(self::$_instance == null)
-        {
+        if (self::$_instance == null) {
             self::$_instance = new BuyItemsController();
         }
         return self::$_instance;
     }
-    
-    public function saveBuyItems(BuyItem $item , $userId)
+
+    public function saveBuyItems(BuyItem $item, $userId)
     {
-        $response['save'] = DbManager::getInstance()->saveItems($item , $userId);
+        $response['save'] = DbManager::getInstance()->saveItems($item, $userId);
         echo json_encode($response);
     }
 
@@ -43,6 +42,12 @@ class BuyItemsController
         $buyitems = DbManager::getInstance()->loadItems($userId);
 
         echo json_encode($buyitems);
+    }
+
+    public function updateBuyItemPrice($buyItemId, $price)
+    {
+        $response['update'] = DbManager::getInstance()->updateItemPrice($buyItemId, $price);
+        echo json_encode($response);
     }
 
 }

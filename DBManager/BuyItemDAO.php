@@ -20,8 +20,14 @@ interface BuyItemDAO
      */
     public function save(BuyItem $buyItem, $userId);
 
+    /**
+     * @param $userId : id of user
+     * @return array
+     */
     public function loadByUser($userId);
 
     public function loadByDate($date);
+
+    public function updatePrice($buyItemId, $price);
     
 }

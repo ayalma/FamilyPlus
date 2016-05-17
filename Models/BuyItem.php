@@ -8,6 +8,7 @@ namespace Models;
  */
 class BuyItem implements \JsonSerializable
 {
+    private $id;
     private $_name; // item name.
     private $_purchased; // this mean that is item bought by user.
     private $_price;// price of item.
@@ -37,7 +38,6 @@ class BuyItem implements \JsonSerializable
         $this->_title = $_title;
     }
 
-
     public static function fromJSON($json)
     {
         $obj = new BuyItem();
@@ -48,6 +48,21 @@ class BuyItem implements \JsonSerializable
 
     }
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed

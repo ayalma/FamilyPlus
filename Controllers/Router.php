@@ -129,11 +129,18 @@ switch ($view) {
         BuyItemsController::getInstance()->loadBuyItems($userId);
         break;
 
+    case 'updateBuyItemPrice':
+
+        if (isset($_GET['buyItemId']) && isset($_GET['price']))
+            BuyItemsController::getInstance()->updateBuyItemPrice($_GET['buyItemId'], $_GET['price']);
+        else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+        break;
     /*all routing for Event*/
 
     /*all routing for Group*/
     case 'createGroup':
-        if (isset($_POST['groupName']) || isset($_POST['adminRole'])) {
+        if (isset($_POST['groupName']) && isset($_POST['adminRole'])) {
 
             $group = new Group(0, $userId, $_POST['groupName']);
 
@@ -146,7 +153,7 @@ switch ($view) {
         }
         break;
     case 'addMember' :
-        
+
         if (!isset($_POST['groupId']) || !isset($_POST['memberId']) || !isset($_POST['Role'])) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
@@ -206,9 +213,9 @@ switch ($view) {
     case "getImageById":
 
         if (!isset($_GET['id'])) {
-             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-             break;
-         }
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
 
 
         ImageController::getInstance()->getImageById($_GET['id']);
@@ -229,9 +236,9 @@ switch ($view) {
 
         // this method is not implemented yet
         if (!isset($_GET['type'])) {
-             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-             break;
-         }
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
 
         ImageController::getInstance()->delete($userId, $_GET['type']);
         break;

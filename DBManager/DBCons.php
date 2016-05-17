@@ -33,6 +33,7 @@ class DBCons
     public static $_LOGINCODE_COL_EXPIRED = 'expired';
 
     public static $_BUYITEMS_TABLE = "BuyItems";
+    public static $_BUYITEMS_COL_ID = "id";
     public static $_BUYITEMS_M_NUMBER = "m_number";
     public static $_BUYITEMS_NAME = "name";
     public static $_BUYITEMS_PURCHASED = "purchased";
@@ -40,6 +41,7 @@ class DBCons
     public static $_BUYITEMS_DATE = "date";
     public static $_BUYITEMS_QNTY = "qnty";
     public static $_BUYITEMS_ITEM_GROUP = 'item_group';
+
 
     public static $_BG_TABLE = "BuyItemGroups";
     public static $_BG_COL_ID = "id";

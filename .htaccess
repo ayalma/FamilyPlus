@@ -14,6 +14,7 @@ RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=regis
 #all buyitem routing
 RewriteRule ^BuyItemsController/saveBuyItems   Controllers/Router.php?view=saveBuyItems [nc,qsa]
 RewriteRule ^BuyItemsController/loadBuyItems   Controllers/Router.php?view=loadBuyItems [nc,qsa]
+RewriteRule ^BuyItemsController/updateBuyItemPrice   Controllers/Router.php?view=updateBuyItemPrice [nc,qsa]
 # all group routing
 RewriteRule ^GroupController/save   Controllers/Router.php?view=createGroup [nc,qsa]
 RewriteRule ^GroupController/addMember   Controllers/Router.php?view=addMember [nc,qsa]
