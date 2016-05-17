@@ -33,6 +33,7 @@ class DbManager
     private $_eventTypeDao;
     private $_groupDao;
     private $_imageDao;
+    private $_buysDao;
 
     function __construct()
     {
@@ -53,6 +54,7 @@ class DbManager
             $this->_eventTypeDao = new EventTypeDAOMS($this->_connection);
             $this->_groupDao = new GroupDAOMS($this->_connection);
             $this->_imageDao = new ImageDAOMS($this->_connection);
+            $this->_buysDao = new BuysDAOMS($this->_connection);
 
         } catch (Exception $_e) {
             error_log($_e->getMessage());
@@ -217,21 +219,21 @@ class DbManager
 
     /**
      * @param BuyItem $item will save in database.
-     * @param $userId : of user that id belong to him/his.
+     * @param $buyId : of user that id belong to him/his.
      * @return bool status of saving.
      */
-    public function saveItems(BuyItem $item, $userId)
+    public function saveBuyItems(BuyItem $item, $buyId)
     {
-        return $this->_buyItemDao->save($item, $userId);
+        return $this->_buyItemDao->save($item, $buyId);
     }
 
     /**
-     * @param $userId : id of user.
-     * @return array(BuyItem)|null : return buyitems of user.
+     * @param $buyId : id of user.
+     * @return array|null : return buyitems of user.
      */
-    public function loadItems($userId)
+    public function loadBuyItems($buyId)
     {
-        return $this->_buyItemDao->loadByUser($userId);
+        return $this->_buyItemDao->loadByBuy($buyId);
     }
 
 
@@ -243,6 +245,46 @@ class DbManager
     public function updateItemPrice($buyItemId, $price)
     {
         return $this->_buyItemDao->updatePrice($buyItemId, $price);
+    }
+
+    /*all method related to buy*/
+
+    /**
+     * @param $buys : buys object .
+     * @param $userId : id of user.
+     * @return bool : status of saving.
+     */
+    public function saveBuys($buys, $userId)
+    {
+        return $this->_buysDao->save($buys, $userId);
+    }
+
+    /**
+     * @param $userId : user id .
+     * @return array : array of buys item.
+     */
+    public function loadBuys($userId)
+    {
+        return $this->_buysDao->load($userId);
+    }
+
+    /**
+     * @param int $buyId : id of buy.
+     * @param int $userId : id of user.
+     * @return bool : status of saving.
+     */
+    public function addReceiver($buyId, $userId)
+    {
+        $this->_buysDao->addReceiver($buyId, $userId);
+    }
+
+    /**
+     * @param $buyId : id of buy .
+     * @return array : user who access to this buy.
+     */
+    public function getReceiver($buyId)
+    {
+        $this->_buysDao->getReceiver($buyId);
     }
 
     /**

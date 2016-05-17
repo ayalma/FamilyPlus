@@ -136,6 +136,41 @@ switch ($view) {
         else
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
         break;
+
+    /*all routing for Buys*/
+
+    case 'saveBuys':
+        $inputJSON = file_get_contents('php://input');
+        if ($inputJSON != null) {
+            $buys = "";
+            BuysController::getInstance()->saveBuys($buys, $userId);
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+
+        break;
+    case 'loadBuys':
+        BuysController::getInstance()->loadBuys($userId);
+        break;
+    case 'addReceiver':
+
+        if (isset($_POST['buyId'])) {
+
+            $buyId = $_POST['buyId'];
+            BuysController::getInstance()->addReceiver($buyId, $userId);
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+
+        break;
+    case 'getReceiver':
+
+        if (isset($_POST['buyId'])) {
+
+            $buyId = $_POST['buyId'];
+            BuysController::getInstance()->getReceiver($buyId);
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+        break;
+
     /*all routing for Event*/
 
     /*all routing for Group*/

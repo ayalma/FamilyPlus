@@ -15,19 +15,22 @@ interface BuyItemDAO
 {
     /**
      * @param BuyItem $buyItem will save in db
-     * @param $userId : id of user
+     * @param $buyId : id of buy that this item is for him.
      * @return bool return status of saving.
      */
-    public function save(BuyItem $buyItem, $userId);
+    public function save(BuyItem $buyItem, $buyId);
 
     /**
-     * @param $userId : id of user
-     * @return array
+     * @param int $buyId : id of buy that item is for it.
+     * @return array : of BuyItem;
      */
-    public function loadByUser($userId);
+    public function loadByBuy($buyId);
 
-    public function loadByDate($date);
-
+    /**
+     * @param int $buyItemId : id of buyItem.
+     * @param int $price : new price.
+     * @return bool          : status of update.
+     */
     public function updatePrice($buyItemId, $price);
     
 }

@@ -12,31 +12,25 @@ class BuyItem implements \JsonSerializable
     private $_name; // item name.
     private $_purchased; // this mean that is item bought by user.
     private $_price;// price of item.
-    private $_date;
-    private $_users;// user that will received this items.
     private $_qunty;
-    private $_title;
 
     /**
      * BuyItem constructor.
-     * @param $_name
-     * @param $_purchased
-     * @param $_price
-     * @param $_date
-     * @param $_users
-     * @param $_qunty
-     * @param $_title
+     * @param int $id : id of item.
+     * @param string $_name : name of item.
+     * @param bool $_purchased : is purchased.
+     * @param int $_price : price of item.
+     * @param int $_qunty : count of this item.
      */
-    public function __construct($_name = '', $_purchased = '', $_price = '', $_date = '', $_users = '', $_qunty = '', $_title = '')
+    public function __construct($id = 0, $_name = '', $_purchased = false, $_price = 0, $_qunty = 0)
     {
+        $this->id = $id;
         $this->_name = $_name;
         $this->_purchased = $_purchased;
         $this->_price = $_price;
-        $this->_date = $_date;
-        $this->_users = $_users;
         $this->_qunty = $_qunty;
-        $this->_title = $_title;
     }
+
 
     public static function fromJSON($json)
     {
@@ -65,7 +59,7 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function getPurchased()
     {
@@ -73,7 +67,7 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @param mixed $purchased
+     * @param bool $purchased
      */
     public function setPurchased($purchased)
     {
@@ -81,7 +75,7 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -89,7 +83,7 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -97,7 +91,7 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getPrice()
     {
@@ -105,43 +99,11 @@ class BuyItem implements \JsonSerializable
     }
 
     /**
-     * @param mixed $price
+     * @param int $price
      */
     public function setPrice($price)
     {
         $this->_price = $price;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->_date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
-        $this->_date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsers()
-    {
-        return $this->_users;
-    }
-
-    /**
-     * @param mixed $users
-     */
-    public function setUsers($users)
-    {
-        $this->_users = $users;
     }
 
     /**
@@ -158,22 +120,6 @@ class BuyItem implements \JsonSerializable
     public function setQunty($qunty)
     {
         $this->_qunty = $qunty;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->_title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->_title = $title;
     }
 
 

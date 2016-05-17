@@ -34,18 +34,23 @@ class DBCons
 
     public static $_BUYITEMS_TABLE = "BuyItems";
     public static $_BUYITEMS_COL_ID = "id";
-    public static $_BUYITEMS_M_NUMBER = "m_number";
+    public static $_BUYITEMS_BUY_ID = "buy_id";
     public static $_BUYITEMS_NAME = "name";
     public static $_BUYITEMS_PURCHASED = "purchased";
     public static $_BUYITEMS_PRICE = "price";
-    public static $_BUYITEMS_DATE = "date";
     public static $_BUYITEMS_QNTY = "qnty";
-    public static $_BUYITEMS_ITEM_GROUP = 'item_group';
+    public static $_BUYITEMS_ = "qnty";
 
 
-    public static $_BG_TABLE = "BuyItemGroups";
-    public static $_BG_COL_ID = "id";
-    public static $_BG_COL_TITLE = "title";
+    public static $_BUY_TABLE = "Buys";
+    public static $_BUY_COL_ID = "id";
+    public static $_BUY_COL_OWNER = "owner";
+    public static $_BUY_COL_TITLE = "title";
+    public static $_BUY_COL_DATE = "date";
+
+    public static $_BU_TABLE = "Buy_User";
+    public static $_BU_COL_USER_ID = "uid";
+    public static $_BU_COL_BUY_ITEM_ID = "buy_id";
 
     public static $_GROUP_TABLE = "Groups";
     public static $_GROUP_COL_ID = "id";
@@ -72,10 +77,6 @@ class DBCons
     public static $_EU_TABLE = "Event_User";
     public static $_EU_COL_USER_ID = "uid";
     public static $_EU_COL_EVENT_ID = "eid";
-
-    public static $_BIU_TABLE = "BuyItem_User";
-    public static $_BIU_COL_USER_ID = "uid";
-    public static $_BIU_COL_BUY_ITEM_ID = "bid";
 
     public static $_IMAGE_TABLE = "Images";
     public static $_IMAGE_COL_ID = "id";
