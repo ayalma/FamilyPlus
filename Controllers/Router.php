@@ -113,12 +113,12 @@ switch ($view) {
     /*all routing for buyItems*/
 
     case 'saveBuyItems':
-        $inputJSON = file_get_contents('php://input');
-        if ($inputJSON != null) {
 
-            $buyitems = BuyItem::fromJSON($inputJSON);
-            BuyItemsController::getInstance()->saveBuyItems($buyitems, $userId);
+        if (isset($_POST['buyItem']) && isset($_POST['buyItem'])) {
 
+            $buyitems = BuyItem::fromJSON($_POST['buyItem']);
+            BuyItemsController::getInstance()->saveBuyItems($buyitems, $_POST['buyItem']);
+            
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
@@ -142,6 +142,8 @@ switch ($view) {
 
     case 'saveBuys':
         $inputJSON = file_get_contents('php://input');
+
+        echo json_encode($inputJSON);
         if ($inputJSON != null) {
             $buys = Buys::fromJSON($inputJSON);
             BuysController::getInstance()->saveBuys($buys, $userId);

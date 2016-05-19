@@ -38,8 +38,12 @@ class BuyItemDAOMS implements BuyItemDAO
             . ') VALUES (?,?,?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('siiii', $buyItem->getName(), $buyItem->getPurchased()
+
+        $purchasedStatus = ($buyItem->getPurchased()) ? 1 : 0;
+
+        $statement->bind_param('siiii', $buyItem->getName(), $purchasedStatus
             , $buyItem->getPrice(), $buyItem->getQunty(), $buyId);
+
 
         $res = $statement->execute();
         $statement->close();

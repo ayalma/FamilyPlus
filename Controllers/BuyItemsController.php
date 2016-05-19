@@ -31,9 +31,9 @@ class BuyItemsController
         return self::$_instance;
     }
 
-    public function saveBuyItems(BuyItem $item, $userId)
+    public function saveBuyItems(BuyItem $item, $buyId)
     {
-        $response['save'] = DbManager::getInstance()->saveBuyItems($item, $userId);
+        $response['save'] = DbManager::getInstance()->saveBuyItems($item, $buyId);
         echo json_encode($response);
     }
 
