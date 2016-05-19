@@ -91,7 +91,7 @@ class BuyItemDAOMS implements BuyItemDAO
         $items = array();
 
         while ($statement->fetch()) {
-            $items[$i] = new BuyItem($id, $name, $purchased, $price, $quty);
+            $items[$i] = new BuyItem($id, $name, ($purchased) ? true : false, $price, $quty);
             $i++;
         }
 
