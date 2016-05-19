@@ -39,6 +39,17 @@ class Buys implements \JsonSerializable
     }
 
 
+    public static function fromJSON($json)
+    {
+        $obj = new Buys();
+        $obj->setBuyItems(null);
+        $obj->setUsers(null);
+        $jsonValue = json_decode($json, true);
+        foreach ($jsonValue as $key => $value)
+            $obj->{'_' . $key} = $value;
+        return $obj;
+
+    }
     /**
      * @return int
      */

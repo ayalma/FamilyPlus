@@ -69,7 +69,11 @@ class BuysDAOMS implements BuysDAO
 
         while ($statement->fetch()) {
             $buys[$i] = new Buys($id, $title, $date, $this->getReceiver($id), DbManager::getInstance()->loadBuyItems($id), DbManager::getInstance()->loadUser($owner));
+            $i++;
         }
+
+        $statement->close();
+        return $buys;
     }
 
     /**
@@ -81,7 +85,7 @@ class BuysDAOMS implements BuysDAO
         $sql = 'SELECT * FROM ' . DBCons::$_USER_TABLE
             . ' WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER
             . ' = (SELECT ' . DBCons::$_BU_COL_USER_ID
-            . ' FROM ' . DBCons::$_BUY_TABLE
+            . ' FROM ' . DBCons::$_BU_TABLE
             . ' WHERE ' . DBCons::$_BU_COL_BUY_ITEM_ID . ' =?)';
 
         $statement = $this->_connection->prepare($sql);

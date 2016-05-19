@@ -10,6 +10,7 @@
 namespace Controllers;
 require "../vendor/autoload.php";
 use Models\BuyItem;
+use Models\Buys;
 use Models\Device;
 use Models\Group;
 use Models\Image;
@@ -142,7 +143,7 @@ switch ($view) {
     case 'saveBuys':
         $inputJSON = file_get_contents('php://input');
         if ($inputJSON != null) {
-            $buys = "";
+            $buys = Buys::fromJSON($inputJSON);
             BuysController::getInstance()->saveBuys($buys, $userId);
         } else
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
