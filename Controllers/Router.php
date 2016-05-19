@@ -114,10 +114,10 @@ switch ($view) {
 
     case 'saveBuyItems':
 
-        if (isset($_POST['buyItem']) && isset($_POST['buyItem'])) {
+        if (isset($_POST['buyItem']) && isset($_POST['buyId'])) {
 
             $buyitems = BuyItem::fromJSON($_POST['buyItem']);
-            BuyItemsController::getInstance()->saveBuyItems($buyitems, $_POST['buyItem']);
+            BuyItemsController::getInstance()->saveBuyItems($buyitems, $_POST['buyId']);
             
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
