@@ -269,6 +269,15 @@ class DbManager
     }
 
     /**
+     * @param $userId : user id .
+     * @return array : array of buys item.
+     */
+    public function loadSharedBuys($userId)
+    {
+        return $this->_buysDao->loadSharedBuys($userId);
+    }
+
+    /**
      * @param int $buyId : id of buy.
      * @param int $userId : id of user.
      * @return bool : status of saving.

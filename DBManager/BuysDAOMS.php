@@ -123,4 +123,37 @@ class BuysDAOMS implements BuysDAO
 
         return $res;
     }
+
+    /**
+     * @param $userId : id of user.
+     * @return array  : buys shared with user.
+     */
+    public function loadSharedBuys($userId)
+    {
+        $sql = 'SELECT * FROM ' . DBCons::$_BUY_TABLE
+            . ' WHERE ' . DBCons::$_BUY_COL_ID
+            . ' IN (SELECT ' . DBCons::$_BU_COL_BUY_ITEM_ID
+            . ' FROM ' . DBCons::$_BU_TABLE . ' WHERE '
+            . DBCons::$_BU_COL_USER_ID . ' = ?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+        $statement->bind_result($id, $title, $date, $owner);
+        $statement->execute();
+        $statement->store_result();
+
+        $i = 0;
+        $buys = array();
+
+        while ($statement->fetch()) {
+            $buys[$i] = new Buys($id, $title, $date, $this->getReceiver($id), DbManager::getInstance()->loadBuyItems($id), DbManager::getInstance()->loadUser($owner));
+            $i++;
+        }
+
+        $statement->close();
+        return $buys;
+
+    }
+
+
 }

@@ -28,6 +28,13 @@ interface BuysDAO
     public function load($userId);
 
     /**
+     * @param $userId : id of user.
+     * @return array  : buys shared with user.
+     */
+    public function loadSharedBuys($userId);
+    
+
+    /**
      * @param int $buyId : id of buy.
      * @param int $userId : id of user.
      * @return bool : status of saving.

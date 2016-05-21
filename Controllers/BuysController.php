@@ -47,7 +47,9 @@ class BuysController
      */
     public function loadBuys($userId)
     {
-        $buys = DbManager::getInstance()->loadBuys($userId);
+        $buys = array_merge(DbManager::getInstance()->loadBuys($userId),
+            DbManager::getInstance()->loadSharedBuys($userId)); // merge to buys items array
+
         echo json_encode($buys);
     }
 
