@@ -12,15 +12,15 @@ class Event
 {
     private $_eventType;
     private $_date;
-    private $_user;
+    private $_owner;
     private $_repeatType;
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct(EventType $_eventType, User $_user, $_date, $_users, $_message, $_repeatType)
+    function __construct(EventType $_eventType, User $_owner, $_date, $_users, $_message, $_repeatType)
     {
         $this->_eventType = $_eventType;
-        $this->_user = $_user;
+        $this->_owner = $_owner;
         $this->_date = $_date;
         $this->_users = $_users;
         $this->_message = $_message;
@@ -110,17 +110,17 @@ class Event
     /**
      * @return User
      */
-    public function getUser()
+    public function getOwner()
     {
-        return $this->_user;
+        return $this->_owner;
     }
 
     /**
-     * @param User $user
+     * @param User $owner
      */
-    public function setUser($user)
+    public function setOwner($owner)
     {
-        $this->_user = $user;
+        $this->_owner = $owner;
     }
     
     

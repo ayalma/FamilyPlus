@@ -35,7 +35,7 @@ class EventsDAOMS implements EventsDAO
             ' , ' . DBCons::$_EVENT_COL_REPEAT_TYPE . ' )  VALUES (?,?,?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('idisi', $events->getEventType()->getId(), $events->getUser()->getMNumber()
+        $statement->bind_param('idisi', $events->getEventType()->getId(), $events->getOwner()->getMNumber()
             , $events->getDate(), $events->getMessage(), $events->getRepeatType());
 
         $result = $statement->execute();
