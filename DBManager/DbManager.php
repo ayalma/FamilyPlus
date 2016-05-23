@@ -280,11 +280,11 @@ class DbManager
     /**
      * @param int $buyId : id of buy.
      * @param int $userId : id of user.
-     * @return bool : status of saving.
+     * @return boolean : status of saving.
      */
     public function addReceiver($buyId, $userId)
     {
-        $this->_buysDao->addReceiver($buyId, $userId);
+        return $this->_buysDao->addReceiver($buyId, $userId);
     }
 
     /**

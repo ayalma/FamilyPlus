@@ -60,7 +60,15 @@ class BuysController
      */
     public function addReceiver($buyId, $userId)
     {
-        $response['save'] = DbManager::getInstance()->addReceiver($buyId, $userId);
+        $response['save'] = true;
+
+        if (is_array($userId)) {
+            foreach ($userId as $id) {
+                $response['save'] = $response['save'] && DbManager::getInstance()->addReceiver($buyId, $id);
+            }
+        } else {
+            $response['save'] = DbManager::getInstance()->addReceiver($buyId, $userId);
+        }
         echo json_encode($response);
     }
 

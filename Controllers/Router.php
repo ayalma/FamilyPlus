@@ -156,10 +156,14 @@ switch ($view) {
         break;
     case 'addReceiver':
 
-        if (isset($_POST['buyId'])) {
+        if (isset($_POST['buyId']) && isset($_POST['usersId'])) {
 
             $buyId = $_POST['buyId'];
-            BuysController::getInstance()->addReceiver($buyId, $userId);
+            $usersId = $_POST['usersId'];
+            $usersId = json_decode($usersId, true);
+
+            BuysController::getInstance()->addReceiver($buyId, $usersId);
+
         } else
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
 
