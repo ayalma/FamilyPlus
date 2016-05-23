@@ -44,8 +44,23 @@ class GroupController
 
     public function addMember($groupId, $userId, $role)
     {
-        $response['save'] = DbManager::getInstance()->saveMember($groupId, $userId, $role);
-        echo json_encode($response);
+        if (DbManager::getInstance()->haveAGroup($userId)) {
+            /* if user is member of any group .
+             we can't add him/his to another group.
+            */
+
+            $errorMsg['error'] = '403';
+            $errorMsg['describe'] = 'user already is member of one family';
+
+            header('HTTP/1.1' . " " . '403' . 'Forbidden');
+            header("Content-Type:" . $_SERVER['HTTP_ACCEPT']);
+            echo json_encode($errorMsg);
+
+        } else {
+
+            $response['save'] = DbManager::getInstance()->saveMember($groupId, $userId, $role);
+            echo json_encode($response);
+        }
     }
 
     public function deleteMember($groupId, $userId)

@@ -321,6 +321,17 @@ class DbManager
     }
 
     /**
+     * method for checking that user has membership in any group.
+     * @param $userId : id of user.
+     * @return boolean : true if user be member of any group.
+     */
+    public function haveAGroup($userId)
+    {
+        return $this->_groupDao->haveAGroup($userId);
+    }
+    
+
+    /**
      * @param $groupId : id of group.
      * @param $userId : id of user.
      * @return boolean : status of removing.

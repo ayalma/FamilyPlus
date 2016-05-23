@@ -45,4 +45,11 @@ interface GroupDAO
      * @return array: all users in this group
      */
     public function loadGroupUser($groupId);
+
+    /**
+     * method for checking that user has membership in any group.
+     * @param $userId : id of user.
+     * @return boolean : true if user be member of any group.
+     */
+    public function haveAGroup($userId);
 }
