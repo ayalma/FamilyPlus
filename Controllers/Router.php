@@ -187,6 +187,7 @@ switch ($view) {
 
     case 'deletebuyItemList' :
 
+        echo json_encode($_POST);
         if (!isset($_POST['buyId'])) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
