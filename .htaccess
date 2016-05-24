@@ -15,13 +15,13 @@ RewriteRule ^DeviceController/registerDevice   Controllers/Router.php?view=regis
 RewriteRule ^BuyItemsController/saveBuyItems   Controllers/Router.php?view=saveBuyItems [nc,qsa]
 RewriteRule ^BuyItemsController/loadBuyItems   Controllers/Router.php?view=loadBuyItems [nc,qsa]
 RewriteRule ^BuyItemsController/updateBuyItemPrice   Controllers/Router.php?view=updateBuyItemPrice [nc,qsa]
+RewriteRule ^BuyItemsController/deleteBuyItem   Controllers/Router.php?view=deleteBuyItem [nc,qsa]
 #all buys
 RewriteRule ^BuysController/saveBuys   Controllers/Router.php?view=saveBuys [nc,qsa]
 RewriteRule ^BuysController/loadBuys   Controllers/Router.php?view=loadBuys [nc,qsa]
 RewriteRule ^BuysController/addReceiver   Controllers/Router.php?view=addReceiver [nc,qsa]
 RewriteRule ^BuysController/getReceiver   Controllers/Router.php?view=getReceiver [nc,qsa]
-RewriteRule ^BuysController/deletBuy   Controllers/Router.php?view=deletebuyItemList [nc,qsa]
-
+RewriteRule ^BuysController/deletBuy   Controllers/Router.php?view=delete [nc,qsa]
 # all group routing
 RewriteRule ^GroupController/save   Controllers/Router.php?view=createGroup [nc,qsa]
 RewriteRule ^GroupController/addMember   Controllers/Router.php?view=addMember [nc,qsa]

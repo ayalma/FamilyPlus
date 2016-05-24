@@ -247,6 +247,16 @@ class DbManager
         return $this->_buyItemDao->updatePrice($buyItemId, $price);
     }
 
+    /**
+     * delete buyItem with id.
+     * @param int $buyItemId : id of buyItem
+     * @return boolean:
+     */
+    public function deleteBuyItem($buyItemId)
+    {
+        return $this->_buyItemDao->delete($buyItemId);
+    }
+
     /*all method related to buy*/
 
     /**

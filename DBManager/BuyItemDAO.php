@@ -32,5 +32,12 @@ interface BuyItemDAO
      * @return bool          : status of update.
      */
     public function updatePrice($buyItemId, $price);
+
+    /**
+     * delete buyItem with id.
+     * @param int $buyItemId : id of buyItem
+     * @return boolean:
+     */
+    public function delete($buyItemId);
     
 }

@@ -137,7 +137,14 @@ switch ($view) {
         else
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
         break;
+    case 'deleteBuyItem':
 
+        if (isset($_POST['buyItemId'])) {
+            BuyItemsController::getInstance()->delete($_POST['buyItemId']);
+        } else {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+        }
+        break;
     /*all routing for Buys*/
 
     case 'saveBuys':

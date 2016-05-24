@@ -50,4 +50,10 @@ class BuyItemsController
         echo json_encode($response);
     }
 
+    public function delete($buyItemId)
+    {
+        $response['delete'] = DbManager::getInstance()->deleteBuyItem($buyItemId);
+        echo json_encode($response);
+    }
+
 }

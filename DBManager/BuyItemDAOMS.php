@@ -96,4 +96,24 @@ class BuyItemDAOMS implements BuyItemDAO
 
         return $items;
     }
+
+    /**
+     * delete buyItem with id.
+     * @param int $buyItemId : id of buyItem
+     * @return boolean:
+     */
+    public function delete($buyItemId)
+    {
+        $sql = 'DELETE FROM ' . DBCons::$_BUYITEMS_TABLE
+            . ' WHERE ' . DBCons::$_BUYITEMS_COL_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $buyItemId);
+
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
+
+    }
 }
