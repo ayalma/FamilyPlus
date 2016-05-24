@@ -82,4 +82,14 @@ class BuysController
         echo json_encode($users);
     }
 
+    /**
+     * @param $buyId : id of buy.
+     * @return bool :
+     */
+    public function deletBuy($buyId)
+    {
+        $response['delete'] = DbManager::getInstance()->deletBuys($buyId);
+        echo json_encode($response);
+    }
+
 }

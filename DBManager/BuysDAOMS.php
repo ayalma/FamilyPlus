@@ -156,4 +156,20 @@ class BuysDAOMS implements BuysDAO
     }
 
 
+    /**
+     * @param $Id : id of buy .
+     * @return bool :
+     */
+    public function delet($Id)
+    {
+        $sql = 'DELETE FROM ' . DBCons::$_BUY_TABLE
+            . ' WHERE ' . DBCons::$_BUY_COL_ID .'= ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $Id);
+        $res = $statement->execute();
+
+        $statement->close();
+        return $res;
+    }
 }

@@ -178,6 +178,15 @@ switch ($view) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
         break;
 
+    case 'deletebuyItemList' :
+
+        if (!isset($_POST['buyId'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            break;
+        }
+        BuysController::getInstance()->deletBuy($_POST['buyId']);
+        break;
+
     /*all routing for Event*/
 
     /*all routing for Group*/

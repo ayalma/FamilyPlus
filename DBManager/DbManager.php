@@ -260,6 +260,15 @@ class DbManager
     }
 
     /**
+     * @param $buyId : id of buy.
+     * @return bool :
+     */
+    public function deletBuys($buyId)
+    {
+        return $this->_buysDao->delet($buyId);
+    }
+
+    /**
      * @param $userId : user id .
      * @return array : array of buys item.
      */

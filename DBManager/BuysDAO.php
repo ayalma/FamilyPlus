@@ -46,4 +46,10 @@ interface BuysDAO
      * @return array : user who access to this buy.
      */
     public function getReceiver($buyId);
+
+    /**
+     * @param $Id : id of buy .
+     * @return bool : 
+     */
+    public function delet($Id);
 }
