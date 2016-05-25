@@ -33,8 +33,8 @@ class BuyItemsController
 
     public function saveBuyItems(BuyItem $item, $buyId)
     {
-        $response['save'] = DbManager::getInstance()->saveBuyItems($item, $buyId);
-        echo json_encode($response);
+        $buyItem = DbManager::getInstance()->saveBuyItems($item, $buyId);
+        echo json_encode($buyItem);
     }
 
     public function loadBuyItems($userId)
