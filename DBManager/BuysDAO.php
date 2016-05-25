@@ -17,7 +17,7 @@ interface BuysDAO
     /**
      * @param Buys $buys buyItem for save
      * @param $userId : id of user.
-     * @return bool
+     * @return Buys|null : return added item to db.
      */
     public function save(Buys $buys, $userId);
 

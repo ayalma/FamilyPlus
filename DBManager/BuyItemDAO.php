@@ -16,7 +16,7 @@ interface BuyItemDAO
     /**
      * @param BuyItem $buyItem will save in db
      * @param $buyId : id of buy that this item is for him.
-     * @return bool return status of saving.
+     * @return BuyItem|null return saved item.
      */
     public function save(BuyItem $buyItem, $buyId);
 

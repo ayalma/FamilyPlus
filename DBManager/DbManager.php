@@ -220,7 +220,7 @@ class DbManager
     /**
      * @param BuyItem $item will save in database.
      * @param $buyId : of user that id belong to him/his.
-     * @return bool status of saving.
+     * @return BuyItem status of saving.
      */
     public function saveBuyItems(BuyItem $item, $buyId)
     {

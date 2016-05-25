@@ -26,7 +26,7 @@ class BuysDAOMS implements BuysDAO
     /**
      * @param Buys $buys buyItem for save
      * @param $userId : id of user.
-     * @return bool
+     * @return Buys
      */
     public function save(Buys $buys, $userId)
     {
@@ -40,13 +40,21 @@ class BuysDAOMS implements BuysDAO
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('sid', $buys->getTitle(), $buys->getDate(), $userId);
 
-        $res = $statement->execute();
-        $buyId = $statement->insert_id;
-        $statement->close();
-        if ($buys->getBuyItems() != null && sizeof($buys->getBuyItems()) > 0 && $buys->getBuyItems() != null)
-            $res &= DbManager::getInstance()->saveBuyItems($buys->getBuyItems()[0], $buyId);
 
-        return $res;
+        if ($statement->execute()) {
+            $buys->setId($statement->insert_id);
+            $statement->close();
+
+            if ($buys->getBuyItems() != null && sizeof($buys->getBuyItems()) > 0 && $buys->getBuyItems() != null) {
+                $buys->getBuyItems()[0] = DbManager::getInstance()->saveBuyItems($buys->getBuyItems()[0], $buys->getId());
+            }
+            
+            return $buys;
+
+        } else {
+            $statement->close();
+            return null;
+        }
     }
 
     /**
@@ -163,7 +171,7 @@ class BuysDAOMS implements BuysDAO
     public function delet($Id)
     {
         $sql = 'DELETE FROM ' . DBCons::$_BUY_TABLE
-            . ' WHERE ' . DBCons::$_BUY_COL_ID .'= ?';
+            . ' WHERE ' . DBCons::$_BUY_COL_ID . '= ?';
 
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('i', $Id);

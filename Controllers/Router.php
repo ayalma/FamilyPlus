@@ -150,7 +150,6 @@ switch ($view) {
     case 'saveBuys':
         $inputJSON = file_get_contents('php://input');
 
-        echo json_encode($inputJSON);
         if ($inputJSON != null) {
             $buys = Buys::fromJSON($inputJSON);
             BuysController::getInstance()->saveBuys($buys, $userId);

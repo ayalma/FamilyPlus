@@ -37,8 +37,8 @@ class BuysController
      */
     public function saveBuys($buys, $userId)
     {
-        $response['save'] = DbManager::getInstance()->saveBuys($buys, $userId);
-        echo json_encode($response);
+        $savedBuys = DbManager::getInstance()->saveBuys($buys, $userId);
+        echo json_encode($savedBuys);
     }
 
     /**

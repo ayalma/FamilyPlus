@@ -24,7 +24,7 @@ class BuyItemDAOMS implements BuyItemDAO
     /**
      * @param BuyItem $buyItem will save in db
      * @param int $buyId : id of buy that item is for it.
-     * @return bool return status of saving.
+     * @return BuyItem|null
      */
     public function save(BuyItem $buyItem, $buyId)
     {
@@ -44,10 +44,15 @@ class BuyItemDAOMS implements BuyItemDAO
             , $buyItem->getPrice(), $buyItem->getQunty(), $buyId);
 
 
-        $res = $statement->execute();
-        $statement->close();
+        if ($statement->execute()) {
+            $buyItem->setId($statement->insert_id);
+            $statement->close();
+            return $buyItem;
+        } else {
+            $statement->close();
+            return null;
+        }
 
-        return $res;
 
     }
 
@@ -60,8 +65,8 @@ class BuyItemDAOMS implements BuyItemDAO
     {
         $sql = 'UPDATE ' . DBCons::$_BUYITEMS_TABLE
             . ' SET ' . DBCons::$_BUYITEMS_PRICE
-            . '= ? ,'.DBCons::$_BUYITEMS_PURCHASED
-            .'= 1 WHERE ' . DBCons::$_BUYITEMS_COL_ID . '= ?';
+            . '= ? ,' . DBCons::$_BUYITEMS_PURCHASED
+            . '= 1 WHERE ' . DBCons::$_BUYITEMS_COL_ID . '= ?';
 
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('di', $price, $buyItemId);
