@@ -60,7 +60,8 @@ class BuyItemDAOMS implements BuyItemDAO
     {
         $sql = 'UPDATE ' . DBCons::$_BUYITEMS_TABLE
             . ' SET ' . DBCons::$_BUYITEMS_PRICE
-            . '= ? WHERE ' . DBCons::$_BUYITEMS_COL_ID . '= ?';
+            . '= ? ,'.DBCons::$_BUYITEMS_PURCHASED
+            .'= 1 WHERE ' . DBCons::$_BUYITEMS_COL_ID . '= ?';
 
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('di', $price, $buyItemId);
