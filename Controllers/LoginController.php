@@ -15,7 +15,7 @@ use Models\User;
  * Date: 4/17/16
  * Time: 10:19 PM
  */
-class LoginRestHandler extends SimpleRest
+class LoginController extends SimpleRest
 {
     private static $_instance = null;
 
@@ -29,7 +29,7 @@ class LoginRestHandler extends SimpleRest
     public static function getInstance()
     {
         if (self::$_instance == null)
-            self::$_instance = new LoginRestHandler();
+            self::$_instance = new LoginController();
         return self::$_instance;
     }
 
@@ -100,7 +100,7 @@ class LoginRestHandler extends SimpleRest
             $response['accessToken'] = $this->getJwt($mobileNumber);
 
         } else {
-            $response['loginCode'] = $loginCode->getCode();
+            // $response['loginCode'] = $loginCode->getCode();
             $response['signIn'] = false;
             $response['accessToken'] = "hello";
         }

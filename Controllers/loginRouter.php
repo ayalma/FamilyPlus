@@ -35,7 +35,7 @@ switch ($view) {
             $mobileNumber = $_POST['mobileNumber'];
             $register = $_POST['register'];
 
-            LoginRestHandler::getInstance()->signIn($mobileNumber, $code, $register);
+            LoginController::getInstance()->signIn($mobileNumber, $code, $register);
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             echo 'bad request';
@@ -45,7 +45,7 @@ switch ($view) {
     case 'requestCode' :
 
         if (isset($_POST['mobileNumber'])) {
-            LoginRestHandler::getInstance()->requestCode($_POST['mobileNumber']);
+            LoginController::getInstance()->requestCode($_POST['mobileNumber']);
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             echo 'no mobile available';
@@ -65,7 +65,7 @@ switch ($view) {
 
         $data = $authToken['data'];
         $userId = $data->userId;
-        LoginRestHandler::getInstance()->updateName($userId, $_POST['name']);
+        LoginController::getInstance()->updateName($userId, $_POST['name']);
         break;
    
 }
