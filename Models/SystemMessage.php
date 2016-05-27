@@ -13,19 +13,16 @@ namespace Models;
 class SystemMessage
 {
     private $_id;
-    private $_uid;
     private $_message;
 
     /**
      * SystemMessage constructor.
      * @param $_id
-     * @param $_uid
      * @param $_message
      */
-    public function __construct($_id, $_uid, $_message)
+    public function __construct($_id = 0, $_message = '')
     {
         $this->_id = $_id;
-        $this->_uid = $_uid;
         $this->_message = $_message;
     }
 
@@ -54,22 +51,7 @@ class SystemMessage
     {
         $this->_id = $id;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getUid()
-    {
-        return $this->_uid;
-    }
-
-    /**
-     * @param mixed $uid
-     */
-    public function setUid($uid)
-    {
-        $this->_uid = $uid;
-    }
+    
 
     /**
      * @return mixed

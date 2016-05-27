@@ -16,7 +16,6 @@ use Models\Event;
 use Models\EventType;
 use Models\Group;
 use Models\Image;
-use Models\SystemMessage;
 
 
 $view = "";
@@ -116,22 +115,11 @@ switch ($view) {
         TestRestHandler::getInstance()->SendNotification($userId);
         break;
 
-    case 'saveMessage':
-        if(isset($_POST['SystemMsg']) && isset($_POST['userId']))
-        {
-            $SystemMessage = SystemMessage::fromJSON($_POST['SystemMsg']);
-            SystemMessageController::getInstance()->saveMessage($SystemMessage,$_POST['userId']);
-        }
-        else {
-            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
-            break;
-        }
-        break;
 
     case 'loadMessageById':
         if(isset($_GET['SMsgId']))
         {
-            SystemMessageController::getInstance()->loadmessageById($_GET['SMsgId']);
+            SystemMessageController::getInstance()->loadMessageById($_GET['SMsgId']);
         }
         else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
@@ -352,7 +340,7 @@ switch ($view) {
         $fileSize = $_FILES['picture']['size'];
         $fileType = $_FILES['picture']['type'];
 
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/';
+        $distination = '/var/www/html/FamilyPlus/upload/';
 
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;

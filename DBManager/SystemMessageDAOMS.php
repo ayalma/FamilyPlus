@@ -35,7 +35,7 @@ class SystemMessageDAOMS implements SystemMessageDAO
             . ') VALUES (?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('ds',$sysMsg->getUid(),$sysMsg->getMessage());
+        $statement->bind_param('ds', $userId, $sysMsg->getMessage());
         $res = $statement->execute();
         $statement->close();
 
@@ -59,7 +59,7 @@ class SystemMessageDAOMS implements SystemMessageDAO
         if($statement->fetch())
         {
             $statement->close();
-            return new SystemMessage($smId,$userId,$message);
+            return new SystemMessage($smId, $message);
         }
         else
         {
@@ -87,7 +87,7 @@ class SystemMessageDAOMS implements SystemMessageDAO
 
         while ($statement->fetch())
         {
-            $items[$i] = new SystemMessage($id ,$userId,$message);
+            $items[$i] = new SystemMessage($id, $message);
             $i++;
         }
 
