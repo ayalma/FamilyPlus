@@ -118,7 +118,7 @@ switch ($view) {
 
             $buyitems = BuyItem::fromJSON($_POST['buyItem']);
             BuyItemsController::getInstance()->saveBuyItems($buyitems, $_POST['buyId']);
-            
+
         } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
@@ -195,6 +195,45 @@ switch ($view) {
         break;
 
     /*all routing for Event*/
+
+    case 'saveEvents':
+        $inputJSON = file_get_contents('php://input');
+
+        if ($inputJSON != null) {
+            $events = Buys::fromJSON($inputJSON);
+            EventController::getInstance()->saveEvents($events, $userId);
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+
+        break;
+    case 'loadEvents':
+        EventController::getInstance()->loadEvent($userId);
+        break;
+    case 'addEventReceiver':
+
+        if (isset($_POST['eventId']) && isset($_POST['usersId'])) {
+
+            $eventId = $_POST['eventId'];
+            $usersId = $_POST['usersId'];
+            $usersId = json_decode($usersId, true);
+
+            EventController::getInstance()->addReceiver($eventId, $usersId);
+
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+
+        break;
+    case 'getEventReceiver':
+
+        /* if (isset($_POST['eventId'])) {
+
+             $buyId = $_POST['eventId'];
+             BuysController::getInstance()->($buyId);
+         } else
+             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+        */
+        break;
+
 
     /*all routing for Group*/
     case 'createGroup':

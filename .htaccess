@@ -33,3 +33,8 @@ RewriteRule ^ImageController/getImageById  Controllers/Router.php?view=getImageB
 RewriteRule ^ImageController/getImagesByUser  Controllers/Router.php?view=getImagesByUser [nc,qsa]
 RewriteRule ^ImageController/deleteImage Controllers/Router.php?view=deleteImage [nc,qsa]
 RewriteRule ^ImageController/getImageByUserId Controllers/Router.php?view=getImageByUserId [nc,qsa]
+#all event routing
+RewriteRule ^EventController/saveEvents  Controllers/Router.php?view=saveEvents [nc,qsa]
+RewriteRule ^EventController/loadEvents  Controllers/Router.php?view=loadEvents [nc,qsa]
+RewriteRule ^EventController/addEventReceiver  Controllers/Router.php?view=addEventReceiver [nc,qsa]
+RewriteRule ^EventController/getEventReceiver  Controllers/Router.php?view=getEventReceiver [nc,qsa]
