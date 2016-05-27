@@ -10,6 +10,7 @@ use Models\EventType;
 use Models\Group;
 use Models\Image;
 use Models\LoginCode;
+use Models\SystemMessage;
 use Models\User;
 
 /**
@@ -35,6 +36,7 @@ class DbManager
     private $_groupDao;
     private $_imageDao;
     private $_buysDao;
+    private $_systemMessageDao;
 
     function __construct()
     {
@@ -56,6 +58,7 @@ class DbManager
             $this->_groupDao = new GroupDAOMS($this->_connection);
             $this->_imageDao = new ImageDAOMS($this->_connection);
             $this->_buysDao = new BuysDAOMS($this->_connection);
+            $this->_systemMessageDao = new SystemMessageDAOMS($this->_connection);
 
         } catch (Exception $_e) {
             error_log($_e->getMessage());
@@ -88,6 +91,45 @@ class DbManager
     {
         return $this->_deviceDao->loadRegIds($userId, $serial);
     }
+    /* all method related to System Message*/
+
+    /**
+     * @param SystemMessage $sysMsg : message to save
+     * @param $userId : user that message is for him/his.
+     * @return boolean : status of saving.
+     */
+    public function saveSystemMessage(SystemMessage $sysMsg, $userId)
+    {
+        return $this->_systemMessageDao->save($sysMsg, $userId);
+    }
+
+    /**
+     * @param $smId : id of system message
+     * @return SystemMessage : message with requested id.
+     */
+    public function loadSystemMessageById($smId)
+    {
+        return $this->_systemMessageDao->loadById($smId);
+    }
+
+    /**
+     * @param $userId : id of user.
+     * @return array : load all SystemMessage for user.
+     */
+    public function loadSystemMessage($userId)
+    {
+        return $this->_systemMessageDao->load($userId);
+    }
+
+    /**
+     * @param $smId : id of System message.
+     * @return boolean : status of deleting.
+     */
+    public function deleteSystemMessage($smId)
+    {
+        return $this->_systemMessageDao->delete($smId);
+    }
+
     /**
      * all method related to User Model.
      */
