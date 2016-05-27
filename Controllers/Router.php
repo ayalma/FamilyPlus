@@ -12,6 +12,8 @@ require "../vendor/autoload.php";
 use Models\BuyItem;
 use Models\Buys;
 use Models\Device;
+use Models\Event;
+use Models\EventType;
 use Models\Group;
 use Models\Image;
 
@@ -200,7 +202,7 @@ switch ($view) {
         $inputJSON = file_get_contents('php://input');
 
         if ($inputJSON != null) {
-            $events = Buys::fromJSON($inputJSON);
+            $events = Event::fromJSON($inputJSON);
             EventController::getInstance()->saveEvents($events, $userId);
         } else
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
@@ -228,10 +230,24 @@ switch ($view) {
         /* if (isset($_POST['eventId'])) {
 
              $buyId = $_POST['eventId'];
-             BuysController::getInstance()->($buyId);
+             EventController::getInstance()->($buyId);
          } else
              setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
         */
+        break;
+
+    case 'loadEventTypes':
+        EventController::getInstance()->loadEventTypes();
+        break;
+
+    case 'saveEventType':
+        $inputJSON = file_get_contents('php://input');
+
+        if ($inputJSON != null) {
+            $eventType = EventType::fromJSON($inputJSON);
+            EventController::getInstance()->saveEventType($eventType);
+        } else
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
         break;
 
 

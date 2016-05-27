@@ -63,4 +63,29 @@ class EventTypeDAOMS implements EventTypeDAO
 
         return $result;
     }
+
+    /**
+     * @return array : return array of eventsType.
+     */
+    public function loadEventTypes()
+    {
+        $sql = 'SELECT * FROM ' .
+            DBCons::$_EVENTTYPE_TABLE;
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_result($eventTypeId, $name);
+
+        $statement->execute();
+
+        $eventTypes = array();
+        $i = 0;
+
+        while ($statement->fetch()) {
+            $eventTypes[$i] = new EventType($eventTypeId, $name);
+            $i++;
+        }
+
+        $statement->close();
+        return $eventTypes;
+    }
 }

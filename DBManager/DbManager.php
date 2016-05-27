@@ -183,9 +183,18 @@ class DbManager
      * @param $eventTypeId : id of eventType.
      * @return EventType: eventType contains requested id.
      */
-    public function loadEventType($eventTypeId)
+    public function loadEventTypeBuyId($eventTypeId)
     {
         return $this->_eventTypeDao->loadByEventId($eventTypeId);
+    }
+
+
+    /**
+     * @return array : return array of eventType.
+     */
+    public function loadEventTypes()
+    {
+        return $this->_eventTypeDao->loadEventTypes();
     }
 
     public function saveEventType(EventType $eventType)

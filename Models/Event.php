@@ -21,7 +21,7 @@ class Event implements \JsonSerializable
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct($id, EventType $_eventType, User $_owner, $_date, $_users, $_message, $_repeatType)
+    function __construct($id = 0, EventType $_eventType = null, User $_owner = null, $_date = 0, $_users = array(), $_message = '', $_repeatType = 0)
     {
         $this->_id = $id;
         $this->_eventType = $_eventType;
@@ -34,12 +34,12 @@ class Event implements \JsonSerializable
 
     public static function fromJSON($json)
     {
-        $obj = new Buys();
-        $obj->setBuyItems(null);
-        $obj->setUsers(null);
+        $obj = new Event();
+
         $jsonValue = json_decode($json, true);
         foreach ($jsonValue as $key => $value)
             $obj->{'_' . $key} = $value;
+
         return $obj;
 
     }

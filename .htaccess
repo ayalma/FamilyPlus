@@ -38,3 +38,5 @@ RewriteRule ^EventController/saveEvents  Controllers/Router.php?view=saveEvents 
 RewriteRule ^EventController/loadEvents  Controllers/Router.php?view=loadEvents [nc,qsa]
 RewriteRule ^EventController/addEventReceiver  Controllers/Router.php?view=addEventReceiver [nc,qsa]
 RewriteRule ^EventController/getEventReceiver  Controllers/Router.php?view=getEventReceiver [nc,qsa]
+RewriteRule ^EventController/loadEventTypes  Controllers/Router.php?view=loadEventTypes [nc,qsa]
+RewriteRule ^EventController/saveEventType  Controllers/Router.php?view=saveEventType [nc,qsa]

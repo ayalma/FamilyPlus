@@ -10,6 +10,7 @@ namespace Controllers;
 
 
 use DBManager\DbManager;
+use Models\EventType;
 
 class EventController
 {
@@ -87,6 +88,18 @@ class EventController
     public function deletBuy($eventId)
     {
         //todo implement this method
+    }
+
+    public function loadEventTypes()
+    {
+        $eventTypes = DbManager::getInstance()->loadEventTypes();
+        echo json_encode($eventTypes);
+    }
+
+    public function saveEventType(EventType $eventType)
+    {
+        $response['save'] = DbManager::getInstance()->saveEventType($eventType);
+        echo json_encode($response);
     }
 
 }

@@ -25,4 +25,9 @@ interface EventTypeDAO
      * @return EventType|null : eventType or null if id don't exist.
      */
     public function loadByEventId($eventTypeId);
+
+    /**
+     * @return array : return array of eventsType.
+     */
+    public function loadEventTypes();
 }
