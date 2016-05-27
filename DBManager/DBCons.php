@@ -85,6 +85,11 @@ class DBCons
     public static $_IMAGE_COL_FILE_TYPE = "file_type";
     public static $_IMAGE_COL_SIZE = "size";
     public static $_IMAGE_COL_NAME = "name";
+
+    public static $_SYS_MSG_TABLE = "SystemMessages";
+    public static $_SYS_MSG_COL_ID = "id";
+    public static $_SYS_MSG_COL_MSG = "message";
+    public static $_SYS_MSG_COL_USER_ID = "uid";
     
     
 }
