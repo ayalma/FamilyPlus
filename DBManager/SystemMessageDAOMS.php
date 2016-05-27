@@ -29,7 +29,17 @@ class SystemMessageDAOMS implements SystemMessageDAO
      */
     public function save(SystemMessage $sysMsg, $userId)
     {
-        // TODO: Implement save() method.
+        $sql = 'INSERT INTO ' . DBCons::$_SYS_MSG_TABLE
+            . ' (' . DBCons::$_SYS_MSG_COL_USER_ID
+            . ', ' . DBCons::$_SYS_MSG_COL_MSG
+            . ') VALUES (?,?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('ds',$sysMsg->getUid(),$sysMsg->getMessage());
+        $res = $statement->execute();
+        $statement->close();
+
+        return $res;
     }
 
     /**
@@ -38,7 +48,24 @@ class SystemMessageDAOMS implements SystemMessageDAO
      */
     public function loadById($smId)
     {
-        // TODO: Implement loadById() method.
+        $sql = 'SELECT * FROM ' . DBCons::$_SYS_MSG_TABLE
+            . ' WHERE ' . DBCons::$_SYS_MSG_COL_ID . '=?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $smId);
+        $statement->bind_result($userId,$message,$smId);
+        $statement->execute();
+
+        if($statement->fetch())
+        {
+            $statement->close();
+            return new SystemMessage($smId,$userId,$message);
+        }
+        else
+        {
+            $statement->close();
+            return null;
+        }
     }
 
     /**
@@ -47,7 +74,24 @@ class SystemMessageDAOMS implements SystemMessageDAO
      */
     public function load($userId)
     {
-        // TODO: Implement load() method.
+        $sql = 'SELECT * FROM ' . DBCons::$_SYS_MSG_TABLE
+            . ' WHERE ' . DBCons::$_SYS_MSG_COL_USER_ID . '=?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d',$userId);
+        $statement->bind_result($id,$message,$userId);
+        $statement->execute();
+
+        $i = 0;
+        $items = array();
+
+        while ($statement->fetch())
+        {
+            $items[$i] = new SystemMessage($id ,$userId,$message);
+            $i++;
+        }
+
+        return $items;
     }
 
     /**
@@ -56,6 +100,14 @@ class SystemMessageDAOMS implements SystemMessageDAO
      */
     public function delete($smId)
     {
-        // TODO: Implement delete() method.
+        $sql = 'DELETE FROM ' . DBCons::$_SYS_MSG_TABLE
+            . ' WHERE ' . DBCons::$_SYS_MSG_COL_ID . ' = ?';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $smId);
+
+        $res = $statement->execute();
+        $statement->close();
+        return $res;
     }
 }

@@ -89,14 +89,14 @@ class BuyItemDAOMS implements BuyItemDAO
         $statement = $this->_connection->prepare($sql);
 
         $statement->bind_param('i', $buyId);
-        $statement->bind_result($id, $name, $purchased, $price, $quty, $buyId);
+        $statement->bind_result($id, $name, $purchased, $price, $qunty, $buyId);
         $statement->execute();
 
         $i = 0;
         $items = array();
 
         while ($statement->fetch()) {
-            $items[$i] = new BuyItem($id, $name, ($purchased) ? true : false, $price, $quty);
+            $items[$i] = new BuyItem($id, $name, ($purchased) ? true : false, $price, $qunty);
             $i++;
         }
 
