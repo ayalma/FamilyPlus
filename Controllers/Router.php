@@ -83,7 +83,9 @@ function getHttpStatusMessage($statusCode)
 }
 
 
-$authToken = Util::getAuthToken(apache_request_headers());;
+$authToken = Util::getAuthToken(apache_request_headers());
+$deviceSerial = Util::getDeviceSerial(apache_request_headers());
+
 
 if ($authToken == null)
     die(401);

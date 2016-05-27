@@ -4,7 +4,9 @@ include_once '../vendor/autoload.php';
 
 use DBManager\DbManager;
 use Gcm\GcmHelper;
-use PHP_GCM\Message;
+use Gcm\MessageType;
+use Gcm\SystemMessage\Builder;
+use Gcm\SystemMessage\SystemMessage;
 
 
 /**
@@ -52,7 +54,12 @@ class TestRestHandler extends SimpleRest
 
     public function SendNotification($userId)
     {
-        GcmHelper::getInstance()->sendNotification($userId, "", new Message("hello"));
+        $builder = new Builder();
+
+        $builder->setMsgType(MessageType::systemMessage)->setMsg("welcome to familyPlus");
+        $msg = new SystemMessage($builder);
+
+        GcmHelper::getInstance()->sendNotification($userId, "", $msg->getMessage());
     }
 
 }

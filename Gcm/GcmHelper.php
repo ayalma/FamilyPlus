@@ -37,7 +37,7 @@ class GcmHelper
      * @param $userSerial : notification that comes from device:
      * @param $message Message : message to send.
      */
-    public function sendNotification($userId, $userSerial, $message)
+    public function sendNotification($userId, $userSerial, Message $message)
     {
         $registerIds = DbManager::getInstance()->loadUserRegIds($userId, $userSerial);
         $this->_sender->sendMulti($message, $registerIds, 5);

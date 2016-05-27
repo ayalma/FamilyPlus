@@ -37,4 +37,14 @@ class Util
             }
         }
     }
+
+    public static function getDeviceSerial($requestHeaders)
+    {
+        if (!isset($requestHeaders['DeviceSerial'])) {
+            setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+            return null;
+        } else {
+            return $requestHeaders['DeviceSerial'];
+        }
+    }
 }

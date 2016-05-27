@@ -15,6 +15,8 @@ $view = "";
 if (isset($_GET["view"]))
     $view = $_GET["view"];
 
+$deviceSerial = Util::getDeviceSerial(apache_request_headers());
+
 
 function setHttpHeaders($contentType, $statusCode)
 {
