@@ -3,6 +3,7 @@ namespace DBManager;
 require "../vendor/autoload.php";
 
 use Models\Event;
+use Models\User;
 use mysqli;
 
 /**
@@ -23,9 +24,10 @@ class EventsDAOMS implements EventsDAO
 
     /**
      * @param Event $events : will save in database.
-     * @return boolean : status of saving as boolean.
+     * @param $userId : id of owner.
+     * @return Event : status of saving as boolean.
      */
-    public function save(Event $events)
+    public function save(Event $events, $userId)
     {
         $sql = ' INSERT INTO ' . DBCons::$_EVENT_TABLE .
             ' ( ' . DBCons::$_EU_COL_EVENT_ID .
@@ -35,18 +37,27 @@ class EventsDAOMS implements EventsDAO
             ' , ' . DBCons::$_EVENT_COL_REPEAT_TYPE . ' )  VALUES (?,?,?,?,?)';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('idisi', $events->getEventType()->getId(), $events->getOwner()->getMNumber()
+        $statement->bind_param('iddsi', $events->getEventType()->getId(), $userId
             , $events->getDate(), $events->getMessage(), $events->getRepeatType());
 
-        $result = $statement->execute();
-        $eventId = $statement->insert_id;
-        $res = false;
-        if ($result) {
 
-            foreach ($events->getUsers() as $userId)
-                $res = $this->SaveReceiver($userId, $eventId);
+        if ($statement->execute()) {
+            $eventId = $statement->insert_id;
+
+            foreach ($events->getUsers() as $user) {
+                /** @var User $user */
+                $res = $this->SaveReceiver($user->getMNumber(), $eventId);
+                //todo do best work here.
+            }
+            $events->setId($statement->insert_id);
+
+            $statement->close();
+
+            return $events;
+        } else {
+            $statement->close();
+            return null;
         }
-        return $res && $result;
 
     }
 
@@ -55,7 +66,7 @@ class EventsDAOMS implements EventsDAO
      * @param int $eventId : id of event.
      * @return bool status of save.
      */
-    private function SaveReceiver($userId, $eventId)
+    public function SaveReceiver($userId, $eventId)
     {
         $sql = ' INSERT INTO ' . DBCons::$_EU_TABLE .
             ' ( ' . DBCons::$_EU_COL_USER_ID .
@@ -85,7 +96,7 @@ class EventsDAOMS implements EventsDAO
         if ($statement->fetch()) {
 
             $statement->close();
-            $event = new Event(DbManager::getInstance()->loadEventType($eventTypeId),
+            $event = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
             return $event;
@@ -143,7 +154,7 @@ class EventsDAOMS implements EventsDAO
         $i = 0;
 
         while ($statement->fetch()) {
-            $events[$i] = new Event(DbManager::getInstance()->loadEventType($eventTypeId),
+            $events[$i] = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
         }
@@ -167,6 +178,39 @@ class EventsDAOMS implements EventsDAO
      */
     public function delete($userId, $eventId)
     {
+
+    }
+
+    /**
+     * @param $userId
+     * @return array:array of event
+     */
+    public function loadShardEvents($userId)
+    {
+        $sql = 'SELECT * FROM ' . DBCons::$_EVENT_TABLE
+            . ' WHERE ' . DBCons::$_EVENT_COL_ID
+            . ' IN (SELECT ' . DBCons::$_EU_COL_EVENT_ID
+            . ' FROM ' . DBCons::$_EU_TABLE
+            . ' WHERE ' . DBCons::$_EU_COL_USER_ID . '=?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+        $statement->bind_result($date, $message, $repeatType, $eventId, $eventTypeId, $userId);
+        $statement->execute();
+        $statement->store_result();
+
+        $i = 0;
+        $events = array();
+
+        while ($statement->fetch()) {
+            $buys[$i] = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
+                DbManager::getInstance()->loadUser($userId),
+                $date, $this->loadReceiver($eventId), $message, $repeatType);
+            $i++;
+        }
+
+        $statement->close();
+        return $events;
 
     }
 }

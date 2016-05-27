@@ -1,5 +1,8 @@
 <?php
 namespace Models;
+
+use namespacetest\model\UserList;
+
 include_once 'User.php';
 include_once 'EventType.php';
 /**
@@ -8,8 +11,9 @@ include_once 'EventType.php';
  * Date: 4/16/16
  * Time: 10:43 AM
  */
-class Event
+class Event implements \JsonSerializable
 {
+    private $_id;
     private $_eventType;
     private $_date;
     private $_owner;
@@ -17,14 +21,27 @@ class Event
     private $_message;
     private $_users; // user that will received this events.
 
-    function __construct(EventType $_eventType, User $_owner, $_date, $_users, $_message, $_repeatType)
+    function __construct($id, EventType $_eventType, User $_owner, $_date, $_users, $_message, $_repeatType)
     {
+        $this->_id = $id;
         $this->_eventType = $_eventType;
         $this->_owner = $_owner;
         $this->_date = $_date;
         $this->_users = $_users;
         $this->_message = $_message;
         $this->_repeatType = $_repeatType;
+    }
+
+    public static function fromJSON($json)
+    {
+        $obj = new Buys();
+        $obj->setBuyItems(null);
+        $obj->setUsers(null);
+        $jsonValue = json_decode($json, true);
+        foreach ($jsonValue as $key => $value)
+            $obj->{'_' . $key} = $value;
+        return $obj;
+
     }
 
     /**
@@ -92,7 +109,7 @@ class Event
     }
 
     /**
-     * @return array
+     * @return UserList
      */
     public function getUsers()
     {
@@ -122,9 +139,39 @@ class Event
     {
         $this->_owner = $owner;
     }
-    
-    
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        $json = array();
+
+        foreach ($this as $key => $value) {
+            $key = str_replace('_', '', $key);
+            $json[$key] = $value;
+        }
+
+        return $json; // or json_encode($json)
+    }
 }

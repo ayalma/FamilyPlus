@@ -5,6 +5,7 @@ require "../vendor/autoload.php";
 use Exception;
 use Models\BuyItem;
 use Models\Device;
+use Models\Event;
 use Models\EventType;
 use Models\Group;
 use Models\Image;
@@ -191,6 +192,49 @@ class DbManager
     {
         return $this->_eventTypeDao->save($eventType);
     }
+
+
+    /*all method related to events*/
+
+
+    /**
+     * @param Event $event : will save in database.
+     * @return Event : status of saving as boolean.
+     */
+    public function saveEvent(Event $event, $userId)
+    {
+        $this->_eventsDao->save($event, $userId);
+    }
+
+    /**
+     * @param $userId : of user that event is for him/his.
+     * @return array : array of Event.
+     */
+    public function loadEventByUserId($userId)
+    {
+        return $this->_eventsDao->loadByUserId($userId);
+    }
+
+    /**
+     * @param int $userId id of user that event sent to him/his.
+     * @param int $eventId : id of event.
+     * @return bool status of save.
+     */
+    public function SaveEventReceiver($userId, $eventId)
+    {
+        return $this->_eventsDao->SaveReceiver($userId, $eventId);
+    }
+
+    /**
+     * @param $userId
+     * @return array:array of event
+     */
+    public function loadShardEvents($userId)
+    {
+        return $this->_eventsDao->loadShardEvents($userId);
+    }
+
+
 
     /**
      * all method related to LoginCode.

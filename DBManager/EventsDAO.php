@@ -15,7 +15,7 @@ interface EventsDAO
      * @param Event $events : will save in database.
      * @return boolean : status of saving as boolean.
      */
-    public function save(Event $events);
+    public function save(Event $events, $userId);
 
     
     /**
@@ -29,6 +29,13 @@ interface EventsDAO
      * @return array : array of Event.
      */
     public function loadByUserId($userId);
+
+    /**
+     * @param $userId
+     * @return array:array of event
+     */
+    public function loadShardEvents($userId);
+    
 
     /**
      * @param Event $events : will update in database.
