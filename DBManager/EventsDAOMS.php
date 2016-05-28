@@ -44,17 +44,18 @@ class EventsDAOMS implements EventsDAO
         if ($statement->execute()) {
             $eventId = $statement->insert_id;
 
-            foreach ($events->getUsers() as $user) {
+            for ($i = 0; $i < sizeof($events->getUsers()); $i++) {
                 /** @var User $user */
-                $res = $this->SaveReceiver($user->getMNumber(), $eventId);
-                //todo do best work here.
+                if (!$this->SaveReceiver($user->getMNumber(), $eventId))
+                    $events->getUsers()[$i] = null;
             }
+
             $events->setId($statement->insert_id);
-
             $statement->close();
-
             return $events;
+
         } else {
+
             $statement->close();
             return null;
         }
@@ -96,7 +97,7 @@ class EventsDAOMS implements EventsDAO
         if ($statement->fetch()) {
 
             $statement->close();
-            $event = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
+            $event = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
             return $event;
@@ -154,7 +155,7 @@ class EventsDAOMS implements EventsDAO
         $i = 0;
 
         while ($statement->fetch()) {
-            $events[$i] = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
+            $events[$i] = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
         }
@@ -203,7 +204,7 @@ class EventsDAOMS implements EventsDAO
         $events = array();
 
         while ($statement->fetch()) {
-            $buys[$i] = new Event($eventId, DbManager::getInstance()->loadEventType($eventTypeId),
+            $buys[$i] = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
             $i++;

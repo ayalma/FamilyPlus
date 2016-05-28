@@ -250,11 +250,12 @@ class DbManager
 
     /**
      * @param Event $event : will save in database.
+     * @param $userId : id of user
      * @return Event : status of saving as boolean.
      */
     public function saveEvent(Event $event, $userId)
     {
-        $this->_eventsDao->save($event, $userId);
+        return $this->_eventsDao->save($event, $userId);
     }
 
     /**
