@@ -10,7 +10,12 @@ namespace Controllers;
 
 
 use DBManager\DbManager;
+use Gcm\ActionType;
+use Gcm\GcmHelper;
+use Gcm\MessageType;
+use Gcm\SystemMessage\GcmMessage;
 use Models\EventType;
+use Models\User;
 
 class EventController
 {
@@ -39,6 +44,17 @@ class EventController
     {
         $savedEvent = DbManager::getInstance()->saveEvent($event, $userId);
         echo json_encode($savedEvent);
+
+        /** @var User $user */
+        foreach ($savedEvent->getUsers() as $user) {
+
+            $msg = new GcmMessage($savedEvent->getId(), MessageType::eventMessage, ActionType::insert);
+
+            if ($user != null)
+                GcmHelper::getInstance()->sendNotification($user->getMNumber(), "", $msg);
+
+        }
+
     }
 
     /**

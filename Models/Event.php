@@ -1,8 +1,6 @@
 <?php
 namespace Models;
 
-use namespacetest\model\UserList;
-
 include_once 'User.php';
 include_once 'EventType.php';
 /**
@@ -129,7 +127,7 @@ class Event implements \JsonSerializable
     }
 
     /**
-     * @return UserList
+     * @return array
      */
     public function getUsers()
     {
