@@ -36,9 +36,27 @@ class Event implements \JsonSerializable
     {
         $obj = new Event();
 
-        $jsonValue = json_decode($json, true);
-        foreach ($jsonValue as $key => $value)
-            $obj->{'_' . $key} = $value;
+        $mapper = new \JsonMapper();
+
+        $mapper->map($json, $obj);
+
+        /* $jsonValue = json_decode($json, true);
+         foreach ($jsonValue as $key => $value)
+         {
+             switch ($key)
+             {
+                 case 'eventType':
+                     $obj->{'_' . $key} = EventType::fromJSON($value)
+                     break;
+                 case '':
+                     break;
+                 case '':
+                     break;
+                 default:
+                     $obj->{'_' . $key} = $value;
+             }
+ 
+         }*/
 
         return $obj;
 
