@@ -3,10 +3,10 @@ namespace Controllers;
 include_once '../vendor/autoload.php';
 
 use DBManager\DbManager;
+use Gcm\ActionType;
 use Gcm\GcmHelper;
 use Gcm\MessageType;
-use Gcm\SystemMessage\Builder;
-use Gcm\SystemMessage\SystemMessage;
+use Gcm\SystemMessage\GcmMessage;
 
 
 /**
@@ -54,12 +54,9 @@ class TestRestHandler extends SimpleRest
 
     public function SendNotification($userId)
     {
-        $builder = new Builder();
 
-        $builder->setMsgType(MessageType::systemMessage)->setMsg("welcome to familyPlus");
-        $msg = new SystemMessage($builder);
-
-        GcmHelper::getInstance()->sendNotification($userId, "", $msg->getMessage());
+        $msg = new GcmMessage(2, MessageType::eventMessage, ActionType::insert);
+        GcmHelper::getInstance()->sendNotification($userId, "", $msg);
     }
 
 }

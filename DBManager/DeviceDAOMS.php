@@ -47,7 +47,7 @@ class DeviceDAOMS implements DeviceDAO
      */
     public function loadRegIds($userId, $serial)
     {
-        $sql = 'SELECT ' . DBCons::$_DEVICE_COL_SERIAL
+        $sql = 'SELECT ' . DBCons::$_DEVICE_COL_REGISTER_ID
             . ' FROM ' . DBCons::$_DEVICE_TABLE
             . ' WHERE ' . DBCons::$_DEVICE_COL_USER_ID
             . ' = ? AND ' . DBCons::$_DEVICE_COL_SERIAL . ' !=? ';
