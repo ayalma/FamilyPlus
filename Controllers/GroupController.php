@@ -43,7 +43,7 @@ class GroupController
             }
         }
 
-        echo json_decode($group);
+        echo json_encode($group);
     }
 
     public function addMember($groupId, $userId, $role)
