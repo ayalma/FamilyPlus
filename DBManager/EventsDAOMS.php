@@ -93,6 +93,7 @@ class EventsDAOMS implements EventsDAO
 
         $statement->bind_result($eventId, $eventTypeId, $userId, $date, $message, $repeatType);
         $statement->execute();
+        $statement->store_result();
 
         if ($statement->fetch()) {
 
@@ -150,7 +151,8 @@ class EventsDAOMS implements EventsDAO
         $statement->bind_param('d', $userId);
 
         $statement->bind_result($date, $message, $repeatType, $eventId, $eventTypeId, $userId);
-
+        $statement->store_result();
+        
         $events = array();
         $i = 0;
 

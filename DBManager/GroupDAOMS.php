@@ -42,6 +42,7 @@ class GroupDAOMS implements GroupDAO
 
         $statement->bind_result($id, $admin, $name);
         $statement->execute();
+        $statement->store_result();
 
         $groups = array();
         $groups[0] = 'now groups available';
@@ -207,6 +208,7 @@ class GroupDAOMS implements GroupDAO
         $statement->bind_result($groupId, $adminId, $groupName);
 
         $statement->execute();
+        $statement->store_result();
 
 
         if ($statement->fetch()) {
