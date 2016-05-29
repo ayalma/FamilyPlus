@@ -210,7 +210,7 @@ class GroupDAOMS implements GroupDAO
 
 
         if ($statement->fetch()) {
-            $group = new Group($groupId, '', $groupName);
+            $group = new Group($groupId, DbManager::getInstance()->loadUser($adminId), $groupName);
             $statement->close();
             return $group;
         }
