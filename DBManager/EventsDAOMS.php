@@ -138,7 +138,7 @@ class EventsDAOMS implements EventsDAO
 
     /**
      * @param $userId : of user that event is for him/his.
-     * @return array : array of Event.
+     * @return Event[] : array of Event.
      */
     public function loadByUserId($userId)
     {
@@ -160,6 +160,8 @@ class EventsDAOMS implements EventsDAO
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
         }
+
+        return $events;
 
     }
 
@@ -185,7 +187,7 @@ class EventsDAOMS implements EventsDAO
 
     /**
      * @param $userId
-     * @return array:array of event
+     * @return Event[] :array of event
      */
     public function loadShardEvents($userId)
     {
