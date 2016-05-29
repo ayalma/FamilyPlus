@@ -17,6 +17,9 @@ class Event implements \JsonSerializable
     private $_owner;
     private $_repeatType;
     private $_message;
+    /**
+     * @var User[]
+     */
     private $_users; // user that will received this events.
 
     function __construct($id = 0, EventType $_eventType = null, User $_owner = null, $_date = 0, $_users = array(), $_message = '', $_repeatType = 0)
@@ -127,7 +130,7 @@ class Event implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return User[]
      */
     public function getUsers()
     {
@@ -135,13 +138,14 @@ class Event implements \JsonSerializable
     }
 
     /**
-     * @param mixed $users
+     * @param User[] $users
      */
     public function setUsers($users)
     {
         $this->_users = $users;
     }
 
+    
     /**
      * @return User
      */

@@ -11,7 +11,6 @@ namespace Controllers;
 
 use DBManager\DbManager;
 use Gcm\ActionType;
-use Gcm\GcmHelper;
 use Gcm\MessageType;
 use Gcm\SystemMessage\GcmMessage;
 use Models\EventType;
@@ -50,8 +49,8 @@ class EventController
 
             $msg = new GcmMessage($savedEvent->getId(), MessageType::eventMessage, ActionType::insert);
 
-            if ($user != null)
-                GcmHelper::getInstance()->sendNotification($user->getMNumber(), "", $msg);
+            // if ($user != null)
+            // GcmHelper::getInstance()->sendNotification($user->getMNumber(), "", $msg);
 
         }
 

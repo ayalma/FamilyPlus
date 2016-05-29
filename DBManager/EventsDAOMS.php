@@ -3,7 +3,6 @@ namespace DBManager;
 require "../vendor/autoload.php";
 
 use Models\Event;
-use Models\User;
 use mysqli;
 
 /**
@@ -44,9 +43,9 @@ class EventsDAOMS implements EventsDAO
         if ($statement->execute()) {
             $eventId = $statement->insert_id;
 
+            echo json_encode($events->getUsers());
             for ($i = 0; $i < sizeof($events->getUsers()); $i++) {
-                /** @var User $user */
-                if (!$this->SaveReceiver($user->getMNumber(), $eventId))
+                if (!$this->SaveReceiver($events->getUsers()[$i]->getMNumber(), $eventId))
                     $events->getUsers()[$i] = null;
             }
 
