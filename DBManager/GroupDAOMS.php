@@ -48,7 +48,7 @@ class GroupDAOMS implements GroupDAO
 
         $i = 0;
         while ($statement->fetch()) {
-            $groups[$i] = new Group($id, $admin, $name);
+            $groups[$i] = new Group($id, DbManager::getInstance()->loadUser($admin), $name);
             $i++;
         }
 
@@ -59,7 +59,7 @@ class GroupDAOMS implements GroupDAO
 
     /**
      * @param Group $group : group to save.
-     * @return int         : id of group
+     * @return Group
      */
     public function save(Group $group)
     {
@@ -69,13 +69,14 @@ class GroupDAOMS implements GroupDAO
 
         $statement = $this->_connection->prepare($sql);
 
-        $statement->bind_param('ds', $group->getAdmin(), $group->getName());
-        $statement->execute();
-        $groupId = $statement->insert_id;
-
+        $statement->bind_param('ds', $group->getAdmin()->getMNumber(), $group->getName());
+        if ($statement->execute()) {
+            $group->setId($statement->insert_id);
+            $statement->close();
+            return $group;
+        }
         $statement->close();
-
-        return $groupId;
+        return null;
 
     }
 
@@ -186,5 +187,37 @@ class GroupDAOMS implements GroupDAO
         // if there is no group in db
         $statement->close();
         return false;
+    }
+
+    /**
+     * method for loading user group.
+     * @param $userId : id of user.
+     * @return Group|null: return Group of user or null.
+     */
+    public function loadGroup($userId)
+    {
+        $sql = 'SELECT * FROM ' . DBCons::$_GROUP_TABLE
+            . ' WHERE ' . DBCons::$_GROUP_COL_ID
+            . ' = (SELECT ' . DBCons::$_GU_COL_GROUP_ID
+            . ' FROM ' . DBCons::$_GU_TABLE
+            . ' WHERE ' . DBCons::$_GU_COL_USER_ID . ' =?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('d', $userId);
+        $statement->bind_result($groupId, $adminId, $groupName);
+
+        $statement->execute();
+
+
+        if ($statement->fetch()) {
+            $group = new Group($groupId, '', $groupName);
+            $statement->close();
+            return $group;
+        }
+
+        // if there is no group in db
+        $statement->close();
+        return null;
+
     }
 }

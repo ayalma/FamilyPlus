@@ -34,12 +34,16 @@ class GroupController
     public function save(Group $group, $adminRole)
     {
 
-        $response['groupId'] = DbManager::getInstance()->saveGroup($group);
+        $group = DbManager::getInstance()->saveGroup($group);
 
-        if (is_int($response['groupId']) && $response['groupId'] != 0) {
-            $response['save'] = DbManager::getInstance()->saveMember($response['groupId'], $group->getAdmin(), $adminRole);
+        if ($group != null) {
+            if (!DbManager::getInstance()->saveMember($group->getId(), $group->getAdmin()->getMNumber(), $adminRole)) {
+                //todo if admin not add as member so delete group an return null
+
+            }
         }
-        echo json_encode($response);
+
+        echo json_decode($group);
     }
 
     public function addMember($groupId, $userId, $role)
@@ -73,6 +77,11 @@ class GroupController
     {
         $res = DbManager::getInstance()->getGroupUsers($groupId);
         echo json_encode($res);
+    }
+
+    public function loadGroup($userId)
+    {
+        echo json_encode(DbManager::getInstance()->loadGroup($userId));
     }
 
 }

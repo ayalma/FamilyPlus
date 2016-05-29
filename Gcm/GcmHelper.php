@@ -40,6 +40,7 @@ class GcmHelper
     public function sendNotification($userId, $userSerial, Message $message)
     {
         $registerIds = DbManager::getInstance()->loadUserRegIds($userId, $userSerial);
+        var_dump($registerIds);
         $this->_sender->sendMulti($message, $registerIds, 5);
     }
 

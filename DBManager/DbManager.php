@@ -417,7 +417,7 @@ class DbManager
 
     /**
      * @param Group $group : group to save.
-     * @return int         : id of group
+     * @return Group      
      */
     public function saveGroup(Group $group)
     {
@@ -464,5 +464,17 @@ class DbManager
     {
         return $this->_groupDao->loadGroupUser($groupId);
     }
+
+    /**
+     * method for loading user group.
+     * @param $userId : id of user.
+     * @return Group|null: return Group of user or null.
+     */
+    public function loadGroup($userId)
+    {
+        return $this->_groupDao->loadGroup($userId);
+    }
+    
+    
 
 }

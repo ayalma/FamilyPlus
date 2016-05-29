@@ -16,6 +16,7 @@ use Models\Event;
 use Models\EventType;
 use Models\Group;
 use Models\Image;
+use Models\User;
 
 
 $view = "";
@@ -285,7 +286,8 @@ switch ($view) {
     case 'createGroup':
         if (isset($_POST['groupName']) && isset($_POST['adminRole'])) {
 
-            $group = new Group(0, $userId, $_POST['groupName']);
+            //todo get Group from client completely.
+            $group = new Group(0, new User("", $userId), $_POST['groupName']);
 
             GroupController::getInstance()->save($group, $_POST['adminRole']);
 
@@ -321,6 +323,10 @@ switch ($view) {
             break;
         }
         GroupController::getInstance()->GetGroupUser($_GET['groupId']);
+        break;
+
+    case 'loadGroup':
+        GroupController::getInstance()->loadGroup($userId);
         break;
 
     /*all routing for Image*/

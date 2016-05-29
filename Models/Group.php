@@ -6,7 +6,7 @@ namespace Models;
  * Date: 4/16/2016
  * Time: 1:08 PM
  */
-class Group
+class Group implements \JsonSerializable
 {
     private $_id;    //Group ID
     private $_admin; //group admin
@@ -14,11 +14,11 @@ class Group
 
     /**
      * Group constructor.
-     * @param $_id
-     * @param $_admin
-     * @param $_name
+     * @param int $_id
+     * @param User $_admin
+     * @param String $_name
      */
-    public function __construct($_id, $_admin, $_name)
+    public function __construct($_id = 0, User $_admin = null, $_name = '')
     {
         $this->_id = $_id;
         $this->_admin = $_admin;
@@ -28,15 +28,17 @@ class Group
     public static function fromJSON($json)
     {
         $obj = new Group();
-        $jsonValue = json_decode($json, true);
-        foreach ($jsonValue as $key => $value)
-            $obj->{'_' . $key} = $value;
+        $jsonValue = json_decode($json);
+        
+        $mapper = new \JsonMapper();
+        $mapper->map($jsonValue, $obj);
+      
         return $obj;
 
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -44,7 +46,7 @@ class Group
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -52,7 +54,7 @@ class Group
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getAdmin()
     {
@@ -60,7 +62,7 @@ class Group
     }
 
     /**
-     * @param mixed $admin
+     * @param User $admin
      */
     public function setAdmin($admin)
     {
@@ -68,7 +70,7 @@ class Group
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -76,14 +78,30 @@ class Group
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
         $this->_name = $name;
     }
-    
-    
-    
 
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        $json = array();
+
+        foreach ($this as $key => $value) {
+            $key = str_replace('_', '', $key);
+            $json[$key] = $value;
+        }
+
+        return $json; // or json_encode($json)
+    }
 }

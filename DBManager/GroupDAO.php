@@ -21,7 +21,7 @@ interface GroupDAO
 
     /**
      * @param Group $group : group to save.
-     * @return int         : id of group
+     * @return Group   
      */
     public function save(Group $group);
 
@@ -52,4 +52,11 @@ interface GroupDAO
      * @return boolean : true if user be member of any group.
      */
     public function haveAGroup($userId);
+
+    /**
+     * method for loading user group.
+     * @param $userId : id of user.
+     * @return Group|null: return Group of user or null.
+     */
+    public function loadGroup($userId);
 }
