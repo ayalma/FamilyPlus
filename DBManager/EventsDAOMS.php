@@ -150,6 +150,7 @@ class EventsDAOMS implements EventsDAO
         $statement->bind_param('d', $userId);
 
         $statement->bind_result($date, $message, $repeatType, $eventId, $eventTypeId, $userId);
+        $statement->execute();
         $statement->store_result();
         
         $events = array();
@@ -159,7 +160,9 @@ class EventsDAOMS implements EventsDAO
             $events[$i] = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
+            $i++;
         }
+        $statement->close();
 
         return $events;
 

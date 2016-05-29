@@ -13,6 +13,7 @@ use DBManager\DbManager;
 use Gcm\ActionType;
 use Gcm\MessageType;
 use Gcm\SystemMessage\GcmMessage;
+use Models\Event;
 use Models\EventType;
 use Models\User;
 
@@ -58,12 +59,13 @@ class EventController
 
     /**
      * @param $userId : user id .
-     * @return array : array of buys item.
+     * @return Event[] : array of buys item.
      */
     public function loadEvent($userId)
     {
+        echo 'userid:' . $userId;
         $events = array_merge(DbManager::getInstance()->loadEventByUserId($userId),
-            DbManager::getInstance()->loadShardEvents($userId)); // merge to buys items array
+            DbManager::getInstance()->loadShardEvents($userId)); // merge to event  array
 
         echo json_encode($events);
     }

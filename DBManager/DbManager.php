@@ -260,7 +260,7 @@ class DbManager
 
     /**
      * @param $userId : of user that event is for him/his.
-     * @return array : array of Event.
+     * @return Event[] : array of Event.
      */
     public function loadEventByUserId($userId)
     {
@@ -279,7 +279,7 @@ class DbManager
 
     /**
      * @param $userId
-     * @return array:array of event
+     * @return Event[] :array of event
      */
     public function loadShardEvents($userId)
     {
