@@ -191,7 +191,16 @@ class EventsDAOMS implements EventsDAO
      */
     public function delete($userId, $eventId)
     {
+        $sql = 'DELETE FROM ' . DBCons::$_EVENT_TABLE
+            . ' WHERE ' . DBCons::$_EVENT_COL_USER_ID
+            . ' = ? AND ' . DBCons::$_EVENT_COL_ID . ' = ?';
 
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('di', $userId, $eventId);
+        $res = $statement->execute();
+
+        $statement->close();
+        return $res;
     }
 
     /**

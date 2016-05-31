@@ -99,11 +99,13 @@ class EventController
 
     /**
      * @param $eventId : id of event.
+     * @param $userId : id of user.
      * @return bool :
      */
-    public function deletBuy($eventId)
+    public function deleteEvent($userId , $eventId )
     {
-        //todo implement this method
+        $response['delete'] = DbManager::getInstance()->DeletEvent($userId , $eventId);
+        echo json_encode($response);
     }
 
     public function loadEventTypes()

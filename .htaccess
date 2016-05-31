@@ -41,6 +41,7 @@ RewriteRule ^EventController/addEventReceiver  Controllers/Router.php?view=addEv
 RewriteRule ^EventController/getEventReceiver  Controllers/Router.php?view=getEventReceiver [nc,qsa]
 RewriteRule ^EventController/loadEventTypes  Controllers/Router.php?view=loadEventTypes [nc,qsa]
 RewriteRule ^EventController/saveEventType  Controllers/Router.php?view=saveEventType [nc,qsa]
+RewriteRule ^EventController/deleteEvent  Controllers/Router.php?view=deleteEvent [nc,qsa]
 #all systemMessage routing
 #RewriteRule ^SystemMessageController/saveMessage  Controllers/Router.php?view=saveMessage [nc,qsa]
 RewriteRule ^SystemMessageController/loadMessageById  Controllers/Router.php?view=loadMessageById [nc,qsa]
