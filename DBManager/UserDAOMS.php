@@ -60,7 +60,7 @@ class UserDAOMS implements UserDAO
 
         } else {
             $statement->close();
-            return 'no user found';
+            return null;
         }
     }
 

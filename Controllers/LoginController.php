@@ -90,7 +90,6 @@ class LoginController extends SimpleRest
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this->setHttpHeaders($requestContentType, $statusCode);
 
-
         if ($loginCode != null && $loginCode->getExpired() == false && $loginCode->getCode() == $code) {
             //todo set code is expired.
             if ($register)

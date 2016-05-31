@@ -124,7 +124,6 @@ class EventsDAOMS implements EventsDAO
         $statement->execute();
 
         $userIds = array();
-        $userIds[0] = 'no user available';
 
         $i = 0;
         while ($statement->fetch()) {
@@ -210,7 +209,7 @@ class EventsDAOMS implements EventsDAO
         $events = array();
 
         while ($statement->fetch()) {
-            $buys[$i] = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
+            $events[$i] = new Event($eventId, DbManager::getInstance()->loadEventTypeBuyId($eventTypeId),
                 DbManager::getInstance()->loadUser($userId),
                 $date, $this->loadReceiver($eventId), $message, $repeatType);
             $i++;

@@ -63,7 +63,6 @@ class EventController
      */
     public function loadEvent($userId)
     {
-        echo 'userid:' . $userId;
         $events = array_merge(DbManager::getInstance()->loadEventByUserId($userId),
             DbManager::getInstance()->loadShardEvents($userId)); // merge to event  array
 
