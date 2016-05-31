@@ -3,6 +3,8 @@ namespace DBManager;
 require "../vendor/autoload.php";
 
 use Models\Event;
+use Models\User;
+
 use mysqli;
 
 /**
@@ -114,20 +116,25 @@ class EventsDAOMS implements EventsDAO
      */
     private function loadReceiver($eventId)
     {
-        $sql = 'SELECT ' . DBCons::$_EU_COL_USER_ID . ' FROM ' . DBCons::$_EU_TABLE .
-            ' WHERE ' . DBCons::$_EU_COL_EVENT_ID . ' = ?';
 
+        $sql = 'SELECT * FROM ' . DBCons::$_USER_TABLE
+            . ' WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER
+            . ' = (SELECT ' . DBCons::$_EU_COL_USER_ID
+            . ' FROM ' . DBCons::$_EU_TABLE
+            . ' WHERE ' . DBCons::$_EU_COL_EVENT_ID . ' =?)';
+        
+       
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('i', $eventId);
 
-        $statement->bind_result($userId);
+        $statement->bind_result($fName, $mobileNumber);
         $statement->execute();
 
         $userIds = array();
 
         $i = 0;
         while ($statement->fetch()) {
-            $userIds[$i] = $userId;
+            $userIds[$i] = new User($fName, $mobileNumber);
             $i++;
         }
         $statement->close();

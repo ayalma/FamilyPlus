@@ -44,8 +44,8 @@ class UserDAOMS implements UserDAO
      */
     public function load($userId)
     {
-        $sql = 'Select ' . DBCons::$_USER_COL_FNAME . ' from ' . DBCons::$_USER_TABLE .
-            ' Where ' . DBCons::$_USER_COL_MOBILE_NUMBER . '= ? ';
+        $sql = 'SELECT ' . DBCons::$_USER_COL_FNAME . ' FROM ' . DBCons::$_USER_TABLE .
+            ' WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER . '= ? ';
 
         $statement = $this->_connection->prepare($sql);
         $statement->bind_param('d', $userId);

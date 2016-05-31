@@ -27,7 +27,7 @@ class EventTypeDAOMS implements EventTypeDAO
      */
     public function loadByEventId($eventTypeId)
     {
-        $sql = 'SELECT ' . DBCons::$_EVENTTYPE_COL_NAME . ' from ' .
+        $sql = 'SELECT ' . DBCons::$_EVENTTYPE_COL_NAME . ' FROM ' .
             DBCons::$_EVENTTYPE_TABLE .
             ' WHERE ' . DBCons::$_EVENTTYPE_COL_ID . ' = ?';
 
