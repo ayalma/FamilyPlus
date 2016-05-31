@@ -44,9 +44,15 @@ class DbManager
 
             $this->_connection = mysqli_connect(DBCons::$_host, DBCons::$_user, DBCons::$_password, DBCons::$db_name);
 
-            if (!$this->_connection) {
-
+            /* check connection */
+            if (mysqli_connect_errno()) {
+                printf("Connect failed: %s\n", mysqli_connect_error());
+                exit();
             }
+
+            // echo("Initial character set:". $this->_connection->character_set_name());
+
+            mysqli_set_charset($this->_connection, "utf8");
 
             $this->_userDao = new UserDAOMS($this->_connection);
             $this->_buyItemDao = new BuyItemDAOMS($this->_connection);
