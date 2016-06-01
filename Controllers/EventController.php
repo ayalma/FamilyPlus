@@ -45,6 +45,7 @@ class EventController
         $savedEvent = DbManager::getInstance()->saveEvent($event, $userId);
         echo json_encode($savedEvent);
 
+        if ($savedEvent != null)
         /** @var User $user */
         foreach ($savedEvent->getUsers() as $user) {
 
