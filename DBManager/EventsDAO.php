@@ -44,9 +44,8 @@ interface EventsDAO
     public function update(Event $events);
 
     /**
-     * @param $userId : id of user.
      * @param $eventId : id of event.
      * @return boolean : status of remove as boolean.
      */
-    public function delete($userId, $eventId);
+    public function delete($eventId);
 }

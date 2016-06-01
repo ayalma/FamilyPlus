@@ -99,12 +99,11 @@ class EventController
 
     /**
      * @param $eventId : id of event.
-     * @param $userId : id of user.
      * @return bool :
      */
-    public function deleteEvent($userId , $eventId )
+    public function deleteEvent($eventId)
     {
-        $response['delete'] = DbManager::getInstance()->DeletEvent($userId , $eventId);
+        $response['delete'] = DbManager::getInstance()->deleteEvent($eventId);
         echo json_encode($response);
     }
 

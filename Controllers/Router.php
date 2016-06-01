@@ -248,7 +248,7 @@ switch ($view) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
         }
-        EventController::getInstance()->deleteEvent($userId, $_POST['eventId']);
+        EventController::getInstance()->deleteEvent($_POST['eventId']);
         break;
         break;
     case 'addEventReceiver':
@@ -355,7 +355,7 @@ switch ($view) {
         $fileSize = $_FILES['picture']['size'];
         $fileType = $_FILES['picture']['type'];
 
-        $distination = 'C:/xampp/htdocs/FamilyPlus/upload/';
+        $distination = '/var/www/html/FamilyPlus/upload/';
 
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileName = $userId . date('Y-m-d-g-i-s') . '.' . $ext;

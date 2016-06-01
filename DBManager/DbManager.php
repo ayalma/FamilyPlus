@@ -284,13 +284,12 @@ class DbManager
     }
 
     /**
-     * @param $userId : id of user.
      * @param $eventId : id of event.
      * @return bool :
      */
-    public function DeletEvent($userId , $eventId)
+    public function deleteEvent($eventId)
     {
-       return $this->_eventsDao->delete($userId,$eventId);
+        return $this->_eventsDao->delete($eventId);
     }
 
     /**

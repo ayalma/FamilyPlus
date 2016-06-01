@@ -4,7 +4,6 @@ require "../vendor/autoload.php";
 
 use Models\Event;
 use Models\User;
-
 use mysqli;
 
 /**
@@ -185,18 +184,16 @@ class EventsDAOMS implements EventsDAO
     }
 
     /**
-     * @param $userId : id of user.
      * @param $eventId : id of event.
      * @return boolean : status of remove as boolean.
      */
-    public function delete($userId, $eventId)
+    public function delete($eventId)
     {
         $sql = 'DELETE FROM ' . DBCons::$_EVENT_TABLE
-            . ' WHERE ' . DBCons::$_EVENT_COL_USER_ID
-            . ' = ? AND ' . DBCons::$_EVENT_COL_ID . ' = ?';
+            . ' WHERE ' . DBCons::$_EVENT_COL_ID . ' = ?';
 
         $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('di', $userId, $eventId);
+        $statement->bind_param('i', $eventId);
         $res = $statement->execute();
 
         $statement->close();
