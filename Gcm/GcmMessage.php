@@ -6,10 +6,9 @@
  * Time: 1:06 PM
  */
 
-namespace Gcm\SystemMessage;
+namespace Gcm;
 
 
-use Gcm\GcmCons;
 use PHP_GCM\Message;
 
 class GcmMessage extends Message

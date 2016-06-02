@@ -11,7 +11,7 @@ namespace Gcm;
 
 class GcmCons
 {
-    static $_API_KEY = "-J8upqY";//todo remove this line when committing.
+    static $_API_KEY = "AIzaSyBcdBKo2L7DVMG6oV2Zos0Lc3Hb-J8upqY";//todo remove this line when committing.
 
     static $_MSG_TYPE = "msgType";
     static $_ID = "id";
