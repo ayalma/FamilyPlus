@@ -5,8 +5,8 @@ include_once '../vendor/autoload.php';
 use DBManager\DbManager;
 use Gcm\ActionType;
 use Gcm\GcmHelper;
+use Gcm\GcmMessage;
 use Gcm\MessageType;
-use Gcm\SystemMessage\GcmMessage;
 
 
 /**
