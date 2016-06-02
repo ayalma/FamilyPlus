@@ -301,6 +301,14 @@ class DbManager
         return $this->_eventsDao->loadShardEvents($userId);
     }
 
+    /**
+     * @param $eventId : id of event.
+     * @return Event : event that match with id.
+     */
+    public function loadEventById($eventId)
+    {
+        return $this->_eventsDao->loadById($eventId);
+    }
 
 
     /**

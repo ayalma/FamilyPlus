@@ -118,11 +118,9 @@ switch ($view) {
 
 
     case 'loadMessageById':
-        if(isset($_GET['SMsgId']))
-        {
+        if (isset($_GET['SMsgId'])) {
             SystemMessageController::getInstance()->loadMessageById($_GET['SMsgId']);
-        }
-        else {
+        } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
         }
@@ -133,11 +131,9 @@ switch ($view) {
         break;
 
     case 'deleteMessage':
-        if(isset($_POST['MsgId']))
-        {
+        if (isset($_POST['MsgId'])) {
             SystemMessageController::getInstance()->deleteMessage($_POST['MsgId']);
-        }
-        else{
+        } else {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;
         }
@@ -240,10 +236,21 @@ switch ($view) {
 
         break;
     case 'loadEvents':
+
         EventController::getInstance()->loadEvent($userId);
         break;
+    case 'loadEvent':
+
+        if (isset($_GET['eventId'])) {
+
+            $eventId = $_POST['eventId'];
+            EventController::getInstance()->loadEventById($eventId);
+
+        } else setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
+
+        break;
     case 'deleteEvent':
-        
+
         if (!isset($_POST['eventId'])) {
             setHttpHeaders($_SERVER['HTTP_ACCEPT'], 400);
             break;

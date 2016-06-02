@@ -59,6 +59,11 @@ class EventController
 
     }
 
+
+    public function loadEventById($eventId)
+    {
+        json_encode(DbManager::getInstance()->loadEventById($eventId));
+    }
     /**
      * @param $userId : user id .
      * @return Event[] : array of buys item.
