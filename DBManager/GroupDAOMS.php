@@ -49,13 +49,50 @@ class GroupDAOMS implements GroupDAO
 
         $i = 0;
         while ($statement->fetch()) {
-            $groups[$i] = new Group($id, DbManager::getInstance()->loadUser($admin), $name);
+            $groups[$i] = new Group($id, DbManager::getInstance()->loadUser($admin), $name, $this->loadGroupUser($id));
             $i++;
         }
 
         $statement->close();
 
         return $groups;
+    }
+
+    /**
+     * @param $groupId : id of group.
+     * @return array: all users in this group
+     */
+    public function loadGroupUser($groupId)
+    {
+        $sql = 'SELECT * FROM ' . DBCons::$_USER_TABLE
+            . ' WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER
+            . ' IN (SELECT ' . DBCons::$_GU_COL_USER_ID
+            . ' FROM ' . DBCons::$_GU_TABLE
+            . ' WHERE ' . DBCons::$_GU_COL_GROUP_ID . ' = ?)';
+
+        $statement = $this->_connection->prepare($sql);
+        $statement->bind_param('i', $groupId);
+
+        $statement->bind_result($fname, $m_number);
+        $statement->execute();
+        $statement->store_result();
+
+        $user = array();
+        $user[0] = 'no user available';
+
+        $i = 0;
+        while ($statement->fetch()) {
+            $tempUser = new User($fname, $m_number);
+
+            $tempUser->setRoles(DbManager::getInstance()->loadUserRolesByGroupId($tempUser->getMNumber(), $groupId));
+            $user[$i] = $tempUser;
+            $i++;
+        }
+
+        $statement->close();
+
+        return $user;
+
     }
 
     /**
@@ -103,7 +140,6 @@ class GroupDAOMS implements GroupDAO
         return $res;
     }
 
-
     /**
      * @param $groupId : id of group.
      * @param $userId : id of user.
@@ -121,43 +157,6 @@ class GroupDAOMS implements GroupDAO
 
         $statement->close();
         return $res;
-
-    }
-
-    /**
-     * @param $groupId : id of group.
-     * @return array: all users in this group
-     */
-    public function loadGroupUser($groupId)
-    {
-        $sql = 'SELECT * FROM ' . DBCons::$_USER_TABLE
-            . ' WHERE ' . DBCons::$_USER_COL_MOBILE_NUMBER
-            . ' IN (SELECT ' . DBCons::$_GU_COL_USER_ID
-            . ' FROM ' . DBCons::$_GU_TABLE
-            . ' WHERE ' . DBCons::$_GU_COL_GROUP_ID . ' = ?)';
-
-        $statement = $this->_connection->prepare($sql);
-        $statement->bind_param('i', $groupId);
-
-        $statement->bind_result($fname, $m_number);
-        $statement->execute();
-        $statement->store_result();
-
-        $user = array();
-        $user[0] = 'no user available';
-
-        $i = 0;
-        while ($statement->fetch()) {
-            $tempUser = new User($fname, $m_number);
-
-            $tempUser->setRoles(DbManager::getInstance()->loadUserRolesByGroupId($tempUser->getMNumber(), $groupId));
-            $user[$i] = $tempUser;
-            $i++;
-        }
-
-        $statement->close();
-
-        return $user;
 
     }
 
@@ -212,7 +211,7 @@ class GroupDAOMS implements GroupDAO
 
 
         if ($statement->fetch()) {
-            $group = new Group($groupId, DbManager::getInstance()->loadUser($adminId), $groupName);
+            $group = new Group($groupId, DbManager::getInstance()->loadUser($adminId), $groupName, $this->loadGroupUser($groupId));
             $statement->close();
             return $group;
         }

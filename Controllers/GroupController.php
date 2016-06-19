@@ -48,7 +48,14 @@ class GroupController
 
     public function addMember($groupId, $userId, $role)
     {
-        if (DbManager::getInstance()->haveAGroup($userId)) {
+        if (DbManager::getInstance()->loadUser($userId) == null) {
+            $errorMsg['error'] = '403';
+            $errorMsg['describe'] = 'user don\'t exist';
+
+            header('HTTP/1.1' . " " . '403' . 'Forbidden');
+            header("Content-Type:" . $_SERVER['HTTP_ACCEPT']);
+            echo json_encode($errorMsg);
+        } else if (DbManager::getInstance()->haveAGroup($userId)) {
             /* if user is member of any group .
              we can't add him/his to another group.
             */

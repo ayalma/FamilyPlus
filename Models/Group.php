@@ -11,18 +11,21 @@ class Group implements \JsonSerializable
     private $_id;    //Group ID
     private $_admin; //group admin
     private $_name; //group name.
+    private $_members; // member of groups
 
     /**
      * Group constructor.
      * @param int $_id
      * @param User $_admin
      * @param String $_name
+     * @param User[] $members
      */
-    public function __construct($_id = 0, User $_admin = null, $_name = '')
+    public function __construct($_id = 0, User $_admin = null, $_name = '', $members = null)
     {
         $this->_id = $_id;
         $this->_admin = $_admin;
         $this->_name = $_name;
+        $this->_members = $members;
     }
 
     public static function fromJSON($json)
@@ -84,6 +87,24 @@ class Group implements \JsonSerializable
     {
         $this->_name = $name;
     }
+
+    /**
+     * @return User[]
+     */
+    public function getMembers()
+    {
+        return $this->_members;
+    }
+
+    /**
+     * @param User[] $members
+     */
+    public function setMembers($members)
+    {
+        $this->_members = $members;
+    }
+    
+    
 
 
     /**
